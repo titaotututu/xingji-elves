@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>行迹精灵 - 待办事项</title>
+    <link rel="stylesheet" href="../style-views.css">
+    <link rel="icon" href="/xingji-elves/images/logo1.svg" type="image/svg+xml">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #87CEEB, #ffffff);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            margin-top: 80px;
+            text-align: center;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 25px;
+            color: #2C3E50;
+            font-weight: bold;
+            text-align: left;
+            padding: 5px 0;
+        }
+
+        .trip-info {
+            text-align: left;
+            margin-top: 30px;
+            padding: 10px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .todo-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 0;
+            list-style: none;
+            background-color: white;
+            max-height: 400px;
+            overflow-y: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .todo-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #f9f9f9;
+            text-decoration: none;
+            color: #333;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .todo-item:hover {
+            background-color: #f1f1f1;
+        }
+
+        .todo-item.completed {
+            background-color: #d3f9d8; /* 绿色背景表示已完成 */
+        }
+
+        .todo-item .completed-icon {
+            color: green;
+            margin-left: 10px;
+        }
+
+        .add-todo {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #2980b9, #1c6ea4);
+            transform: scale(1.05);
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- 📌 导航栏 -->
+    <nav>
+        <a href="../main.html">首页</a>
+        <a href="../travel.html">行程</a>
+        <a href="../map.html">导航</a>
+        <a href="../Weather.html">天气</a>
+        <a href="../lighting.html">点亮地标</a>
+        <a href="../journal.html">旅行日志</a>
+        <a href="../community.html">社区</a>
+        <a href="../assistant.html">智能助手</a>
+
+        <!-- 下拉菜单 -->
+        <div class="dropdown">
+            <button class="dropbtn">更多</button>
+            <div class="dropdown-content">
+                <a href="profile.html">个人信息</a>
+                <a href="feedback.html">反馈</a>
+            </div>
+        </div>
+        
+        <a href="#" id="logout-btn">退出</a>
+    </nav>
+
+    <div class="container">
+        <!-- 行程信息展示 -->
+        <div id="tripInfo" class="trip-info">
+            <h2 id="tripName">行程名称</h2>
+            <p id="tripCity">城市: </p>
+            <p id="tripDate">时间: </p>
+        </div>
+
+        <div class="header">
+            <h1>待办事项</h1>
+            <button onclick="window.location.href='create-todo.html?travelId=' + travelId">添加新待办</button>
+        </div>
+        
+        <!-- 待办事项列表 -->
+        <div id="todoList" class="todo-list">
+            <!-- 待办事项将在这里动态加载 -->
+        </div>
+    </div>
+
+    <script>
+        // 获取 URL 中的 travelId 参数
+        const urlParams = new URLSearchParams(window.location.search);
+        const travelId = urlParams.get('travelId');
+
+        function loadTripInfo() {
+            const travels = JSON.parse(localStorage.getItem("travels")) || [];
+            const travel = travels.find(t => t.id == travelId);
+
+            if (travel) {
+                // 显示行程信息
+                document.getElementById("tripName").textContent = travel.name;
+                document.getElementById("tripCity").textContent = `城市: ${travel.city}`;
+                document.getElementById("tripDate").textContent = `时间: ${travel.date}`;
+            }
+        }
+
+        function loadTodos() {
+            const todoList = document.getElementById("todoList");
+            todoList.innerHTML = ""; // 清空列表
+
+            const travels = JSON.parse(localStorage.getItem("travels")) || [];
+            const travel = travels.find(t => t.id == travelId);
+
+            if (travel && travel.todos.length > 0) {
+                travel.todos.forEach((todo, index) => {
+                    const todoItem = document.createElement("div");
+                    todoItem.classList.add("todo-item");
+                    if (todo.completed) todoItem.classList.add("completed");
+                    todoItem.innerHTML = `
+                        <span>${todo.time} | ${todo.location} - ${todo.content}</span>
+                        <div>
+                            <button onclick="removeTodo(${index})">删除</button>
+                            <button onclick="toggleComplete(${index})">
+                                ${todo.completed ? '<i class="fas fa-check-circle completed-icon"></i> 完成' : '打卡'}
+                            </button>
+                        </div>
+                    `;
+                    todoList.appendChild(todoItem);
+                });
+            } else {
+                todoList.innerHTML = "<p>暂无待办事项。</p>";
+            }
+        }
+
+        function addTodo() {
+            const newTodo = document.getElementById('newTodo').value.trim();
+            if (newTodo) {
+                const travels = JSON.parse(localStorage.getItem("travels")) || [];
+                const travel = travels.find(t => t.id == travelId);
+
+                if (travel) {
+                    travel.todos.push({ content: newTodo, time: '', location: '', completed: false });
+                    localStorage.setItem('travels', JSON.stringify(travels));
+                    loadTodos(); // 重新加载待办事项
+                }
+                document.getElementById('newTodo').value = ""; // 清空输入框
+            }
+        }
+
+        function removeTodo(index) {
+            const travels = JSON.parse(localStorage.getItem("travels")) || [];
+            const travel = travels.find(t => t.id == travelId);
+
+            if (travel) {
+                travel.todos.splice(index, 1); // 删除对应的待办事项
+                localStorage.setItem('travels', JSON.stringify(travels));
+                loadTodos(); // 重新加载待办事项
+            }
+        }
+
+        function toggleComplete(index) {
+            const travels = JSON.parse(localStorage.getItem("travels")) || [];
+            const travel = travels.find(t => t.id == travelId);
+
+            if (travel) {
+                travel.todos[index].completed = !travel.todos[index].completed; // 切换完成状态
+                localStorage.setItem('travels', JSON.stringify(travels));
+                loadTodos(); // 重新加载待办事项
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            loadTripInfo();
+            loadTodos();
+        });
+    </script>
+</body>
+</html>

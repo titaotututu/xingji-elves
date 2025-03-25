@@ -1,0 +1,104 @@
+/* 🌍 全局样式 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #007bff, #00d4ff);
+}
+
+/* 📌 让登录和注册框都在一个居中容器中 */
+.container {
+    position: relative;
+    width: 350px;
+    height: 400px;
+}
+
+/* 📌 统一样式的卡片框 */
+.box {
+    position: absolute;
+    width: 100%;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* 🚀 隐藏注册框（默认不显示） */
+.hidden {
+    opacity: 0;
+    pointer-events: none; /* 禁止交互 */
+}
+
+/* 🌟 标题样式 */
+h2 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* 🔍 输入框美化 */
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s;
+    font-size: 16px;
+}
+
+input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}
+
+/* ✨ 按钮美化 */
+button {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+/* 登录按钮 */
+#login-btn {
+    background: #007bff;
+    color: white;
+}
+
+#login-btn:hover {
+    background: #0056b3;
+    transform: scale(1.05);
+}
+
+/* 注册按钮 */
+#register-btn {
+    background: #28a745;
+    color: white;
+}
+
+#register-btn:hover {
+    background: #1e7e34;
+    transform: scale(1.05);
+}
+
+/* 🔗 链接美化 */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+

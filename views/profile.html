@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>个人信息 - 行迹精灵</title>
+    <link rel="stylesheet" href="style-views.css">  
+    <link rel="icon" href="/xingji-elves/images/logo1.svg" type="image/svg+xml">
+</head>
+<body>
+    <!-- 📌 导航栏 -->
+    <nav>
+        <a href="main.html">首页</a>
+        <a href="travel.html">行程</a>
+        <a href="map.html">导航</a>
+        <a href="weather.html">天气</a>
+        <a href="landmark.html">点亮地标</a>
+        <a href="journal.html">旅行日志</a>
+        <a href="assistant.html">智能助手</a>
+        <a href="feedback.html">反馈</a>
+        <a href="profile.html">个人信息</a>
+        <a href="#" id="logout-btn">退出</a>
+    </nav>
+
+    <!-- 📌 个人信息主体内容 -->
+    <div class="content">
+        <h1>个人信息</h1>
+        
+        <!-- 📌 头像和用户名修改部分 -->
+        <div class="profile-section">
+            <div class="avatar">
+                <img src="assets/default-avatar.png" alt="头像" id="avatar-img">
+                <button id="change-avatar-btn">更换头像</button>
+            </div>
+            <div class="username">
+                <label for="username">用户名:</label>
+                <input type="text" id="username" value="当前用户名" placeholder="请输入新用户名">
+                <button id="change-username-btn">修改用户名</button>
+            </div>
+        </div>
+
+        <!-- 📌 修改密码部分 -->
+        <div class="password-section">
+            <h3>修改密码</h3>
+            <label for="old-password">当前密码:</label>
+            <input type="password" id="old-password" placeholder="请输入当前密码">
+
+            <label for="new-password">新密码:</label>
+            <input type="password" id="new-password" placeholder="请输入新密码">
+
+            <label for="confirm-password">确认密码:</label>
+            <input type="password" id="confirm-password" placeholder="请确认新密码">
+
+            <button id="change-password-btn">修改密码</button>
+        </div>
+    </div>
+
+    <script src="components/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>注册 - 行迹精灵</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 注册框 -->
+        <div class="box" id="register-box">
+            <h2>注册</h2>
+            <p>创建您的账号</p>
+
+            <input type="text" id="new-username" placeholder="请输入用户名">
+            <input type="password" id="new-password" placeholder="请输入密码">
+            <input type="password" id="confirm-password" placeholder="确认密码">
+            <button id="register-btn">注册</button>
+            <p>已有账号？<a href="#" id="show-login">返回登录</a></p>
+        </div>
+    </div>
+
+    <!-- 自定义错误提示弹窗 -->
+    <div id="error-popup" class="popup">
+        <div class="popup-content">
+            <p id="error-message"></p>
+            <button id="close-popup-btn">关闭</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("show-login").addEventListener("click", function() {
+            window.location.href = "index.html"; // 返回登录页面
+        });
+
+        document.getElementById("register-btn").addEventListener("click", function () {
+            const username = document.getElementById("new-username").value;
+            const password = document.getElementById("new-password").value;
+            const confirmPassword = document.getElementById("confirm-password").value;
+
+            // 清空错误信息
+            document.getElementById("error-message").innerText = "";
+
+            if (!username || !password || !confirmPassword) {
+                showErrorPopup("请填写所有字段！");
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showErrorPopup("两次输入的密码不一致！");
+                return;
+            }
+
+            // 获取现有的用户列表
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+
+            // 检查用户名是否已经存在
+            if (users.find(u => u.username === username)) {
+                showErrorPopup("用户名已存在！");
+                return;
+            }
+
+            // 如果用户名不重复，将新用户信息保存到 localStorage
+            users.push({ username, password });
+            localStorage.setItem("users", JSON.stringify(users));
+
+            alert("注册成功，请登录！");
+            window.location.href = "index.html"; // 跳转回登录页
+        });
+
+        // 显示弹窗的函数
+        function showErrorPopup(message) {
+            document.getElementById("error-message").innerText = message;
+            document.getElementById("error-popup").style.display = "flex";
+        }
+
+        // 关闭弹窗
+        document.getElementById("close-popup-btn").addEventListener("click", function() {
+            document.getElementById("error-popup").style.display = "none";
+        });
+    </script>
+
+    <style>
+        /* 自定义弹窗样式 */
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+        }
+
+        .popup-content p {
+            color: red;
+            font-size: 16px;
+            font-weight:bold;  /*加粗*/
+        }
+
+        .popup-content button {
+            background: #007bff;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .popup-content button:hover {
+            background: #0056b3;
+        }
+    </style>
+</body>
+</html>

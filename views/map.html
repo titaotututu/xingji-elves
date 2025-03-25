@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>行迹精灵 - 地图导航</title>
+    <link rel="stylesheet" href="style-views.css">
+    <link rel="icon" href="/xingji-elves/images/logo1.svg" type="image/svg+xml">
+    <style>
+        /* 🌍 页面整体背景 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #87CEEB, #ffffff); /* 天空蓝到白色渐变 */
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 解决导航栏遮挡问题 */
+        .content {
+            margin-top: 100px;  /* 避免被导航栏挡住 */
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        /* 🌟 标题样式 */
+        h1 {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 📝 描述文字 */
+        p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        /* 🗺️ 4 大模块的容器 */
+        .map-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: 100%;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        /* 🚗 每个模块的卡片 */
+        .map-option {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9); /* 半透明背景 */
+            border-radius: 12px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 120px;
+        }
+
+        /* 🌟 按钮悬停效果 */
+        .map-option:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-5px);
+        }
+
+        /* 🚀 图标样式 */
+        .map-option span {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        /* 📱 响应式适配 */
+        @media screen and (max-width: 600px) {
+            .map-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 📌 导航栏 -->
+    <nav>
+        <a href="main.html">首页</a>
+        <a href="travel.html">行程</a>
+        <a href="map.html">导航</a>
+        <a href="Weather.html">天气</a>
+        <a href="lighting.html">点亮地标</a>
+        <a href="journal.html">旅行日志</a>
+        <a href="community.html">社区</a>
+        <a href="assistant.html">智能助手</a>
+
+        <!-- 下拉菜单 -->
+        <div class="dropdown">
+            <button class="dropbtn">更多</button>
+            <div class="dropdown-content">
+                <a href="profile.html">个人信息</a>
+                <a href="feedback.html">反馈</a>
+            </div>
+        </div>
+        
+        <a href="#" id="logout-btn">退出</a>
+    </nav>
+
+
+    <!-- 🏙️ 主要内容 -->
+    <div class="content">
+        <h1>🗺️ 地图导航</h1>
+        <p>请选择您的出行方式，进行路径规划。</p>
+
+        <!-- 🚗 4 大模块 -->
+        <div class="map-options">
+            <div class="map-option" onclick="location.href='map/Car_Map.html'">
+                <span>🚗</span> 驾驶路径规划
+            </div>
+            <div class="map-option" onclick="location.href='map/Walk_Map.html'">
+                <span>🚶</span> 步行路径规划
+            </div>
+            <div class="map-option" onclick="location.href='map/Bike_Map.html'">
+                <span>🚴</span> 骑行路径规划
+            </div>
+            <div class="map-option" onclick="location.href='map/Bus_Map.html'">
+                <span>🚌</span> 公交路径规划
+            </div>
+        </div>
+    </div>
+</body>
+</html>

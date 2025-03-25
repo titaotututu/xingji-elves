@@ -1,0 +1,215 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>行迹精灵 - 行程</title>
+    <link rel="stylesheet" href="style-views.css">
+    <link rel="icon" href="/xingji-elves/images/logo1.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #87CEEB, #ffffff);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            margin-top: 80px;
+            text-align: center;
+            width: 100%;
+            max-width: 650px;
+            padding:20px;
+        }
+        h1 {
+            font-size: 36px;
+            color: #2C3E50;
+            font-weight: bold;
+            text-align: left;
+            padding: 5px 0;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding-top:30px;
+        }
+        .list-group {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            padding: 0;
+            list-style: none;
+            background-color: white;
+            max-height: 400px;
+            overflow-y: auto;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+            width: 90%;
+            margin:0 auto;
+        }
+        .list-group a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #f1f1f1;
+            text-decoration: none;
+            color: #333;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .list-group a:hover {
+            background-color: #ddd;
+        }
+
+        .list-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        background-color: #f1f1f1;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+     }
+
+        .trip-link {
+            text-decoration: none;
+            color: #333;
+            flex: 1;
+        }
+
+        .trip-link:hover {
+            text-decoration: underline;
+        }
+
+        .delete-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+
+        button {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #2980b9, #1c6ea4);
+            transform: scale(1.05);
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+    </style>
+</head>
+<body>
+           <!-- 📌 导航栏 -->
+           <nav>
+            <a href="main.html">首页</a>
+            <a href="travel.html">行程</a>
+            <a href="map.html">导航</a>
+            <a href="Weather.html">天气</a>
+            <a href="lighting.html">点亮地标</a>
+            <a href="journal.html">旅行日志</a>
+            <a href="community.html">社区</a>
+            <a href="assistant.html">智能助手</a>
+    
+            <!-- 下拉菜单 -->
+            <div class="dropdown">
+                <button class="dropbtn">更多</button>
+                <div class="dropdown-content">
+                    <a href="profile.html">个人信息</a>
+                    <a href="feedback.html">反馈</a>
+                </div>
+            </div>
+            
+            <a href="#" id="logout-btn">退出</a>
+        </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-suitcase"></i> 行程管理</h1>
+            <button onclick="window.location.href='travel/create-travel.html'">新建行程</button>
+        </div>
+        <div id="tripList" class="list-group">
+            <!-- 行程列表将在这里动态加载 -->
+        </div>
+    </div>
+
+    <script>
+        function loadTrips() {
+            const tripList = document.getElementById("tripList");
+            tripList.innerHTML = ""; // 清空列表
+
+            const travels = JSON.parse(localStorage.getItem("travels")) || [];
+            
+            if (travels.length === 0) {
+                tripList.innerHTML = "<p>暂无行程，请创建新行程。</p>";
+                return;
+            }
+
+            travels.forEach((travel, index) => {
+                const listItem = document.createElement("div");
+                listItem.className = "list-item";
+
+                // 行程链接
+                const a = document.createElement("a");
+                a.textContent = `${travel.name} (${travel.city}) - ${travel.date}`;
+                a.href = `travel/todo.html?travelId=${travel.id}`;
+                a.className = "trip-link";
+
+                // 删除按钮
+                const deleteBtn = document.createElement("button");
+                deleteBtn.textContent = "删除";
+                deleteBtn.className = "delete-btn";
+                deleteBtn.onclick = function () {
+                    deleteTrip(index);
+                };
+
+                listItem.appendChild(a);
+                listItem.appendChild(deleteBtn);
+                tripList.appendChild(listItem);
+            });
+        }
+
+        // 删除行程函数
+        function deleteTrip(index) {
+            const travels = JSON.parse(localStorage.getItem("travels")) || [];
+            if (index >= 0 && index < travels.length) {
+                const deletedTrip = travels.splice(index, 1); // 删除对应的行程
+                localStorage.setItem("travels", JSON.stringify(travels)); // 更新 localStorage
+                alert(`行程 "${deletedTrip[0].name}" 已删除！`);
+                loadTrips(); // 重新加载行程列表
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", loadTrips);
+    </script>
+
+</body>
+</html>

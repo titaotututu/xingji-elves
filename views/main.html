@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>行迹精灵 - 主页</title>
+    <link rel="stylesheet" href="style-views.css">
+    <link rel="icon" href="../images/logo1.svg" type="image/svg+xml">
+    <style>
+        /* 🌍 页面整体背景 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #87CEEB, #ffffff); /* 天空蓝到白色渐变 */
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 📌 解决导航栏遮挡 */
+        .content {
+            margin-top: 120px; /* 避免被导航栏遮挡 */
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.8); /* 半透明背景提升可读性 */
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            backdrop-filter: blur(5px);
+        }
+
+        /* 🏕️ 主页标题 */
+        h1 {
+            font-size: 38px;
+            color: #004d99;
+            font-family: "Georgia", serif;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* ✨ 主页副标题 */
+        p {
+            font-size: 20px;
+            color: #333;
+            font-weight: 500;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* 🛫 开始规划按钮 */
+        .start-btn {
+            display: inline-block;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 12px 24px;
+            color: white;
+            background: linear-gradient(90deg, #007bff, #0056b3);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .start-btn:hover {
+            background: linear-gradient(90deg, #0056b3, #007bff);
+            transform: scale(1.05);
+        }
+
+        /* 📱 响应式布局 */
+        @media screen and (max-width: 600px) {
+            .content {
+                padding: 30px 15px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            p {
+                font-size: 18px;
+            }
+
+            .start-btn {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <!-- 📌 导航栏 -->
+    <nav>
+        <a href="main.html">首页</a>
+        <a href="travel.html">行程</a>
+        <a href="map.html">导航</a>
+        <a href="Weather.html">天气</a>
+        <a href="lighting.html">点亮地标</a>
+        <a href="journal.html">旅行日志</a>
+        <a href="community.html">社区</a>
+        <a href="assistant.html">智能助手</a>
+
+        <!-- 下拉菜单 -->
+        <div class="dropdown">
+            <button class="dropbtn">更多</button>
+            <div class="dropdown-content">
+                <a href="profile.html">个人信息</a>
+                <a href="feedback.html">反馈</a>
+            </div>
+        </div>
+        
+        <a href="#" id="logout-btn">退出</a>
+    </nav>
+
+    <!-- 📌 主要内容 -->
+    <div class="content">
+        <h1>🏝️ 欢迎来到行迹精灵</h1>
+        <p>探索世界，从这里开始！管理您的旅行计划、日志、地图和天气信息。</p>
+        <a href="travel.html" class="start-btn">立即规划行程 🛫</a>
+    </div>
+
+    <script src="components/auth.js"></script>
+</body>
+</html>

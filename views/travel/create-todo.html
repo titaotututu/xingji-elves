@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>行迹精灵 - 新建待办事项</title>
+    <link rel="stylesheet" href="../style-views.css">
+    <link rel="icon" href="/xingji-elves/images/logo1.svg" type="image/svg+xml">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #87CEEB, #ffffff);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            margin-top: 80px;
+            text-align: center;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #2C3E50;
+            font-weight: bold;
+            text-align: left;
+            padding: 5px 0;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+        }
+
+        .form-container label {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+            display: block;
+            font-weight: 600;
+        }
+
+        .form-container input[type="text"], .form-container input[type="datetime-local"] {
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .form-container input[type="text"]:focus, .form-container input[type="datetime-local"]:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+        }
+
+        .form-container input::placeholder {
+            color: #aaa;
+        }
+
+        .form-container button {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .form-container button:hover {
+            background: linear-gradient(135deg, #2980b9, #1c6ea4);
+            transform: scale(1.05);
+            box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        .form-container button:active {
+            background: linear-gradient(135deg, #1c6ea4, #3498db);
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+    <!-- 📌 导航栏 -->
+    <nav>
+        <a href="../main.html">首页</a>
+        <a href="../travel.html">行程</a>
+        <a href="../map.html">导航</a>
+        <a href="../Weather.html">天气</a>
+        <a href="../lighting.html">点亮地标</a>
+        <a href="../journal.html">旅行日志</a>
+        <a href="../community.html">社区</a>
+        <a href="../assistant.html">智能助手</a>
+
+        <!-- 下拉菜单 -->
+        <div class="dropdown">
+            <button class="dropbtn">更多</button>
+            <div class="dropdown-content">
+                <a href="profile.html">个人信息</a>
+                <a href="feedback.html">反馈</a>
+            </div>
+        </div>
+        
+        <a href="#" id="logout-btn">退出</a>
+    </nav>
+
+    <div class="container">
+        <h1>新建待办事项</h1>
+
+        <div class="form-container">
+            <label for="todoTime">时间</label>
+            <input type="datetime-local" id="todoTime" name="todoTime" required>
+
+            <label for="todoLocation">地点</label>
+            <input type="text" id="todoLocation" name="todoLocation" placeholder="请输入地点" required>
+
+            <label for="todoContent">待办内容</label>
+            <input type="text" id="todoContent" name="todoContent" placeholder="请输入待办内容" required>
+
+            <button onclick="saveTodo()">保存待办事项</button>
+        </div>
+    </div>
+
+    <script>
+        // 获取 URL 中的 travelId 参数
+        const urlParams = new URLSearchParams(window.location.search);
+        const travelId = urlParams.get('travelId');
+
+        function saveTodo() {
+            const time = document.getElementById('todoTime').value;
+            const location = document.getElementById('todoLocation').value.trim();
+            const content = document.getElementById('todoContent').value.trim();
+
+            if (!time || !location || !content) {
+                alert("请填写所有字段");
+                return;
+            }
+
+            // 从 localStorage 中获取所有行程数据
+            const travels = JSON.parse(localStorage.getItem("travels")) || [];
+
+            // 查找与当前 travelId 对应的行程
+            const travel = travels.find(t => t.id == travelId);
+
+            if (!travel) {
+                // 如果没有找到行程，显示错误信息
+                alert("未找到对应的行程！");
+                console.error(`未找到ID为${travelId}的行程`);
+                return;
+            }
+
+            // 如果找到了对应行程，添加新的待办事项
+            travel.todos.push({ content: content, time: time, location: location, completed: false });
+
+            // 更新 localStorage 中的行程数据
+            localStorage.setItem('travels', JSON.stringify(travels));
+
+            alert("待办事项已保存！");
+            window.location.href = `todo.html?travelId=${travelId}`; // 保存后跳转回 todo.html 页面
+        }
+
+    </script>
+</body>
+</html>

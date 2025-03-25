@@ -1,0 +1,184 @@
+<!---->
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>行迹精灵 - 新建行程</title>
+    <link rel="stylesheet" href="../style-views.css">
+    <link rel="icon" href="/xingji-elves/images/logo1.svg" type="image/svg+xml">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #87CEEB, #ffffff);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            margin-top: 200px;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .new-trip-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .new-trip-form input, .new-trip-form textarea {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        .new-trip-form button {
+            padding: 12px 25px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 50%;
+            max-width: 200px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.2s;
+        }
+
+        .new-trip-form button:hover {
+            background-color: #45a049;
+            transform: translateY(-3px);
+        }
+
+        .new-trip-form button:active {
+            transform: translateY(2px);
+        }
+
+        label {
+            font-size: 18px;
+            color: #333;
+            text-align: left;
+            margin-top: 10px;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        input, textarea {
+            font-size: 16px;
+        }
+
+        .todo-list {
+            margin-top: 20px;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .todo-list li {
+            background-color: #f2f2f2;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            width: 80%;
+            max-width: 400px;
+            text-align: left;
+        }
+
+    </style>
+</head>
+<body>
+           <!-- 📌 导航栏 -->
+           <nav>
+            <a href="../main.html">首页</a>
+            <a href="../travel.html">行程</a>
+            <a href="../map.html">导航</a>
+            <a href="../Weather.html">天气</a>
+            <a href="../lighting.html">点亮地标</a>
+            <a href="../journal.html">旅行日志</a>
+            <a href="../community.html">社区</a>
+            <a href="../assistant.html">智能助手</a>
+    
+            <!-- 下拉菜单 -->
+            <div class="dropdown">
+                <button class="dropbtn">更多</button>
+                <div class="dropdown-content">
+                    <a href="profile.html">个人信息</a>
+                    <a href="feedback.html">反馈</a>
+                </div>
+            </div>
+            
+            <a href="#" id="logout-btn">退出</a>
+        </nav>
+    
+    <div class="container">
+        <h1>创建新行程</h1>
+        <div class="new-trip-form">
+            <input type="text" id="tripTitle" placeholder="行程名称" required>
+            <input type="text" id="tripCity" placeholder="旅行城市" required>
+            <input type="date" id="tripDate" required>
+            <button onclick="createNewTrip()">确认添加</button>
+        </div>
+    </div>
+
+    <script>
+        function createNewTrip() {
+            var tripTitle = document.getElementById('tripTitle').value;
+            var tripCity = document.getElementById('tripCity').value;
+            var tripDate = document.getElementById('tripDate').value;
+
+            if (!tripTitle || !tripCity || !tripDate) {
+                alert('请填写所有信息！');
+                return;
+            }
+
+            // 获取当前日期（格式为 YYYY-MM-DD）
+            var currentDate = new Date().toISOString().split('T')[0];
+
+            // 检查用户填写的日期是否早于当前日期
+            if (tripDate < currentDate) {
+                alert('行程日期不能早于当前日期！');
+                return;
+            }
+
+            var newTrip = {
+                id: Date.now(), // 添加唯一 ID
+                name: tripTitle, // 统一使用 `name`，确保 travel.html 也能正确解析
+                city: tripCity,
+                date: tripDate,
+                todos: [] // 待办事项数组，初始值为空
+            };
+
+            // 读取 `travels`，如果没有则初始化为空数组
+            var travels = JSON.parse(localStorage.getItem('travels')) || [];
+            travels.push(newTrip);
+            localStorage.setItem('travels', JSON.stringify(travels));
+
+            alert('新行程 "' + tripTitle + '" 已创建！');
+            window.location.href = '../travel.html'; // 创建完成后跳转到行程列表页面
+        }
+
+    </script>
+
+</body>
+</html>
