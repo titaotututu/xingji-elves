@@ -9,15 +9,68 @@
     <link rel="icon" href="/xingji-elves/images/logo1.svg" type="image/svg+xml">
     <link rel="stylesheet" href="style-views.css">
     <style>
-        html, body, #container {
-            margin:0;
-            height:100%;
+        html, body {
+            margin: 0;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
         }
-        .input-item-text {
-            width:7rem;
+
+        .main-container {
+            display: flex;
+            height: calc(100% - 50px);
+            width: 100%;
+            margin-top:60px;
         }
-        .input-card {
-            display: none; /* Initially hide the input card */
+
+        #container {
+            flex: 7;
+            height: 100%;
+        }
+
+        .right-panel {
+            flex: 3;
+            height: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+            overflow-y: auto;
+        }
+
+        .city-list {
+            margin-bottom: 20px;
+        }
+
+        .city-list h3 {
+            margin-bottom: 10px;
+        }
+
+        .city-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .city-list ul li {
+            margin-bottom: 5px;
+            padding: 5px 10px;
+            background-color: #e0f7fa;
+            border-radius: 5px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
         }
     </style>
     <script type="text/javascript">
@@ -48,10 +101,22 @@
         
         <a href="#" id="logout-btn">退出</a>
     </nav>
+    <!-- 📌 地图 + 右侧面板 -->
+<div class="main-container"> 
 <div id="container"></div>
+<div class="right-panel">
+    <div class="city-list">
+        <h3>已点亮的城市</h3>
+        <ul id="visitedCities"></ul>
+    </div>
+    <div>
+        <label for="cityInput">输入城市名称：</label>
+        <input type="text" id="cityInput" placeholder="请输入城市名称">
+    </div>
+</div>
 <div class="input-card" id="inputCard">
     <label style='color: grey'>行政区边界查询</label>
-    <div class="input-item">
+    <!-- <div class="input-item">
         <div class="input-item-prepend">
             <span class="input-item-text">行政级别</span>
         </div>
@@ -60,94 +125,82 @@
             <option value="city">city</option>
             <option value="province">province</option>
         </select>
-    </div>
+    </div> -->
     <div class="input-item">
         <div class="input-item-prepend">
-            <span class="input-item-text">名称/adcode</span>
+            <span class="input-item-text">名称</span>
         </div>
-        <input id='district' type="text" value='北京,上海,广州'>
+        <input id='district' type="text" placeholder='请输入城市'>
     </div>
-    <input id="draw" type="button" class="btn" value="查询"/>
+    <input id="draw" type="button" class="btn" value="点亮"/>
 </div>
+
+
+
+
+
+
 <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=6e55ea6069492d3b69f2bb419e1bcd86&plugin=AMap.DistrictSearch"></script>
 <script type="text/javascript">
-    // 初始化地图对象，加载地图
+    //初始化地图对象，加载地图
     var map = new AMap.Map("container", {
-        resizeEnable: true,
-        center: [116.397428, 39.90923], //地图中心点
-        zoom: 10 //地图显示的缩放级别
+      center: [116.397428, 39.90923],//地图中心点
+      zoom: 10 //地图显示的缩放级别
     });
 
     var district = null;
-    var polygons = [];
-
-    function drawBounds(city) {
-        // 加载行政区划插件
-        if (!district) {
-            // 实例化DistrictSearch
-            var opts = {
-                subdistrict: 0,   // 获取边界不需要返回下级行政区
-                extensions: 'all',  // 返回行政区边界坐标组等具体信息
-                level: 'city'  // 查询行政级别为 市
-            };
-            district = new AMap.DistrictSearch(opts);
-        }
-
-        // 行政区查询
-        district.search(city, function (status, result) {
-            var bounds = result.districtList[0].boundaries;
-            if (bounds) {
-                for (var i = 0, l = bounds.length; i < l; i++) {
-                    // 生成行政区划polygon
-                    var polygon = new AMap.Polygon({
-                        strokeWeight: 1,
-                        path: bounds[i],
-                        fillOpacity: 0.4,
-                        fillColor: '#80d8ff',
-                        strokeColor: '#0091ea'
-                    });
-                    polygons.push(polygon);
-                    map.add(polygon);
-                }
-                map.setFitView(polygons); // 视口自适应
+    var polygon;
+    function drawBounds() {
+            if (!district) {
+                var opts = {
+                    subdistrict: 0,
+                    extensions: 'all',
+                    level: 'district'
+                };
+                district = new AMap.DistrictSearch(opts);
             }
-        });
-    }
 
-    document.getElementById('draw').onclick = function () {
-        var cities = document.getElementById('district').value.split(',');
-        clearPolygons();
-        cities.forEach(function (city) {
-            drawBounds(city.trim());
-        });
-    };
+            var keywords = document.getElementById('district').value.split(','); // 支持多个名称
+            if (keywords.length === 0 || keywords[0].trim() === '') {
+                console.warn('名称不能为空');
+                return;
+            }
 
-    document.getElementById('district').onkeydown = function (e) {
-        if (e.keyCode === 13) {
-            var cities = document.getElementById('district').value.split(',');
-            clearPolygons();
-            cities.forEach(function (city) {
-                drawBounds(city.trim());
+            keywords.forEach(function (keyword) {
+                district.search(keyword.trim(), function (status, result) {
+                    if (!result || !result.districtList || !result.districtList[0]) {
+                        console.warn(`未找到行政区：${keyword}`);
+                        return;
+                    }
+
+                    var bounds = result.districtList[0].boundaries;
+                    if (bounds) {
+                        for (var i = 0; i < bounds.length; i++) {
+                            bounds[i] = [bounds[i]];
+                        }
+                        var polygon = new AMap.Polygon({
+                            strokeWeight: 1,
+                            path: bounds,
+                            fillOpacity: 0.4,
+                            fillColor: '#80d8ff',
+                            strokeColor: '#0091ea'
+                        });
+                        map.add(polygon);
+                        map.setFitView(polygon);
+                    }
+                });
             });
-            return false;
         }
-        return true;
+    drawBounds();
+    document.getElementById('draw').onclick = drawBounds;
+    document.getElementById('district').onkeydown = function (e) {
+      if (e.keyCode === 13) {
+        drawBounds();
+        return false;
+      }
+      return true;
     };
-
-    function clearPolygons() {
-        polygons.forEach(function (polygon) {
-            map.remove(polygon);
-        });
-        polygons = [];
-    }
-
-    window.highlightCity = function (city) {
-        drawBounds(city);
-    }
-
-    window.showInputCard = function () {
-        document.getElementById('inputCard').style.display = 'block';
-    }
+  </script>
 </script>
 </body>
 </html>
