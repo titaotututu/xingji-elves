@@ -128,6 +128,19 @@
             transform: scale(1.05);
             box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
         }
+        
+        button.completed-btn {
+            background: #d3d3d3; /* 灰色背景 */
+            color: #666; /* 灰色文字 */
+            cursor: not-allowed; /* 禁用鼠标指针 */
+            box-shadow: none; /* 移除阴影 */
+            transform: none; /* 禁用缩放效果 */
+        }
+        
+        button.completed-btn:hover {
+            background: #d3d3d3; /* 保持灰色背景 */
+            transform: none; /* 禁用悬停效果 */
+        }
     </style>
 </head>
 <body>
@@ -146,8 +159,8 @@
         <div class="dropdown">
             <button class="dropbtn">更多</button>
             <div class="dropdown-content">
-                <a href="profile.html">个人信息</a>
-                <a href="feedback.html">反馈</a>
+                <a href="../profile.html">个人信息</a>
+                <a href="../feedback.html">反馈</a>
             </div>
         </div>
         
@@ -206,8 +219,8 @@
                         <span>${todo.time} | ${todo.location} - ${todo.content}</span>
                         <div>
                             <button onclick="removeTodo(${index})">删除</button>
-                            <button onclick="toggleComplete(${index})">
-                                ${todo.completed ? '<i class="fas fa-check-circle completed-icon"></i> 已完成' : '打卡'}
+                            <button class="${todo.completed ? 'completed-btn' : ''}" onclick="toggleComplete(${index})">
+                                ${todo.completed ? ' 已完成' : '打卡'}
                             </button>
                         </div>
                     `;

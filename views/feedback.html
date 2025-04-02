@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>行迹精灵 - 用户反馈</title>
+    <link rel="icon" href="/xingji-elves/images/logo1.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="style-views.css">
+    <!-- 引入外部样式库 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background: linear-gradient(to bottom, #87CEEB, #ffffff); /* 天空蓝到白色渐变 */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .feedback-container {
+            width: 100%;
+            max-width: 500px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .feedback-header {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .feedback-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            font-size: 1rem;
+        }
+        .feedback-textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 100px;
+        }
+        .feedback-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .feedback-button:hover {
+            background-color: #0056b3;
+        }
+        .feedback-success {
+            text-align: center;
+            color: green;
+            margin-top: 10px;
+            display: none;
+        }
+        .feedback-error {
+            text-align: center;
+            color: red;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="main.html">首页</a>
+        <a href="travel.html">行程</a>
+        <a href="map.html">导航</a>
+        <a href="Weather.html">天气</a>
+        <a href="lighting.html">点亮地标</a>
+        <a href="journal.html">旅行日志</a>
+        <a href="community.html">社区</a>
+        <a href="assistant.html">智能助手</a>
+
+        <!-- 下拉菜单 -->
+        <div class="dropdown">
+            <button class="dropbtn">更多</button>
+            <div class="dropdown-content">
+                <a href="profile.html">个人信息</a>
+                <a href="feedback.html">反馈</a>
+            </div>
+        </div>
+        
+        <a href="#" id="logout-btn">退出</a>
+    </nav>
+    <div class="feedback-container">
+        <div class="feedback-header">用户反馈</div>
+        <form id="feedbackForm">
+            <input type="text" id="userName" class="feedback-input" placeholder="请输入您的姓名（可选）" />
+            <input type="email" id="userEmail" class="feedback-input" placeholder="请输入您的邮箱（可选）" />
+            <textarea id="userMessage" class="feedback-textarea" placeholder="请输入您的建议或反馈"></textarea>
+            <button type="submit" class="feedback-button">发送反馈</button>
+        </form>
+        <div id="successMessage" class="feedback-success">感谢您的反馈，我们会尽快处理！</div>
+        <div id="errorMessage" class="feedback-error">发送失败，请稍后再试。</div>
+    </div>
+
+    <!-- 引入外部脚本库 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            const feedbackForm = $("#feedbackForm");
+            const successMessage = $("#successMessage");
+            const errorMessage = $("#errorMessage");
+
+            // 处理表单提交
+            feedbackForm.submit(async function (e) {
+                e.preventDefault();
+
+                // 获取用户输入
+                const userName = $("#userName").val().trim();
+                const userEmail = $("#userEmail").val().trim();
+                const userMessage = $("#userMessage").val().trim();
+
+                // 验证用户是否填写了反馈内容
+                if (!userMessage) {
+                    alert("请填写您的反馈内容！");
+                    return;
+                }
+
+                // 显示加载状态
+                $(".feedback-button").prop("disabled", true);
+                $(".feedback-button").text("正在发送...");
+
+                try {
+                    // 调用后端接口（您需要实现这个接口）
+                    const response = await fetch("/api/feedback", { // 替换为实际的后端接口地址
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            name: userName,
+                            email: userEmail,
+                            message: userMessage,
+                        }),
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        // 显示成功消息
+                        successMessage.show();
+                        errorMessage.hide();
+                        feedbackForm[0].reset(); // 清空表单
+                    } else {
+                        // 显示错误消息
+                        errorMessage.show();
+                        successMessage.hide();
+                    }
+                } catch (error) {
+                    console.error("Error:", error);
+                    errorMessage.show();
+                    successMessage.hide();
+                } finally {
+                    // 恢复按钮状态
+                    $(".feedback-button").prop("disabled", false);
+                    $(".feedback-button").text("发送反馈");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

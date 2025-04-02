@@ -1,7 +1,7 @@
-#项目目录结构
+# 项目目录结构
 ```
 /xingji-elves
-│── index.html          // 欢迎界面
+│── index.html          // 欢迎界面（软件入口）
 │── main.html           //主界面，用户成功登录之后才能进入
 │── register.html       //注册界面
 │── style.css          // 样式文件
@@ -15,30 +15,42 @@
 │   ├── map.js         // 地图导航组件
 │   ├── auth.js         // 用户认证逻辑
 │── views/
-│   │── main.html       //主界面，用户成功登录之后才能
+│   │── index.html       //主界面，用户成功登录之后才能
 │   │── style-views.css       //views中界面的美化
 │   │── travel.html     //行程
 │   │── map.html        //导航
 │   │── weather.html    //天气
-│   │── landmark.html   //点亮地标
+│   │── lighting.html   //点亮地标
 │   │── journal.html    //旅行日志
 │   │── assistant.html  //智能助手
 │   │── feedback.html   //反馈通道
 │   │── profile.html    //个人信息
+│   │── assistant.html    //智能助手
+│   |── travel/
+|   |   |──create-todo.html  //创建待办
+|   |   |──create-travel.html //创建旅程
+|   |   |──todo.html       //待办信息
 │   |── map/
 |   |   |── Bike_Map.html  //骑行路径规划
 |   |   |── Bus_Map.html   //公交路径规划
 |   |   |── Car_Map.html   //驾驶路径规划
 |   |   |── Walk_Map.html  //步行路径规划
+│   |── journal/
+|   |   |── journal-detail //日志的具体内容
 │── images/            // 存放静态资源（图片、图标等）
 
 ```
 
+# TODO
 
-
-```
 3/19 
-再写两个页面
-```
+- 再写两个页面
 
 const apiKey = 'dc49e4062796f8aa751aadd950f417ed';   //天气查询的密钥
+
+4/1
+- 点亮逻辑还需要改进
+- 个人信息信息界面需要改进
+待做：
+  - 日志界面（前端已经做好，需要删除示例）
+  - 社区界面

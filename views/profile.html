@@ -6,18 +6,39 @@
     <link rel="stylesheet" href="style-views.css">  
     <link rel="icon" href="/xingji-elves/images/logo1.svg" type="image/svg+xml">
 </head>
+<style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background: linear-gradient(to bottom, #87CEEB, #ffffff); /* 天空蓝到白色渐变 */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+</style>
 <body>
     <!-- 📌 导航栏 -->
     <nav>
         <a href="main.html">首页</a>
         <a href="travel.html">行程</a>
         <a href="map.html">导航</a>
-        <a href="weather.html">天气</a>
-        <a href="landmark.html">点亮地标</a>
+        <a href="Weather.html">天气</a>
+        <a href="lighting.html">点亮地标</a>
         <a href="journal.html">旅行日志</a>
+        <a href="community.html">社区</a>
         <a href="assistant.html">智能助手</a>
-        <a href="feedback.html">反馈</a>
-        <a href="profile.html">个人信息</a>
+
+        <!-- 下拉菜单 -->
+        <div class="dropdown">
+            <button class="dropbtn">更多</button>
+            <div class="dropdown-content">
+                <a href="profile.html">个人信息</a>
+                <a href="feedback.html">反馈</a>
+            </div>
+        </div>
+        
         <a href="#" id="logout-btn">退出</a>
     </nav>
 

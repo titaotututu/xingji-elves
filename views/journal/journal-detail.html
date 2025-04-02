@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>行迹精灵 - 日志详情</title>
+    <!-- 引入外部样式库 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="/xingji-elves/images/logo1.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../style-views.css">
+    <style>
+        /* 页面整体布局 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #87CEEB, #ffffff);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .log-detail-container {
+            margin-top:150px;
+            width: 100%;
+            max-width: 600px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* 返回按钮样式 */
+        .back-button {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 40px; /* 按钮宽度 */
+            height: 40px; /* 按钮高度 */
+            background-color: transparent; /* 移除背景色 */
+            border: none; /* 移除边框 */
+            border-radius: 50%; /* 可选：如果需要圆形按钮 */
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+            padding: 0; /* 移除内边距 */
+        }
+
+        .back-button:hover {
+            background-color: #f0f0f0; /* 可选：悬停时的背景色 */
+        }
+
+        .back-icon {
+            width: 40px; /* 图标宽度 */
+            height: 40px; /* 图标高度 */
+            object-fit: contain; /* 确保图标按比例缩放 */
+        }
+
+        /* 旅行名称 */
+        .travel-title {
+            font-size: 1.75rem;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* 天气和心情 */
+        .log-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .log-header-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        label {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        select.log-input {
+            padding: 6px 10px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            outline: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        select.log-input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+        }
+
+        /* 日志标题和描述 */
+        input.log-input, textarea.log-textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            outline: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+        input.log-input:focus, textarea.log-textarea:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+        }
+        textarea.log-textarea {
+            min-height: 120px;
+        }
+
+        /* 图片上传和预览 */
+        .log-image-preview {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .log-image-preview img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+        .log-image-preview img:hover {
+            transform: scale(1.05);
+        }
+
+        /* 保存按钮 */
+        .save-log-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .save-log-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="../main.html">首页</a>
+        <a href="../travel.html">行程</a>
+        <a href="../map.html">导航</a>
+        <a href="../Weather.html">天气</a>
+        <a href="../lighting.html">点亮地标</a>
+        <a href="journal.html">旅行日志</a>
+        <a href="community.html">社区</a>
+        <a href="../assistant.html">智能助手</a>
+        <div class="dropdown">
+            <button class="dropbtn">更多</button>
+            <div class="dropdown-content">
+                <a href="profile.html">个人信息</a>
+                <a href="feedback.html">反馈</a>
+            </div>
+        </div>
+        <a href="#" id="logout-btn">退出</a>
+    </nav>
+    <div class="log-detail-container">
+        <!-- 返回按钮 -->
+        <button class="back-button" onclick="window.location.href='../journal.html'">
+            <img src="../../images/return.svg" alt="返回" class="back-icon" />
+        </button>
+
+        <!-- 旅行名称 -->
+        <div class="travel-title" id="travelTitle">日本之行</div>
+
+        <!-- 日志头部（天气和心情） -->
+        <div class="log-header">
+            <div class="log-header-item">
+                <label for="weather">天气：</label>
+                <select id="weather" class="log-input">
+                    <option value="">选择天气</option>
+                    <option value="sunny">晴天</option>
+                    <option value="cloudy">多云</option>
+                    <option value="rainy">下雨</option>
+                    <option value="snowy">下雪</option>
+                </select>
+            </div>
+            <div class="log-header-item">
+                <label for="mood">心情：</label>
+                <select id="mood" class="log-input">
+                    <option value="">选择心情</option>
+                    <option value="happy">开心</option>
+                    <option value="sad">悲伤</option>
+                    <option value="excited">兴奋</option>
+                    <option value="tired">疲惫</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- 日志标题 -->
+        <input type="text" id="logTitle" class="log-input" placeholder="日志标题" />
+
+        <!-- 日志描述 -->
+        <textarea id="description" class="log-textarea" placeholder="写下你的旅行故事..."></textarea>
+
+        <!-- 图片上传 -->
+        <div>
+            <label for="imageUpload" class="btn btn-secondary">添加图片</label>
+            <input type="file" id="imageUpload" accept="image/*" multiple style="display: none;" />
+        </div>
+        <div class="log-image-preview" id="imagePreview"></div>
+
+        <!-- 保存按钮 -->
+        <button type="submit" class="save-log-button">保存日志</button>
+    </div>
+
+    <!-- 引入外部脚本库 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            const queryParams = new URLSearchParams(window.location.search);
+            const logId = queryParams.get("id");
+
+            // 模拟加载日志数据（实际需要从后端获取）
+            const logs = {
+                1: {
+                    travelTitle: "日本之行",
+                    title: "东京之旅",
+                    weather: "sunny",
+                    mood: "happy",
+                    description: "今天去了东京塔，景色非常美丽。",
+                    images: [],
+                },
+                2: {
+                    travelTitle: "欧洲环游",
+                    title: "巴黎浪漫之旅",
+                    weather: "cloudy",
+                    mood: "excited",
+                    description: "参观了埃菲尔铁塔，感受到了浪漫的氛围。",
+                    images: [],
+                },
+            };
+
+            // 加载日志数据
+            if (logId && logs[logId]) {
+                const log = logs[logId];
+                $("#travelTitle").text(log.travelTitle);
+                $("#logTitle").val(log.title);
+                $("#weather").val(log.weather);
+                $("#mood").val(log.mood);
+                $("#description").val(log.description);
+
+                // 预览图片
+                log.images.forEach(imageUrl => {
+                    const imgElement = `<img src="${imageUrl}" alt="日志图片" />`;
+                    $("#imagePreview").append(imgElement);
+                });
+            }
+
+            // 处理图片上传
+            $("#imageUpload").on("change", function (e) {
+                const files = e.target.files;
+                Array.from(files).forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = function (event) {
+                        const imgElement = `<img src="${event.target.result}" alt="日志图片" />`;
+                        $("#imagePreview").append(imgElement);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            });
+
+            // 保存日志
+            $(".save-log-button").click(function () {
+                // 获取表单数据
+                const logData = {
+                    travelTitle: $("#travelTitle").text(),
+                    title: $("#logTitle").val(),
+                    weather: $("#weather").val(),
+                    mood: $("#mood").val(),
+                    description: $("#description").val(),
+                    images: Array.from($("#imagePreview img")).map(img => img.src),
+                };
+
+                console.log("保存的日志数据：", logData);
+
+                // 模拟保存到后端
+                alert("日志已保存！");
+            });
+        });
+    </script>
+</body>
+</html>
