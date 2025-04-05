@@ -1,51 +1,22 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const loginBtn = document.getElementById("login-btn");
-    const registerBtn = document.getElementById("register-btn");
+    const logoutBtn = document.getElementById("logout-btn"); 
 
-    if (loginBtn) {
-        loginBtn.addEventListener("click", function () {
-            const username = document.getElementById("username").value;
-            const password = document.getElementById("password").value;
+    // 退出逻辑
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", function (event) {
+            event.preventDefault(); // 阻止默认行为
 
-            if (!username || !password) {
-                alert("请输入用户名和密码！");
-                return;
-            }
+            const userConfirmed = confirm("确定要退出吗？");
 
-            const users = JSON.parse(localStorage.getItem("users")) || [];
-            const user = users.find(u => u.username === username && u.password === password);
+            if (userConfirmed) {
+                // 清除用户数据
+                localStorage.removeItem("currentUser"); // 移除当前用户信息
+                sessionStorage.clear(); // 清空 sessionStorage（如果有）
 
-            if (user) {
-                alert("登录成功！");
-                localStorage.setItem("currentUser", username);
-                window.location.href = "main.html";
-            } else {
-                alert("用户名或密码错误！");
+                // 跳转到登录页面或首页
+                window.location.href = "../index.html";
             }
         });
     }
 
-    if (registerBtn) {
-        registerBtn.addEventListener("click", function () {
-            const username = document.getElementById("username").value;
-            const password = document.getElementById("password").value;
-
-            if (!username || !password) {
-                alert("请输入用户名和密码！");
-                return;
-            }
-
-            const users = JSON.parse(localStorage.getItem("users")) || [];
-
-            if (users.some(u => u.username === username)) {
-                alert("用户名已被占用！");
-                return;
-            }
-
-            users.push({ username, password });
-            localStorage.setItem("users", JSON.stringify(users));
-
-            alert("注册成功！请登录");
-        });
-    }
 });
