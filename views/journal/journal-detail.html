@@ -160,14 +160,13 @@
         <a href="../map.html">导航</a>
         <a href="../Weather.html">天气</a>
         <a href="../lighting.html">点亮地标</a>
-        <a href="journal.html">旅行日志</a>
-        <a href="community.html">社区</a>
-        <a href="../assistant.html">智能助手</a>
+        <a href="../journal.html">旅行日志</a>
+        <a href="../community.html">社区</a>
         <div class="dropdown">
             <button class="dropbtn">更多</button>
             <div class="dropdown-content">
-                <a href="profile.html">个人信息</a>
-                <a href="feedback.html">反馈</a>
+                <a href="../profile.html">个人信息</a>
+                <a href="../feedback.html">反馈</a>
             </div>
         </div>
         <a href="#" id="logout-btn">退出</a>
@@ -179,7 +178,15 @@
         </button>
 
         <!-- 旅行名称 -->
-        <div class="travel-title" id="travelTitle">日本之行</div>
+        <div class="travel-title">
+            <label for="travelSelect">旅行名称：</label>
+            <select id="travelSelect" class="log-input" >
+                <option value="">请选择行程</option>
+                <option value="custom">自定义名称</option>
+            </select>
+            <input type="text" id="travelNameInput" class="log-input" placeholder="请输入旅行名称" style="display: none;" />
+            <span id="autoTravelName" class="log-input" style="display: none;"></span>
+        </div>
 
         <!-- 日志头部（天气和心情） -->
         <div class="log-header">
@@ -222,80 +229,144 @@
         <button type="submit" class="save-log-button">保存日志</button>
     </div>
 
-    <!-- 引入外部脚本库 -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function () {
-            const queryParams = new URLSearchParams(window.location.search);
-            const logId = queryParams.get("id");
+        // 获取 URL 参数
+        const queryParams = new URLSearchParams(window.location.search);
+        const logId = queryParams.get("id");
+        const travelTitleFromUrl = queryParams.get("travelTitle");
 
-            // 模拟加载日志数据（实际需要从后端获取）
-            const logs = {
-                1: {
-                    travelTitle: "日本之行",
-                    title: "东京之旅",
-                    weather: "sunny",
-                    mood: "happy",
-                    description: "今天去了东京塔，景色非常美丽。",
-                    images: [],
-                },
-                2: {
-                    travelTitle: "欧洲环游",
-                    title: "巴黎浪漫之旅",
-                    weather: "cloudy",
-                    mood: "excited",
-                    description: "参观了埃菲尔铁塔，感受到了浪漫的氛围。",
-                    images: [],
-                },
-            };
+        // 加载所有行程
+        function loadTravels() {
+            const travels = JSON.parse(localStorage.getItem("travels")) || [];
+            const travelSelect = document.getElementById("travelSelect");
+            travelSelect.innerHTML = '<option value="">请选择行程</option>';
 
-            // 加载日志数据
-            if (logId && logs[logId]) {
-                const log = logs[logId];
-                $("#travelTitle").text(log.travelTitle);
-                $("#logTitle").val(log.title);
-                $("#weather").val(log.weather);
-                $("#mood").val(log.mood);
-                $("#description").val(log.description);
+            travels.forEach(travel => {
+                const option = document.createElement("option");
+                option.value = travel.name; // 使用行程名称作为值
+                option.textContent = travel.name;
+                travelSelect.appendChild(option);
+            });
+                // 添加“自定义名称”选项
+            const customOption = document.createElement("option");
+            customOption.value = "custom";
+            customOption.textContent = "自定义名称";
+            travelSelect.appendChild(customOption);
+        }
 
-                // 预览图片
-                log.images.forEach(imageUrl => {
-                    const imgElement = `<img src="${imageUrl}" alt="日志图片" />`;
-                    $("#imagePreview").append(imgElement);
-                });
+        // 初始化页面
+        function initializePage() {
+            const travelSelect = document.getElementById("travelSelect");
+            const travelNameInput = document.getElementById("travelNameInput");
+            const autoTravelName = document.getElementById("autoTravelName");
+
+            if (travelTitleFromUrl) {
+                // 如果有 travelTitle 参数，表示是从待办事项跳转过来的
+                autoTravelName.textContent = travelTitleFromUrl;
+                autoTravelName.style.display = "inline-block";
+                travelSelect.style.display = "none";
+                travelNameInput.style.display = "none";
+            } else {
+                // 如果没有 travelTitle 参数，表示是手动创建日志
+                travelSelect.style.display = "inline-block";
+                loadTravels();
+                
+                // 监听下拉框变化
+            travelSelect.addEventListener("change", function () {
+                if (travelSelect.value === "custom") {
+                    // 如果选择“自定义”，显示输入框
+                    travelNameInput.style.display = "inline-block";
+                    travelNameInput.value = ""; // 清空输入框
+                } else {
+                    // 如果选择其他选项，隐藏输入框
+                    travelNameInput.style.display = "none";
+                }
+            });
+
             }
 
-            // 处理图片上传
-            $("#imageUpload").on("change", function (e) {
-                const files = e.target.files;
-                Array.from(files).forEach(file => {
-                    const reader = new FileReader();
-                    reader.onload = function (event) {
-                        const imgElement = `<img src="${event.target.result}" alt="日志图片" />`;
-                        $("#imagePreview").append(imgElement);
-                    };
-                    reader.readAsDataURL(file);
+
+            // 加载日志数据
+            let logs = JSON.parse(localStorage.getItem("logs")) || [];
+            if (logId !== null && logs[logId]) {
+                const log = logs[logId];
+                if (travelTitleFromUrl) {
+                    autoTravelName.textContent = log.travelTitle || "";
+                } else {
+                    travelSelect.value = log.travelTitle || "";
+                }
+                document.getElementById("logTitle").value = log.title || "";
+                document.getElementById("weather").value = log.weather || "";
+                document.getElementById("mood").value = log.mood || "";
+                document.getElementById("description").value = log.description || "";
+
+                log.images?.forEach(imageUrl => {
+                    const imgElement = `<img src="${imageUrl}" alt="日志图片" />`;
+                    document.getElementById("imagePreview").innerHTML += imgElement;
                 });
-            });
+            }
+        }
 
-            // 保存日志
-            $(".save-log-button").click(function () {
-                // 获取表单数据
-                const logData = {
-                    travelTitle: $("#travelTitle").text(),
-                    title: $("#logTitle").val(),
-                    weather: $("#weather").val(),
-                    mood: $("#mood").val(),
-                    description: $("#description").val(),
-                    images: Array.from($("#imagePreview img")).map(img => img.src),
+        // 图片上传
+        document.getElementById("imageUpload").addEventListener("change", function (e) {
+            const files = e.target.files;
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    const imgElement = `<img src="${event.target.result}" alt="日志图片" />`;
+                    document.getElementById("imagePreview").innerHTML += imgElement;
                 };
-
-                console.log("保存的日志数据：", logData);
-
-                // 模拟保存到后端
-                alert("日志已保存！");
+                reader.readAsDataURL(file);
             });
         });
+
+        // 保存日志
+        document.querySelector(".save-log-button").addEventListener("click", function () {
+            const travelSelect = document.getElementById("travelSelect");
+            const travelNameInput = document.getElementById("travelNameInput");
+
+            // 获取旅行名称
+            let selectedTravel = "";
+            if (travelSelect.value === "custom") {
+                // 如果选择“自定义”，使用输入框的值
+                selectedTravel = travelNameInput.value.trim();
+                if (!selectedTravel) {
+                    alert("请输入旅行名称！");
+                    return;
+                }
+            } else {
+                // 否则使用下拉框的值
+                selectedTravel = travelSelect.value;
+                if (!selectedTravel) {
+                    alert("请选择旅行名称！");
+                    return;
+                }
+            }
+
+            const logData = {
+                travelTitle: selectedTravel,
+                title: document.getElementById("logTitle").value,
+                weather: document.getElementById("weather").value,
+                mood: document.getElementById("mood").value,
+                description: document.getElementById("description").value,
+                images: Array.from(document.querySelectorAll("#imagePreview img")).map(img => img.src),
+                date: new Date().toLocaleDateString(),
+            };
+
+            let logs = JSON.parse(localStorage.getItem("logs")) || [];
+            if (logId !== null) {
+                logs[logId] = logData;
+            } else {
+                logs.push(logData);
+            }
+
+            localStorage.setItem("logs", JSON.stringify(logs));
+            alert("日志已保存！");
+            window.location.href = "../journal.html";
+        });
+
+        // 页面加载时初始化
+        window.onload = initializePage;
     </script>
 </body>
 </html>

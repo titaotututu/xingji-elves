@@ -1,4 +1,3 @@
-<!--日志-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +9,6 @@
     <!-- 引入外部样式库 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        
         body {
             font-family: 'Arial', sans-serif;
             background: linear-gradient(to bottom, #87CEEB, #ffffff); /* 天空蓝到白色渐变 */
@@ -19,9 +17,9 @@
             height: 100vh; /* 确保背景覆盖整个视口 */
         }
         .log-container {
-            margin-top:120px;
+            margin-top: 120px;
             width: 100%;
-            max-width: 650px; /*宽度*/
+            max-width: 650px; /* 宽度 */
             margin: 120px auto 0;
             background-color: #fff;
             border-radius: 10px;
@@ -57,6 +55,12 @@
         .add-log-button:hover {
             background-color: #0056b3;
         }
+        .delete-log-button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -68,7 +72,6 @@
         <a href="lighting.html">点亮地标</a>
         <a href="journal.html">旅行日志</a>
         <a href="community.html">社区</a>
-        <a href="assistant.html">智能助手</a>
 
         <!-- 下拉菜单 -->
         <div class="dropdown">
@@ -91,54 +94,74 @@
 
     <!-- 引入外部脚本库 -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function () {
-        const logList = $("#logList");
+    <script>
+        $(document).ready(function () {
+            const logList = $("#logList");
 
-        // 从 localStorage 加载日志数据
-        function loadLogs() {
-            const logs = JSON.parse(localStorage.getItem("logs")) || [];
-            return logs;
-        }
-
-        // 保存日志数据到 localStorage
-        function saveLogs(logs) {
-            localStorage.setItem("logs", JSON.stringify(logs));
-        }
-
-        // 渲染日志列表
-        function renderLogs() {
-            const logs = loadLogs();
-            logList.empty();
-            if (logs.length === 0) {
-                logList.append("<p class='text-center text-muted'>暂无日志，请点击下方按钮新建日志。</p>");
-            } else {
-                logs.forEach(log => {
-                    const logItem = `
-                        <div class="log-item" data-id="${log.id}">
-                            <div>
-                                <div class="log-title">${log.title}</div>
-                                <div class="log-date">${log.date}</div>
-                            </div>
-                            <div>
-                                <span class="badge bg-secondary">${log.travelTitle}</span>
-                            </div>
-                        </div>
-                    `;
-                    logList.append(logItem);
-                });
-
-                // 绑定点击事件，跳转到详细页面
-                $(".log-item").on("click", function () {
-                    const logId = $(this).data("id");
-                    window.location.href = `journal/journal-detail.html?id=${logId}`;
-                });
+            // 从 localStorage 加载日志数据
+            function loadLogs() {
+                const logs = JSON.parse(localStorage.getItem("logs")) || [];
+                return logs;
             }
-        }
 
-        // 初始加载日志列表
-        renderLogs();
-    });
-</script>
+            // 保存日志数据到 localStorage
+            function saveLogs(logs) {
+                localStorage.setItem("logs", JSON.stringify(logs));
+            }
+
+            // 删除日志并更新 localStorage
+            function deleteLog(index) {
+                if (confirm("确定要删除此日志吗？")) {
+                    const logs = loadLogs();
+                    logs.splice(index, 1); // 删除对应的日志
+                    saveLogs(logs); // 保存更新后的日志数据到 localStorage
+                    renderLogs(); // 重新渲染日志列表
+                }
+            }
+
+            // 渲染日志列表
+            function renderLogs() {
+                const logs = loadLogs();
+                logList.empty();
+
+                if (logs.length === 0) {
+                    logList.append("<p class='text-center text-muted'>暂无日志，请点击下方按钮新建日志。</p>");
+                } else {
+                    logs.forEach((log, index) => {
+                        const logItem = `
+                            <div class="log-item" data-id="${index}">
+                                <div>
+                                    <div class="log-title">${log.title}</div>
+                                    <div class="log-date">${log.date}</div>
+                                </div>
+                                <div>
+                                    <span class="badge bg-secondary">${log.travelTitle}</span>
+                                    <button class="delete-log-button btn btn-danger btn-sm" data-index="${index}">删除</button>
+                                </div>
+                            </div>
+                        `;
+                        logList.append(logItem);
+                    });
+
+                    // 绑定点击事件，跳转到详细页面
+                    $(".log-item").on("click", function () {
+                        const logId = $(this).data("id");
+                        console.log("Log ID:", logId); // 调试用
+                        window.location.href = `journal/journal-detail.html?id=${logId}`;
+                    });
+
+                    // 绑定删除按钮事件
+                    $(".delete-log-button").on("click", function (event) {
+                        event.stopPropagation(); // 阻止事件冒泡，避免触发父级的点击事件
+                        const index = $(this).data("index");
+                        deleteLog(index);
+                    });
+                }
+            }
+
+            // 初始加载日志列表
+            renderLogs();
+        });
+    </script>
 </body>
 </html>

@@ -3,21 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <title>个人信息 - 行迹精灵</title>
-    <link rel="stylesheet" href="style-views.css">  
+    <link rel="stylesheet" href="style-views.css">
     <link rel="icon" href="/xingji-elves/images/logo1.svg" type="image/svg+xml">
-</head>
-<style>
+    <style>
+        /* 页面整体布局 */
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            display: flex;
             background: linear-gradient(to bottom, #87CEEB, #ffffff); /* 天空蓝到白色渐变 */
-            justify-content: center;
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            height: 100vh;
+            justify-content: flex-start;
+            min-height: 100vh;
         }
-</style>
+
+        /* 标题 */
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* 主体内容 */
+        .content {
+            width: 100%;
+            max-width: 600px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* 每个信息项 */
+        .info-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .info-item label {
+            font-size: 0.9rem;
+            color: #555;
+            font-weight: bold;
+        }
+        .info-item .info-display {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .info-item .info-display p {
+            font-size: 1rem;
+            color: #333;
+            margin: 0;
+            padding: 8px 12px;
+            background-color: #f8f9fa;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            min-width: 200px;
+            text-align: center;
+            box-sizing: border-box; /* 确保内边距不会影响宽度 */
+            width: 200px; /* 与输入框宽度一致 */
+        }
+        .info-item .info-display input {
+            width: 200px;
+            padding: 8px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        .info-item .info-display input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+        }
+
+        /* 按钮样式 */
+        button {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button.edit-btn {
+            background-color: #007bff;
+            color: white;
+        }
+        button.edit-btn:hover {
+            background-color: #0056b3;
+        }
+        button.save-btn {
+            background-color: #28a745;
+            color: white;
+        }
+        button.save-btn:hover {
+            background-color: #1e7e34;
+        }
+
+        /* 修改密码表单样式 */
+        .password-form {
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .password-form label {
+            font-size: 0.9rem;
+            color: #555;
+            font-weight: bold;
+            width: 120px; /* 固定宽度，确保对齐 */
+            text-align: right; /* 标签右对齐 */
+        }
+        .password-form input {
+            width: 200px;
+            max-width:250px;
+            padding: 8px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        .password-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .password-item input {
+            flex: 1; /* 输入框占据剩余空间 */
+            padding: 8px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        .password-item input {
+            flex: 1; /* 输入框占据剩余空间 */
+            padding: 8px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .password-form input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+        }
+        .password-form button {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+                }
+        .password-form button:hover {
+            background-color: #1e7e34;
+        }
+    </style>
+</head>
 <body>
     <!-- 📌 导航栏 -->
     <nav>
@@ -45,36 +196,104 @@
     <!-- 📌 个人信息主体内容 -->
     <div class="content">
         <h1>个人信息</h1>
+
+        <!-- 用户ID -->
+        <div class="info-item">
+            <label>用户ID:</label>
+            <div class="info-display">
+                <p id="user-id">123456789</p>
+            </div>
+        </div>
+
+        <!-- 用户昵称 -->
+        <div class="info-item">
+            <label>用户昵称:</label>
+            <div class="info-display">
+                <input type="text" id="nickname" value="默认昵称" disabled>
+                <button id="edit-nickname-btn" class="edit-btn">编辑</button>
+                <button id="save-nickname-btn" class="save-btn" style="display: none;">保存</button>
+            </div>
+        </div>
+
+        <!-- 密码 -->
+        <div class="info-item">
+            <label>密码:</label>
+            <div class="info-display">
+                <p id="password-display">******</p>
+                <button id="change-password-btn" class="edit-btn">修改</button>
+            </div>
+        </div>
+
         
-        <!-- 📌 头像和用户名修改部分 -->
-        <div class="profile-section">
-            <div class="avatar">
-                <img src="assets/default-avatar.png" alt="头像" id="avatar-img">
-                <button id="change-avatar-btn">更换头像</button>
+        <!-- 修改密码表单 -->
+        <div class="password-form" id="password-form">
+            <div class="password-item">
+                <label for="old-password">当前密码:</label>
+                <input type="password" id="old-password" placeholder="请输入当前密码">
             </div>
-            <div class="username">
-                <label for="username">用户名:</label>
-                <input type="text" id="username" value="当前用户名" placeholder="请输入新用户名">
-                <button id="change-username-btn">修改用户名</button>
+            <div class="password-item">
+                <label for="new-password">新密码:</label>
+                <input type="password" id="new-password" placeholder="请输入新密码">
             </div>
+            <div class="password-item">
+                <label for="confirm-password">确认密码:</label>
+                <input type="password" id="confirm-password" placeholder="请确认新密码">
+            </div>
+            <button id="save-password-btn" class="save-btn">保存密码</button>
         </div>
 
-        <!-- 📌 修改密码部分 -->
-        <div class="password-section">
-            <h3>修改密码</h3>
-            <label for="old-password">当前密码:</label>
-            <input type="password" id="old-password" placeholder="请输入当前密码">
+    <script>
+        // 编辑昵称功能
+        const nicknameInput = document.getElementById('nickname');
+        const editNicknameBtn = document.getElementById('edit-nickname-btn');
+        const saveNicknameBtn = document.getElementById('save-nickname-btn');
 
-            <label for="new-password">新密码:</label>
-            <input type="password" id="new-password" placeholder="请输入新密码">
+        editNicknameBtn.addEventListener('click', () => {
+            nicknameInput.disabled = false;
+            nicknameInput.focus();
+            editNicknameBtn.style.display = 'none';
+            saveNicknameBtn.style.display = 'inline-block';
+        });
 
-            <label for="confirm-password">确认密码:</label>
-            <input type="password" id="confirm-password" placeholder="请确认新密码">
+        saveNicknameBtn.addEventListener('click', () => {
+            nicknameInput.disabled = true;
+            saveNicknameBtn.style.display = 'none';
+            editNicknameBtn.style.display = 'inline-block';
+            alert('昵称已更新！');
+        });
 
-            <button id="change-password-btn">修改密码</button>
-        </div>
-    </div>
+        // 修改密码功能
+        const changePasswordBtn = document.getElementById('change-password-btn');
+        const passwordForm = document.getElementById('password-form');
+        const savePasswordBtn = document.getElementById('save-password-btn');
 
-    <script src="components/auth.js"></script>
+        changePasswordBtn.addEventListener('click', () => {
+            passwordForm.style.display = 'flex';
+        });
+
+        savePasswordBtn.addEventListener('click', () => {
+            const oldPassword = document.getElementById('old-password').value;
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            if (!oldPassword || !newPassword || !confirmPassword) {
+                alert('请填写所有字段！');
+                return;
+            }
+            if (newPassword !== confirmPassword) {
+                alert('两次输入的新密码不一致！');
+                return;
+            }
+
+            // 模拟保存密码逻辑
+            alert('密码已更新！');
+            passwordForm.style.display = 'none';
+
+            // 清空表单
+            document.getElementById('old-password').value = '';
+            document.getElementById('new-password').value = '';
+            document.getElementById('confirm-password').value = '';
+        });
+    </script>
 </body>
 </html>
