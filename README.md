@@ -7,12 +7,7 @@
 │── style.css          // 样式文件
 │── script.js          // 主 JavaScript 逻辑
 │── components/
-│   ├── navbar.js      // 导航栏
-│   ├── travelList.js  // 旅行列表组件
-│   ├── todoList.js    // 待办事项组件
-│   ├── journal.js     // 旅行日志组件
-│   ├── weather.js     // 天气查询组件
-│   ├── map.js         // 地图导航组件
+│   ├── community.js     // 社区的逻辑 不知道数据库怎么连接
 │   ├── auth.js         // 退出逻辑
 │── views/
 │   │── index.html       //主界面，用户成功登录之后才能
