@@ -13,7 +13,7 @@
 │   ├── journal.js     // 旅行日志组件
 │   ├── weather.js     // 天气查询组件
 │   ├── map.js         // 地图导航组件
-│   ├── auth.js         // 用户认证逻辑
+│   ├── auth.js         // 退出逻辑
 │── views/
 │   │── index.html       //主界面，用户成功登录之后才能
 │   │── style-views.css       //views中界面的美化
@@ -51,6 +51,4 @@ const apiKey = 'dc49e4062796f8aa751aadd950f417ed';   //天气查询的密钥
 4/1
 - 点亮逻辑还需要改进
 - 个人信息信息界面需要改进
-- log out 按键
-待做：
-  - 社区界面
+

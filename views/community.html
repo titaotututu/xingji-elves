@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>社区 - 行迹精灵</title>
+    <link rel="stylesheet" href="style-views.css">
+    <link rel="icon" href="/xingji-elves/images/logo1.svg" type="image/svg+xml">
+
+<style>
+/* 社区页面样式 */
+.community-container {
+    max-width: 800px;
+    margin: 90px auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.community-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.journals-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.journal-item {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.journal-item h3 {
+    margin: 0 0 10px;
+    font-size: 1.2rem;
+    color: #007bff;
+}
+
+.journal-item p {
+    margin: 0;
+    font-size: 1rem;
+    color: #555;
+}
+
+</style>
+
+
+</head>
+
+<body>
+    <nav>
+        <a href="main.html">首页</a>
+        <a href="travel.html">行程</a>
+        <a href="map.html">导航</a>
+        <a href="Weather.html">天气</a>
+        <a href="lighting.html">点亮地标</a>
+        <a href="journal.html">旅行日志</a>
+        <a href="community.html">社区</a>
+        <a href="assistant.html">智能助手</a>
+        <div class="dropdown">
+            <button class="dropbtn">更多</button>
+            <div class="dropdown-content">
+                <a href="profile.html">个人信息</a>
+                <a href="feedback.html">反馈</a>
+            </div>
+        </div>
+        <a href="#" id="logout-btn">退出</a>
+    </nav>
+
+    <div class="community-container">
+        <h1>社区分享</h1>
+        
+        <!-- 通过审核的日志列表 -->
+        <div id="approved-journals" class="journals-list">
+            <!-- 日志内容将动态加载到这里 -->
+        </div>
+    </div>
+
+    <!-- 引入 log-out.js -->
+    <script type="module">
+        import { handleLogout, checkLoginStatus } from "./log-out.js";
+
+        // 检查用户登录状态
+        checkLoginStatus();
+
+        // 绑定退出按钮事件
+        const logoutButton = document.getElementById("logout-btn");
+        if (logoutButton) {
+            logoutButton.addEventListener("click", handleLogout);
+        }
+    </script>
+
+    <!-- 加载社区数据 -->
+    <script src="community.js"></script>
+</body>
+</html>
