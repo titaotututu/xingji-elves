@@ -9,6 +9,7 @@
     <link rel="icon" href="/xingji-elves/images/logo1.svg" type="image/svg+xml">
     <link rel="stylesheet" href="style-views.css">
     <style>
+        /* 全局样式 */
         html, body {
             margin: 0;
             height: 100%;
@@ -17,38 +18,60 @@
             flex-direction: column;
         }
 
+        /* 主容器布局 */
         .main-container {
+            margin-top: 75px;
             display: flex;
-            height: calc(100% - 50px);
+            height: calc(100% - 60px); /* 减去导航栏高度 */
             width: 100%;
-            margin-top:60px;
         }
 
+        /* 地图区域 */
         #container {
-            flex: 7;
+            flex: 8;
             height: 100%;
         }
 
+        /* 右侧面板 */
         .right-panel {
-            flex: 3;
+            flex: 2;
             height: 100%;
             padding: 20px;
             box-sizing: border-box;
             background-color: #f9f9f9;
             overflow-y: auto;
+            border-left: 1px solid #ddd;
         }
 
-        .city-list {
-            margin-bottom: 20px;
+        /* 点亮按钮 */
+        .lighting-btn {
+            position: fixed;
+            bottom: 20px;
+            left:85%;
+            padding: 15px 30px; /* 更大的内边距 */
+            font-size: 16px; /* 字体更大 */
+            font-weight: bold; /* 加粗字体 */
+            color: white; /* 文字颜色 */
+            background: linear-gradient(135deg, #ff7e5f, #feb47b); /* 渐变背景 */
+            border: none;
+            border-radius: 30px; /* 圆角矩形 */
+            cursor: pointer;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* 添加阴影 */
+            transition: all 0.3s ease; /* 平滑过渡 */
         }
 
-        .city-list h3 {
-            margin-bottom: 10px;
+        .lighting-btn:hover {
+            background: linear-gradient(135deg, #feb47b, #ff7e5f); /* 鼠标悬停时切换渐变方向 */
+            transform: translateY(-5px); /* 悬停时轻微上移 */
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3); /* 增强阴影效果 */
         }
 
+        /* 已点亮城市列表 */
         .city-list ul {
             list-style: none;
             padding: 0;
+            max-height: 300px; /* 限制高度 */
+            overflow-y: auto; /* 滚动条 */
         }
 
         .city-list ul li {
@@ -58,19 +81,8 @@
             border-radius: 5px;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn:hover {
-            background-color: #0056b3;
+        .city-list ul li:hover {
+            background-color: #b3e5fc;
         }
     </style>
     <script type="text/javascript">
@@ -80,7 +92,6 @@
     </script>
 </head>
 <body>
-    <script src="../components/auth.js"></script>
     <nav>
         <a href="main.html">首页</a>
         <a href="travel.html">行程</a>
@@ -102,56 +113,72 @@
         
         <a href="#" id="logout-btn">退出</a>
     </nav>
-    <!-- 📌 地图 + 右侧面板 -->
-<div class="main-container"> 
-<div id="container"></div>
-<div class="right-panel">
-    <div class="city-list">
-        <h3>已点亮的城市</h3>
-        <ul id="visitedCities"></ul>
-    </div>
-    <div>
-        <label for="cityInput">输入城市名称：</label>
-        <input type="text" id="cityInput" placeholder="请输入城市名称">
-    </div>
-</div>
-<div class="input-card" id="inputCard">
-    <label style='color: grey'>行政区边界查询</label>
-    <!-- <div class="input-item">
-        <div class="input-item-prepend">
-            <span class="input-item-text">行政级别</span>
+
+    <!-- 主容器 -->
+    <div class="main-container">
+        <!-- 地图 -->
+        <div id="container"></div>
+
+        <!-- 右侧面板 -->
+        <div class="right-panel">
+            <div class="city-list">
+                <h3>已点亮的城市</h3>
+                <ul id="visitedCities"></ul>
+            </div>
         </div>
-        <select id="level">
-            <option value="district">district</option>
-            <option value="city">city</option>
-            <option value="province">province</option>
-        </select>
-    </div> -->
-    <div class="input-item">
-        <div class="input-item-prepend">
-            <span class="input-item-text">名称</span>
-        </div>
-        <input id='district' type="text" placeholder='请输入城市'>
     </div>
-    <input id="draw" type="button" class="btn" value="点亮"/>
-</div>
 
+    <!-- 点亮按钮 -->
+    <button class="lighting-btn" id="lightingBtn">点亮</button>
 
+    <!-- 高德地图 API -->
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=6e55ea6069492d3b69f2bb419e1bcd86&plugin=AMap.DistrictSearch"></script>
+    <script type="text/javascript">
+        // 初始化地图对象，加载地图
+        var map = new AMap.Map("container", {
+            center: [116.397428, 39.90923], // 地图中心点
+            zoom: 10 // 地图显示的缩放级别
+        });
 
+        var district = null;
+        var polygon;
 
+        // 初始化一个 Set 来存储已点亮的城市（避免重复）
+        var visitedCities = new Set();
 
+        // 加载已点亮的城市列表
+        function loadVisitedCities() {
+            var savedCities = localStorage.getItem('visitedCities');
+            if (savedCities) {
+                var cities = JSON.parse(savedCities);
+                cities.forEach(function (city) {
+                    addVisitedCity(city);
+                });
+            }
+        }
 
-<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=6e55ea6069492d3b69f2bb419e1bcd86&plugin=AMap.DistrictSearch"></script>
-<script type="text/javascript">
-    //初始化地图对象，加载地图
-    var map = new AMap.Map("container", {
-      center: [116.397428, 39.90923],//地图中心点
-      zoom: 10 //地图显示的缩放级别
-    });
+        // 保存已点亮的城市列表
+        function saveVisitedCities() {
+            localStorage.setItem('visitedCities', JSON.stringify(Array.from(visitedCities)));
+        }
 
-    var district = null;
-    var polygon;
-    function drawBounds() {
+        // 将城市添加到已点亮列表
+        function addVisitedCity(cityName) {
+            if (!visitedCities.has(cityName)) {
+                visitedCities.add(cityName);
+
+                var cityItem = document.createElement('li');
+                cityItem.textContent = cityName;
+
+                document.getElementById('visitedCities').appendChild(cityItem);
+
+                // 保存到本地存储
+                saveVisitedCities();
+            }
+        }
+
+        // 绘制城市边界
+        function drawBounds(cityNames) {
             if (!district) {
                 var opts = {
                     subdistrict: 0,
@@ -161,14 +188,11 @@
                 district = new AMap.DistrictSearch(opts);
             }
 
-            var keywords = document.getElementById('district').value.split(','); // 支持多个名称
-            if (keywords.length === 0 || keywords[0].trim() === '') {
-                console.warn('名称不能为空');
-                return;
-            }
+            cityNames.split(',').forEach(function (keyword) {
+                keyword = keyword.trim();
+                if (!keyword) return;
 
-            keywords.forEach(function (keyword) {
-                district.search(keyword.trim(), function (status, result) {
+                district.search(keyword, function (status, result) {
                     if (!result || !result.districtList || !result.districtList[0]) {
                         console.warn(`未找到行政区：${keyword}`);
                         return;
@@ -188,20 +212,36 @@
                         });
                         map.add(polygon);
                         map.setFitView(polygon);
+
+                        // 添加城市到已点亮列表
+                        addVisitedCity(keyword);
                     }
                 });
             });
         }
-    drawBounds();
-    document.getElementById('draw').onclick = drawBounds;
-    document.getElementById('district').onkeydown = function (e) {
-      if (e.keyCode === 13) {
-        drawBounds();
-        return false;
-      }
-      return true;
-    };
-  </script>
-</script>
+
+        // 模拟从后端获取城市字段并填充到输入框
+        function simulateBackendData() {
+            // 模拟从数据库获取的城市字段，例如 "北京,上海,广州"
+            var citiesFromDatabase = "北京,上海,广州";
+            localStorage.setItem('citiesToLight', citiesFromDatabase); // 存储到 localStorage 模拟后端数据
+            return citiesFromDatabase;
+        }
+
+        // 页面加载时加载已点亮的城市
+        window.onload = function () {
+            loadVisitedCities();
+        };
+
+        // 点亮按钮点击事件
+        document.getElementById('lightingBtn').onclick = function () {
+            var citiesToLight = localStorage.getItem('citiesToLight') || simulateBackendData(); // 获取城市字段
+            if (!citiesToLight) {
+                alert('没有可点亮的城市');
+                return;
+            }
+            drawBounds(citiesToLight);
+        };
+    </script>
 </body>
 </html>
