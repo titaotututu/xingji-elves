@@ -1,0 +1,465 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{455A8ACC-D685-4677-8F81-018BD921DD70}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>TravelApp</RootNamespace>
+    <AssemblyName>TravelApp</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MaterialSkin, Version=2.3.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialSkin.2.2.3.1\lib\net461\MaterialSkin.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bike_Routing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bike_Routing.Designer.cs">
+      <DependentUpon>Bike_Routing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bus_Routing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bus_Routing.Designer.cs">
+      <DependentUpon>Bus_Routing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Car_Routing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Car_Routing.Designer.cs">
+      <DependentUpon>Car_Routing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Client.cs" />
+    <Compile Include="controller\AddTodo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controller\AddTodo.Designer.cs">
+      <DependentUpon>AddTodo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="controller\HistoryPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controller\HistoryPage.Designer.cs">
+      <DependentUpon>HistoryPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="controller\JournalCell.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controller\JournalCell.Designer.cs">
+      <DependentUpon>JournalCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="controller\JournalDetail.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controller\JournalDetail.Designer.cs">
+      <DependentUpon>JournalDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="controller\JournalList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controller\JournalList.Designer.cs">
+      <DependentUpon>JournalList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="controller\MyTravel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controller\MyTravel.Designer.cs">
+      <DependentUpon>MyTravel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="controller\NewTravel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controller\NewTravel.Designer.cs">
+      <DependentUpon>NewTravel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="controller\OldTravel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controller\OldTravel.Designer.cs">
+      <DependentUpon>OldTravel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="controller\Personalinfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controller\Personalinfo.Designer.cs">
+      <DependentUpon>Personalinfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="controller\PictureBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controller\PictureBox.Designer.cs">
+      <DependentUpon>PictureBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="controller\TodoPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controller\TodoPage.Designer.cs">
+      <DependentUpon>TodoPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="controller\Travel_Weather.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controller\Travel_Weather.Designer.cs">
+      <DependentUpon>Travel_Weather.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Else.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Else.Designer.cs">
+      <DependentUpon>Else.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FileClient.cs" />
+    <Compile Include="Lighting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Lighting.Designer.cs">
+      <DependentUpon>Lighting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainFormFinal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainFormFinal.Designer.cs">
+      <DependentUpon>MainFormFinal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="models\Journal.cs" />
+    <Compile Include="models\TodoItem.cs" />
+    <Compile Include="models\Travel.cs" />
+    <Compile Include="models\User.cs" />
+    <Compile Include="Navigation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Navigation.Designer.cs">
+      <DependentUpon>Navigation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Place.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Register.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Register.Designer.cs">
+      <DependentUpon>Register.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TravelTodo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TravelTodo.Designer.cs">
+      <DependentUpon>TravelTodo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Walk_Routing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Walk_Routing.Designer.cs">
+      <DependentUpon>Walk_Routing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="controller\WeatherDay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controller\WeatherDay.Designer.cs">
+      <DependentUpon>WeatherDay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WeatherDetail.cs" />
+    <Compile Include="XmlOperator.cs" />
+    <EmbeddedResource Include="Bike_Routing.resx">
+      <DependentUpon>Bike_Routing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bus_Routing.resx">
+      <DependentUpon>Bus_Routing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Car_Routing.resx">
+      <DependentUpon>Car_Routing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="controller\AddTodo.resx">
+      <DependentUpon>AddTodo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="controller\HistoryPage.resx">
+      <DependentUpon>HistoryPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="controller\JournalCell.resx">
+      <DependentUpon>JournalCell.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="controller\JournalDetail.resx">
+      <DependentUpon>JournalDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="controller\JournalList.resx">
+      <DependentUpon>JournalList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="controller\MyTravel.resx">
+      <DependentUpon>MyTravel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="controller\NewTravel.resx">
+      <DependentUpon>NewTravel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="controller\OldTravel.resx">
+      <DependentUpon>OldTravel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="controller\Personalinfo.byn.resx">
+      <DependentUpon>Personalinfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="controller\Personalinfo.resx">
+      <DependentUpon>Personalinfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="controller\PictureBox.resx">
+      <DependentUpon>PictureBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="controller\TodoPage.resx">
+      <DependentUpon>TodoPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="controller\Travel_Weather.resx">
+      <DependentUpon>Travel_Weather.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="controller\WeatherDay.resx">
+      <DependentUpon>WeatherDay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Else.resx">
+      <DependentUpon>Else.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lighting.resx">
+      <DependentUpon>Lighting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFormFinal.resx">
+      <DependentUpon>MainFormFinal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Navigation.resx">
+      <DependentUpon>Navigation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Register.resx">
+      <DependentUpon>Register.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TravelTodo.resx">
+      <DependentUpon>TravelTodo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Walk_Routing.resx">
+      <DependentUpon>Walk_Routing.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.manifest" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\在路上旅行.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\导航背景.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\navi2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\驾驶icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\步行icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\骑行icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\公交icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\退出black .png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\个人信息.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\历史行程.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\导航地址.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\天气.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\点亮.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\日志.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\其他.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\精灵.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\开发者信息.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="forms\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\删除.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\鹅.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\打卡_成功打卡.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\旅行日志.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\旅游.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\添加.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\返回.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\关闭.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="pictures\test1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="pictures\test2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="pictures\test3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="pictures\test4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\甜美云.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\微信图片_20240605163032.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\天气预报.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\用户.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\route.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\streetsign.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
