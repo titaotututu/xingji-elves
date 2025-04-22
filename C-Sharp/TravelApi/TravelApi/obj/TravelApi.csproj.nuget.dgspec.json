@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "C:\\Users\\32188\\Desktop\\SE\\final\\C-Sharp\\TravelApi\\TravelApi\\TravelApi.csproj": {}
   },
   "projects": {
@@ -12,6 +13,19 @@
         "projectPath": "C:\\Users\\32188\\Desktop\\SE\\final\\C-Sharp\\TravelApi\\TravelApi\\TravelApi.csproj",
         "packagesPath": "C:\\Users\\32188\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\32188\\Desktop\\SE\\final\\C-Sharp\\TravelApi\\TravelApi\\obj\\",
+=======
+    "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp\\TravelApi\\TravelApi\\TravelApi.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp\\TravelApi\\TravelApi\\TravelApi.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp\\TravelApi\\TravelApi\\TravelApi.csproj",
+        "projectName": "TravelApi",
+        "projectPath": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp\\TravelApi\\TravelApi\\TravelApi.csproj",
+        "packagesPath": "C:\\Users\\asus\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp\\TravelApi\\TravelApi\\obj\\",
+>>>>>>> origin/master
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

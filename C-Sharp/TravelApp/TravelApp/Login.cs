@@ -30,50 +30,57 @@ namespace TravelApp
             string userID = textBox1.Text;
             string password = textBox2.Text;
             
-            long passwordEncrypt=SimpleEncryptionHelper.EncryptLong(long.Parse(password));
+            long passwordEncrypt = SimpleEncryptionHelper.EncryptLong(long.Parse(password));
 
             if (userID.Length == 0 || userID == "单行输入")
             {
                 MessageBox.Show("用户ID为空");
             }
+            else if (password.Length == 0 || password == "单行输入")
+            {
+                MessageBox.Show("密码为空");
+            }
             else
             {
-                if (password.Length == 0 || password == "单行输入")
+                try
                 {
-                    MessageBox.Show("密码为空");
-                }
-                else
-                {
-                    try
+                    Client client = new Client();
+                    
+                    // 1. 检查本地数据库
+                    string localUrl = baseUrl + "/?id=" + userID + "&pwd=" + passwordEncrypt;
+                    HttpResponseMessage localResult = await client.Get(localUrl);
+                    
+                    if (!localResult.IsSuccessStatusCode)
                     {
-                       // string url = baseUrl + "/login?Uid=" + userID + "&password=" + passwordMD5;
-                        string url = baseUrl + "/?id=" + userID + "&pwd=" + passwordEncrypt;
-                        Client client = new Client();
-                        HttpResponseMessage result = await client.Get(url);
-                        if (result.IsSuccessStatusCode)
-                        {
+                        string errorMessage = await localResult.Content.ReadAsStringAsync();
+                        MessageBox.Show($"本地数据库登录失败: {errorMessage}");
+                        return;
+                    }
 
-                            using (MainFormFinal mff = new MainFormFinal(long.Parse(userID)))
-                            {
-                                mff.changePanel = mff.AddControlsToPanel;
-                                this.Hide();
-                                mff.ShowDialog();
-                                textBox1.Text = "";
-                                textBox2.Text = "";
-                            }
-                            this.Show();
-                        }
-                        else
-                        {
-                            // MessageBox.Show("用户名或密码输入错误");
-                            string errorMessage = await result.Content.ReadAsStringAsync();
-                            MessageBox.Show($"Failed . Error: {errorMessage}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                    catch (Exception e1)
+                    // 2. 检查Python数据库
+                    string pythonUrl = "http://localhost:5199/api/python/user?userId=" + userID + "&password=" + passwordEncrypt;
+                    HttpResponseMessage pythonResult = await client.Get(pythonUrl);
+                    
+                    if (!pythonResult.IsSuccessStatusCode)
                     {
-                        MessageBox.Show(e1.Message);
+                        string errorMessage = await pythonResult.Content.ReadAsStringAsync();
+                        MessageBox.Show($"Python数据库登录失败: {errorMessage}");
+                        return;
                     }
+
+                    using (MainFormFinal mff = new MainFormFinal(long.Parse(userID)))
+                    {
+                        mff.changePanel = mff.AddControlsToPanel;
+                        this.Hide();
+                        mff.ShowDialog();
+                        textBox1.Text = "";
+                        textBox2.Text = "";
+                    }
+                    this.Show();
+                }
+                catch (Exception e1)
+                {
+                    MessageBox.Show(e1.Message);
                 }
             }
         }
