@@ -276,4 +276,28 @@ public class PythonService
             throw new Exception($"更新反馈状态失败: {response.StatusCode}");
         }
     }
+
+    public async Task<(byte[] ImageData, string ContentType)> GetJournalImageAsync(long journalId)
+    {
+        var response = await _httpClient.GetAsync($"{_pythonServerUrl}/journal/image/{journalId}");
+        
+        if (response.IsSuccessStatusCode)
+        {
+            var contentType = response.Content.Headers.ContentType?.MediaType ?? "image/jpeg";
+            var imageData = await response.Content.ReadAsByteArrayAsync();
+            return (imageData, contentType);
+        }
+        
+        throw new Exception($"获取图片失败: {response.StatusCode}");
+    }
+
+    public async Task ClearJournalImagesAsync(long journalId)
+    {
+        var response = await _httpClient.DeleteAsync($"{_pythonServerUrl}/journal/image/{journalId}");
+        
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception($"清除日志图片失败: {response.StatusCode}");
+        }
+    }
 }

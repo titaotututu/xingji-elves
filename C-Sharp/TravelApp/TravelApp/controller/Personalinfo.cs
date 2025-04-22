@@ -88,47 +88,48 @@ namespace TravelApp.controller
             new_name.Enabled = false;
             new_pwd.Enabled = false;
             new_pwd.PasswordChar = '*';
-            //进行代码提交
-           // string id = new_id.Text;
-          //  long newUserid=long.Parse(id);
-            string newUsername=new_name.Text;
-            string Userpwd=new_pwd.Text;
-            //long pwd = SimpleEncryptionHelper.DecryptLong(user.password);
-            //string Userpwd = Convert.ToString(pwd);
+
+            string newUsername = new_name.Text;
+            string Userpwd = new_pwd.Text;
             long newUserpwd = long.Parse(Userpwd);
-            newUserpwd=SimpleEncryptionHelper.EncryptLong(newUserpwd);
-            string url = baseUrl + "/" + user.UserId;
-            //
-            //XmlSerializer xmlSerializer = new XmlSerializer(typeof(User));
-            //
+            newUserpwd = SimpleEncryptionHelper.EncryptLong(newUserpwd);
+
             User newuser = new User();
             newuser.UserName = newUsername;
             newuser.password = newUserpwd;
             newuser.UserId = user.UserId;
+
             Client client = new Client();
             try
             {
                 string jsonData = JsonConvert.SerializeObject(newuser);
-                //string data = "";
-                HttpResponseMessage result = await client.Put(url,jsonData);
-                if (result.IsSuccessStatusCode)
-                {
-                    //
-                    //User user = (User)xmlSerializer.Deserialize(await result.Content.ReadAsStreamAsync());
-                    //
-                    user.UserName = new_name.Text;
-                    //user.Sex = cbGender.Text;
-                    user.password = SimpleEncryptionHelper.DecryptLong(long.Parse(new_pwd.Text));
-                    MessageBox.Show("修改成功!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //
-                    //using (StringWriter sw = new StringWriter())
-                    //{
-                    //    xmlSerializer.Serialize(sw, user);
-                    //    data = sw.ToString();
-                    //}
-                    //
 
+                // 1. 更新本地数据库
+                string localUrl = baseUrl + "/" + user.UserId;
+                HttpResponseMessage localResult = await client.Put(localUrl, jsonData);
+                
+                if (!localResult.IsSuccessStatusCode)
+                {
+                    string errorMessage = await localResult.Content.ReadAsStringAsync();
+                    MessageBox.Show($"本地数据库更新失败: {errorMessage}", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
                 }
+
+                // 2. 更新Python数据库
+                string pythonUrl = "http://localhost:5199/api/python/user/" + user.UserId;
+                HttpResponseMessage pythonResult = await client.Put(pythonUrl, jsonData);
+                
+                if (!pythonResult.IsSuccessStatusCode)
+                {
+                    string errorMessage = await pythonResult.Content.ReadAsStringAsync();
+                    MessageBox.Show($"Python数据库更新失败: {errorMessage}", "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
+                // 更新成功，更新本地user对象
+                user.UserName = newUsername;
+                user.password = newUserpwd;
+                MessageBox.Show("修改成功!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {

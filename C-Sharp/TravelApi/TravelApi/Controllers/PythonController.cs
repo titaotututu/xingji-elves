@@ -255,4 +255,32 @@ public class PythonController : ControllerBase
             return BadRequest(ex.Message);
         }
     }
+
+    [HttpGet("journal/image/{journalId}")]
+    public async Task<ActionResult> GetJournalImage(long journalId)
+    {
+        try
+        {
+            var (imageData, contentType) = await _pythonService.GetJournalImageAsync(journalId);
+            return File(imageData, contentType);
+        }
+        catch (Exception ex)
+        {
+            return NotFound(ex.Message);
+        }
+    }
+
+    [HttpDelete("journal/image/{journalId}")]
+    public async Task<ActionResult> ClearJournalImages(long journalId)
+    {
+        try
+        {
+            await _pythonService.ClearJournalImagesAsync(journalId);
+            return Ok(new { message = "图片已清空" });
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
 }

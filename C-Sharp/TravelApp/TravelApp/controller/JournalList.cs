@@ -86,7 +86,7 @@ namespace TravelApp.controller
             {
                 string data = JsonConvert.SerializeObject(journal);
                 Console.WriteLine("Sending data: " + data); // 打印出发送的数据
-
+                
                 HttpResponseMessage result = await client.Post(url, data);
                 if (result.IsSuccessStatusCode)
                 {

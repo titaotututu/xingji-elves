@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -53,7 +54,26 @@ namespace TravelApp.controller
             this.Refresh = ImgRefresh;
             Init();
         }
-        public void Init0(Journal journal)
+        public async Task<bool> CheckPythonJournal()
+        {
+            Journal journal = await GetJournal();
+            if (journal == null) return false;
+            
+            string pythonJournalId = journal.UserId + "" + this.JournalId;
+            string url = "http://localhost:5199/api/python/journal/" + pythonJournalId;
+            Client client = new Client();
+            try
+            {
+                HttpResponseMessage result = await client.Get(url);
+                return result.IsSuccessStatusCode;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async void Init0(Journal journal)
         {
             this.JournalId = journal.JournalId;
             journal.Time = DateTime.Now;
@@ -65,7 +85,10 @@ namespace TravelApp.controller
             btnEdit.Enabled = false;
             btnEdit.Text = "编辑中";
             pbBack.Enabled = false;
+            chkPublic.Enabled = true;
+            chkPublic.Checked = await CheckPythonJournal();
         }
+
         public async void Init()
         {
             Journal journal = await GetJournal();
@@ -76,6 +99,7 @@ namespace TravelApp.controller
             tbWeather.Text = journal.Weather;
             lblTime.Text = journal.Time.ToString();
             LoadImg(journal.Picture);
+            chkPublic.Checked = await CheckPythonJournal();
 
             pbBack.Enabled = true;
             tbTitle.Enabled = false;
@@ -84,11 +108,12 @@ namespace TravelApp.controller
             pbAdd.Enabled = false;
             btnSave.Enabled = false;
             rtbDescription.Enabled = false;
-            //flpImage.Enabled = false;
+            chkPublic.Enabled = false;
         }
         public async Task<Journal> GetJournal()
         {
             //根据id获取journal
+            // 直接从本地获取，不需要修改
             string url = this.baseUrl + "/get?journalId=" + this.JournalId;
 
             Client client = new Client();
@@ -114,7 +139,7 @@ namespace TravelApp.controller
         }
 
         public async Task<bool> PutJournal(Journal journal)
-        {
+        {   // 只更新本地，不修改
             string url = this.baseUrl + "/update?journalId=" + journal.JournalId;
 
             Client client = new Client();
@@ -233,7 +258,7 @@ namespace TravelApp.controller
             btnSave.Enabled = true;
             pbAdd.Enabled = true;
             rtbDescription.Enabled = true;
-            //flpImage.Enabled = true;
+            chkPublic.Enabled = true;
         }
 
         private async void btnSave_Click(object sender, EventArgs e)
@@ -245,7 +270,7 @@ namespace TravelApp.controller
             btnSave.Enabled = false;
             pbAdd.Enabled = false;
             rtbDescription.Enabled = false;
-            //flpImage.Enabled = false;
+            chkPublic.Enabled = false;
 
             //将修改传到远端
             Journal journal = await GetJournal();
@@ -259,23 +284,142 @@ namespace TravelApp.controller
             journal.Description = rtbDescription.Text;
             journal.Emotion = tbEmotion.Text;
             journal.Weather = tbWeather.Text;
-         
+
             if (await PutJournal(journal))
             {
+                if (chkPublic.Checked)
+                {
+                    string pythonJournalId = journal.UserId + "" + journal.JournalId;
+                    // 检查Python端是否存在该日志
+                    bool exists = await CheckPythonJournal();
+                    if (exists)
+                    {
+                        // 更新Python端的日志
+                        string url = "http://localhost:5199/api/python/journal/" + pythonJournalId;
+                        Client client = new Client();
+                        string data = JsonConvert.SerializeObject(journal);
+                        await client.Put(url, data);
+
+                        // 先清除原有图片
+                        string clearUrl = "http://localhost:5199/api/python/journal/image/" + pythonJournalId;
+                        await client.Delete(clearUrl);
+
+                        // 上传新的图片
+                        if (!string.IsNullOrEmpty(journal.Picture))
+                        {
+                            string[] imgNames = journal.Picture.Trim().Split(' ');
+                            foreach (string name in imgNames)
+                            {
+                                string imgUrl = "http://localhost:5199/api/File/download?fileName=" + name;
+                                FileClient fileClient = new FileClient();
+                                Image image = await fileClient.Download(imgUrl);
+                                if (image != null)
+                                {
+                                    // 上传图片到Python端
+                                    string uploadUrl = "http://localhost:5199/api/python/journal/" + pythonJournalId + "/image";
+                                    using (var ms = new MemoryStream())
+                                    {
+                                        image.Save(ms, image.RawFormat);
+                                        ms.Position = 0;
+                                        // 根据图片格式确定扩展名
+                                        string extension = ".jpg"; // 默认扩展名
+                                        if (image.RawFormat.Equals(ImageFormat.Png))
+                                            extension = ".png";
+                                        else if (image.RawFormat.Equals(ImageFormat.Gif))
+                                            extension = ".gif";
+                                        else if (image.RawFormat.Equals(ImageFormat.Jpeg))
+                                            extension = ".jpg";
+                                        
+                                        // 生成新的文件名：使用时间戳+随机数+正确扩展名
+                                        string newFileName = DateTime.Now.Ticks + "_" + Guid.NewGuid().ToString("N").Substring(0, 8) + extension;
+                                        await client.PostImage(uploadUrl, ms, newFileName);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // 创建新的Python端日志
+                        string url = "http://localhost:5199/api/python/journal";
+                        Client client = new Client();
+                        string data = JsonConvert.SerializeObject(journal);
+                        // 先尝试创建日志主体
+                        HttpResponseMessage createResponse = await client.Post(url, data);
+                        if (!createResponse.IsSuccessStatusCode)
+                        {
+                             MessageBox.Show("创建Python端日志失败", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                             // 考虑是否需要回滚本地保存或启用编辑
+                             return; // 提前退出
+                        }
+                        
+                        // 在这里增加一个清空picture的api调用 (虽然通常新建日志时不需要，但按要求添加)
+                        string clearUrl = "http://localhost:5199/api/python/journal/image/" + pythonJournalId;
+                        await client.Delete(clearUrl); // 调用清空接口
+                        
+                        // 同步所有图片
+                        if (!string.IsNullOrEmpty(journal.Picture))
+                        {
+                            string[] imgNames = journal.Picture.Trim().Split(' ');
+                            foreach (string name in imgNames)
+                            {
+                                string imgUrl = "http://localhost:5199/api/File/download?fileName=" + name;
+                                FileClient fileClient = new FileClient();
+                                Image image = await fileClient.Download(imgUrl);
+                                if (image != null)
+                                {
+                                    // 上传图片到Python端
+                                    string uploadUrl = "http://localhost:5199/api/python/journal/" + pythonJournalId + "/image";
+                                    using (var ms = new MemoryStream())
+                                    {
+                                        image.Save(ms, image.RawFormat);
+                                        ms.Position = 0;
+                                        // 根据图片格式确定扩展名
+                                        string extension = ".jpg"; // 默认扩展名
+                                        if (image.RawFormat.Equals(ImageFormat.Png))
+                                            extension = ".png";
+                                        else if (image.RawFormat.Equals(ImageFormat.Gif))
+                                            extension = ".gif";
+                                        else if (image.RawFormat.Equals(ImageFormat.Jpeg))
+                                            extension = ".jpg";
+                                        
+                                        // 生成新的文件名：使用时间戳+随机数+正确扩展名
+                                        string newFileName = DateTime.Now.Ticks + "_" + Guid.NewGuid().ToString("N").Substring(0, 8) + extension;
+                                        await client.PostImage(uploadUrl, ms, newFileName);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                else // chkPublic 未选中
+                {
+                    // 检查Python端是否存在该日志
+                    bool exists = await CheckPythonJournal();
+                    if (exists)
+                    {
+                        // 如果存在，则从Python端删除
+                        string pythonJournalId = journal.UserId + "" + journal.JournalId;
+                        string deleteUrl = "http://localhost:5199/api/python/journal/" + pythonJournalId;
+                        Client client = new Client();
+                        await client.Delete(deleteUrl); 
+                        // 可以添加错误处理逻辑
+                    }
+                }
                 MessageBox.Show("保存成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
                 MessageBox.Show("保存失败", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
             //将编辑激活
             btnEdit.Enabled = true;
             btnEdit.Text = "编辑";
         }
 
         private async void pbAdd_Click(object sender, EventArgs e)
-        {
+        {// 同时传到Python数据库
             string filePath = "";
             FileClient fileClient = new FileClient();
             //添加图片：打开文件管理器，选择图片进行上传

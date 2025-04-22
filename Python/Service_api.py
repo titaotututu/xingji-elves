@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException, UploadFile, File, Form
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 import mysql.connector
 from typing import Optional, List
@@ -6,6 +7,7 @@ import os
 from datetime import datetime
 from pathlib import Path
 import shutil
+import base64
 
 
 # 连接 MySQL 数据库（不指定 database）
@@ -255,7 +257,7 @@ class JournalModel(BaseModel):
     Description: Optional[str] = None
     Picture: Optional[str] = None
     UserId: int
-    JournalId: Optional[int] = None  # 让API自动生成JournalId
+    JournalId: int  # 改为必需字段
 
 class JournalResponse(BaseModel):
     JournalId: int
@@ -273,31 +275,23 @@ async def create_journal(
     journal: JournalModel,  # 直接从请求体接收JSON数据
 ):
     try:
-        # 生成JournalId
         conn = get_db_connection("server_db")
         cursor = conn.cursor()
         
-        current_date = datetime.now().strftime("%Y%m%d")
-        cursor.execute("""
-            SELECT JournalId 
-            FROM journals 
-            WHERE JournalId >= %s AND JournalId < %s
-            ORDER BY JournalId DESC 
-            LIMIT 1
-        """, (int(current_date + "0000"), int(current_date + "9999")))
-        
-        result = cursor.fetchone()
-        if result:
-            journal_id = result[0] + 1
-        else:
-            journal_id = int(current_date + "0000")
+
+        final_journal_id = int(f"{journal.UserId}{journal.JournalId}")
+
+        # 检查日志ID是否已存在
+        cursor.execute("SELECT JournalId FROM journals WHERE JournalId = %s", (final_journal_id,))
+        if cursor.fetchone():
+            raise HTTPException(status_code=400, detail="日志ID已存在")
 
         # 插入日志
         cursor.execute("""
             INSERT INTO journals (JournalId, Time, Title, Weather, Emotion, Description, Picture, UserId)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
         """, (
-            journal_id,
+            final_journal_id,
             journal.Time,
             journal.Title,
             journal.Weather,
@@ -311,7 +305,7 @@ async def create_journal(
         conn.close()
         
         return {
-            "JournalId": journal_id,
+            "JournalId": final_journal_id,
             "Time": journal.Time,
             "Title": journal.Title,
             "Weather": journal.Weather,
@@ -320,6 +314,8 @@ async def create_journal(
             "Picture": journal.Picture,
             "UserId": journal.UserId
         }
+    except HTTPException as e:
+        raise e
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -330,6 +326,14 @@ async def upload_journal_image(
     picture_file: UploadFile = File(...)
 ):
     try:
+        # 检查日志是否存在并获取当前图片路径
+        conn = get_db_connection("server_db")
+        cursor = conn.cursor()
+        cursor.execute("SELECT Picture FROM journals WHERE JournalId = %s", (journal_id,))
+        result = cursor.fetchone()
+        if not result:
+            raise HTTPException(status_code=404, detail="日志不存在")
+        
         uploads_dir = Path("uploads")
         uploads_dir.mkdir(exist_ok=True)
         
@@ -340,14 +344,15 @@ async def upload_journal_image(
         with open(picture_path, "wb") as buffer:
             shutil.copyfileobj(picture_file.file, buffer)
         
-        # 更新日志的图片路径
-        conn = get_db_connection("server_db")
-        cursor = conn.cursor()
+        # 更新日志的图片路径，用逗号分隔
+        current_pictures = result[0] if result[0] else ""
+        new_pictures = f"{current_pictures},{picture_path}" if current_pictures else picture_path
+        
         cursor.execute("""
             UPDATE journals 
             SET Picture = %s 
             WHERE JournalId = %s
-        """, (picture_path, journal_id))
+        """, (new_pictures, journal_id))
         conn.commit()
         cursor.close()
         conn.close()
@@ -475,9 +480,11 @@ def delete_journal(journal_id: int):
         result = cursor.fetchone()
         if result and result[0]:
             # 删除图片文件
-            picture_path = Path(result[0])
-            if picture_path.exists():
-                picture_path.unlink()
+            picture_paths = result[0].split(",")
+            for path in picture_paths:
+                picture_path = Path(path)
+                if picture_path.exists():
+                    picture_path.unlink()
         
         # 删除数据库记录
         cursor.execute("DELETE FROM journals WHERE JournalId = %s", (journal_id,))
@@ -646,6 +653,90 @@ def update_feedback_status(feedback_id: int, status_update: FeedbackStatusUpdate
         if cursor.rowcount == 0:
             raise HTTPException(status_code=404, detail="反馈不存在")
         return {"message": "反馈状态更新成功"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+#获取图片——得到的是base64编码的数据，前端需要再处理
+#诸如：
+# // 假设response是API的返回结果
+# response.images.forEach(image => {
+#     const img = document.createElement('img');
+#     img.src = `data:image/jpeg;base64,${image.data}`;  // 根据实际图片类型调整MIME类型
+#     document.body.appendChild(img);
+# });等
+@app.get("/journal/image/{journal_id}")
+async def get_journal_image(journal_id: int):
+    try:
+        conn = get_db_connection("server_db")
+        cursor = conn.cursor()
+        cursor.execute("SELECT Picture FROM journals WHERE JournalId = %s", (journal_id,))
+        result = cursor.fetchone()
+        cursor.close()
+        conn.close()
+        
+        if not result or not result[0]:
+            raise HTTPException(status_code=404, detail="图片不存在")
+            
+        # 获取所有图片路径
+        picture_paths = result[0].split(",")
+        if not picture_paths:
+            raise HTTPException(status_code=404, detail="图片不存在")
+            
+        # 读取所有图片并转换为base64
+        images = []
+        for path in picture_paths:
+            picture_path = Path(path)
+            if picture_path.exists():
+                with open(picture_path, "rb") as f:
+                    image_data = f.read()
+                    base64_data = base64.b64encode(image_data).decode('utf-8')
+                    images.append({
+                        "filename": picture_path.name,
+                        "data": base64_data
+                    })
+        
+        if not images:
+            raise HTTPException(status_code=404, detail="没有可用的图片")
+            
+        return {"images": images}
+    except HTTPException as e:
+        raise e
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.delete("/journal/image/{journal_id}")
+async def clear_journal_images(journal_id: int):
+    try:
+        conn = get_db_connection("server_db")
+        cursor = conn.cursor()
+        
+        # 获取当前图片路径
+        cursor.execute("SELECT Picture FROM journals WHERE JournalId = %s", (journal_id,))
+        result = cursor.fetchone()
+        if not result or not result[0]:
+            raise HTTPException(status_code=404, detail="日志不存在或没有图片")
+            
+        # 删除所有图片文件
+        picture_paths = result[0].split(",")
+        for path in picture_paths:
+            picture_path = Path(path)
+            if picture_path.exists():
+                picture_path.unlink()
+        
+        # 清空图片路径
+        cursor.execute("""
+            UPDATE journals 
+            SET Picture = NULL 
+            WHERE JournalId = %s
+        """, (journal_id,))
+        conn.commit()
+        cursor.close()
+        conn.close()
+        
+        return {"message": "图片已清空"}
+    except HTTPException as e:
+        raise e
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
