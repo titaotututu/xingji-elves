@@ -22,6 +22,7 @@ namespace TravelApp
         {
             InitializeComponent();
             this.Uid = Uid;
+
         }
 
         public void AddControlsToPanel(Control c)
@@ -102,7 +103,9 @@ namespace TravelApp
             panelControl.Controls.Clear();//清除splitContainer1.Panel2内容
             panelControl.Controls.Add(el);//将frmHome添加到splitContainer1.Panel2中
         }
-        private void button_UserInfo_Click(object sender, EventArgs e)
+
+ 
+    private void button_UserInfo_Click(object sender, EventArgs e)
         {
             Personalinfo p = new Personalinfo(Uid,changePanel);
             AddControlsToPanel(p);
@@ -128,5 +131,13 @@ namespace TravelApp
             JournalList journalList = new JournalList(Uid, changePanel);
             AddControlsToPanel(journalList);
         }
+
+        private void button_community_Click(object sender, EventArgs e)
+        {
+            CommunityPage communityPage = new CommunityPage(Uid, changePanel);
+            AddControlsToPanel(communityPage); // 跳转到社区页
+        }
     }
+
 }
+

@@ -1,30 +1,22 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp-Final\\TravelApi\\",
+  "WorkspaceRootPath": "C:\\Users\\32188\\Desktop\\SE\\final\\C-Sharp\\TravelApi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{56F9DC37-8448-4BBF-A71C-AD14126DA7E2}|TravelApi\\TravelApi.csproj|c:\\users\\asus\\desktop\\xingji-elves\\c-sharp-final\\travelapi\\travelapi\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{56F9DC37-8448-4BBF-A71C-AD14126DA7E2}|TravelApi\\TravelApi.csproj|solutionrelative:travelapi\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{56F9DC37-8448-4BBF-A71C-AD14126DA7E2}|TravelApi\\TravelApi.csproj|c:\\users\\asus\\desktop\\xingji-elves\\c-sharp-final\\travelapi\\travelapi\\models\\chatrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{56F9DC37-8448-4BBF-A71C-AD14126DA7E2}|TravelApi\\TravelApi.csproj|solutionrelative:travelapi\\models\\chatrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{56F9DC37-8448-4BBF-A71C-AD14126DA7E2}|TravelApi\\TravelApi.csproj|c:\\users\\asus\\desktop\\xingji-elves\\c-sharp-final\\travelapi\\travelapi\\models\\chatmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{56F9DC37-8448-4BBF-A71C-AD14126DA7E2}|TravelApi\\TravelApi.csproj|solutionrelative:travelapi\\models\\chatmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{56F9DC37-8448-4BBF-A71C-AD14126DA7E2}|TravelApi\\TravelApi.csproj|c:\\users\\asus\\desktop\\xingji-elves\\c-sharp-final\\travelapi\\travelapi\\services\\chatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{56F9DC37-8448-4BBF-A71C-AD14126DA7E2}|TravelApi\\TravelApi.csproj|solutionrelative:travelapi\\services\\chatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{56F9DC37-8448-4BBF-A71C-AD14126DA7E2}|TravelApi\\TravelApi.csproj|c:\\users\\asus\\desktop\\xingji-elves\\c-sharp-final\\travelapi\\travelapi\\controllers\\travelcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{56F9DC37-8448-4BBF-A71C-AD14126DA7E2}|TravelApi\\TravelApi.csproj|solutionrelative:travelapi\\controllers\\travelcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{56F9DC37-8448-4BBF-A71C-AD14126DA7E2}|TravelApi\\TravelApi.csproj|c:\\users\\asus\\desktop\\xingji-elves\\c-sharp-final\\travelapi\\travelapi\\controllers\\pythoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{56F9DC37-8448-4BBF-A71C-AD14126DA7E2}|TravelApi\\TravelApi.csproj|c:\\users\\32188\\desktop\\se\\final\\c-sharp\\travelapi\\travelapi\\controllers\\pythoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{56F9DC37-8448-4BBF-A71C-AD14126DA7E2}|TravelApi\\TravelApi.csproj|solutionrelative:travelapi\\controllers\\pythoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{56F9DC37-8448-4BBF-A71C-AD14126DA7E2}|TravelApi\\TravelApi.csproj|c:\\users\\32188\\desktop\\se\\final\\c-sharp\\travelapi\\travelapi\\controllers\\todoitemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{56F9DC37-8448-4BBF-A71C-AD14126DA7E2}|TravelApi\\TravelApi.csproj|solutionrelative:travelapi\\controllers\\todoitemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{56F9DC37-8448-4BBF-A71C-AD14126DA7E2}|TravelApi\\TravelApi.csproj|c:\\users\\32188\\desktop\\se\\final\\c-sharp\\travelapi\\travelapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{56F9DC37-8448-4BBF-A71C-AD14126DA7E2}|TravelApi\\TravelApi.csproj|solutionrelative:travelapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{56F9DC37-8448-4BBF-A71C-AD14126DA7E2}|TravelApi\\TravelApi.csproj|c:\\users\\32188\\desktop\\se\\final\\c-sharp\\travelapi\\travelapi\\models\\chatmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{56F9DC37-8448-4BBF-A71C-AD14126DA7E2}|TravelApi\\TravelApi.csproj|solutionrelative:travelapi\\models\\chatmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -49,82 +41,65 @@
               "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ChatRecord.cs",
-              "DocumentMoniker": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp-Final\\TravelApi\\TravelApi\\Models\\ChatRecord.cs",
-              "RelativeDocumentMoniker": "TravelApi\\Models\\ChatRecord.cs",
-              "ToolTip": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp-Final\\TravelApi\\TravelApi\\Models\\ChatRecord.cs",
-              "RelativeToolTip": "TravelApi\\Models\\ChatRecord.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAA8AAAAeAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-17T12:40:38.149Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:3:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "ChatMessage.cs",
-              "DocumentMoniker": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp-Final\\TravelApi\\TravelApi\\Models\\ChatMessage.cs",
-              "RelativeDocumentMoniker": "TravelApi\\Models\\ChatMessage.cs",
-              "ToolTip": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp-Final\\TravelApi\\TravelApi\\Models\\ChatMessage.cs",
-              "RelativeToolTip": "TravelApi\\Models\\ChatMessage.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAwwBMAAAASAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-17T12:40:37.517Z",
-              "EditorCaption": ""
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\32188\\Desktop\\SE\\final\\C-Sharp\\TravelApi\\TravelApi\\appsettings.json",
+              "RelativeDocumentMoniker": "TravelApi\\appsettings.json",
+              "ToolTip": "C:\\Users\\32188\\Desktop\\SE\\final\\C-Sharp\\TravelApi\\TravelApi\\appsettings.json",
+              "RelativeToolTip": "TravelApi\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-21T07:43:02.575Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "ChatService.cs",
-              "DocumentMoniker": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp-Final\\TravelApi\\TravelApi\\Services\\ChatService.cs",
-              "RelativeDocumentMoniker": "TravelApi\\Services\\ChatService.cs",
-              "ToolTip": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp-Final\\TravelApi\\TravelApi\\Services\\ChatService.cs",
-              "RelativeToolTip": "TravelApi\\Services\\ChatService.cs",
-              "ViewState": "AQIAAAEAAAAAAAAAAAAAwAwAAAAvAAAA",
+              "Title": "ChatMessage.cs",
+              "DocumentMoniker": "C:\\Users\\32188\\Desktop\\SE\\final\\C-Sharp\\TravelApi\\TravelApi\\Models\\ChatMessage.cs",
+              "RelativeDocumentMoniker": "TravelApi\\Models\\ChatMessage.cs",
+              "ToolTip": "C:\\Users\\32188\\Desktop\\SE\\final\\C-Sharp\\TravelApi\\TravelApi\\Models\\ChatMessage.cs",
+              "RelativeToolTip": "TravelApi\\Models\\ChatMessage.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAA/wBMAAAASAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-17T12:06:54.019Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "TravelController.cs",
-              "DocumentMoniker": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp-Final\\TravelApi\\TravelApi\\Controllers\\TravelController.cs",
-              "RelativeDocumentMoniker": "TravelApi\\Controllers\\TravelController.cs",
-              "ToolTip": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp-Final\\TravelApi\\TravelApi\\Controllers\\TravelController.cs",
-              "RelativeToolTip": "TravelApi\\Controllers\\TravelController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAGAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-17T12:06:47.582Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-17T12:40:37.517Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ChatController.cs",
-              "DocumentMoniker": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp-Final\\TravelApi\\TravelApi\\Controllers\\ChatController.cs",
-              "RelativeDocumentMoniker": "TravelApi\\Controllers\\ChatController.cs",
-              "ToolTip": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp-Final\\TravelApi\\TravelApi\\Controllers\\ChatController.cs",
-              "RelativeToolTip": "TravelApi\\Controllers\\ChatController.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAABMAAAAnAAAA",
+              "Title": "PythonController.cs",
+              "DocumentMoniker": "C:\\Users\\32188\\Desktop\\SE\\final\\C-Sharp\\TravelApi\\TravelApi\\Controllers\\PythonController.cs",
+              "RelativeDocumentMoniker": "TravelApi\\Controllers\\PythonController.cs",
+              "ToolTip": "C:\\Users\\32188\\Desktop\\SE\\final\\C-Sharp\\TravelApi\\TravelApi\\Controllers\\PythonController.cs",
+              "RelativeToolTip": "TravelApi\\Controllers\\PythonController.cs",
+              "ViewState": "AQIAAEMAAAAAAAAAAAAuwEsAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-17T12:04:43.809Z",
+              "WhenOpened": "2025-04-02T15:48:09.553Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "PythonController.cs",
-              "DocumentMoniker": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp-Final\\TravelApi\\TravelApi\\Controllers\\PythonController.cs",
-              "RelativeDocumentMoniker": "TravelApi\\Controllers\\PythonController.cs",
-              "ToolTip": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp-Final\\TravelApi\\TravelApi\\Controllers\\PythonController.cs",
-              "RelativeToolTip": "TravelApi\\Controllers\\PythonController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAFoAAABBAAAA",
+              "DocumentIndex": 1,
+              "Title": "TodoItemController.cs",
+              "DocumentMoniker": "C:\\Users\\32188\\Desktop\\SE\\final\\C-Sharp\\TravelApi\\TravelApi\\Controllers\\TodoItemController.cs",
+              "RelativeDocumentMoniker": "TravelApi\\Controllers\\TodoItemController.cs",
+              "ToolTip": "C:\\Users\\32188\\Desktop\\SE\\final\\C-Sharp\\TravelApi\\TravelApi\\Controllers\\TodoItemController.cs",
+              "RelativeToolTip": "TravelApi\\Controllers\\TodoItemController.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABgAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-02T15:48:09.553Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-21T07:52:21.84Z"
             }
           ]
         }

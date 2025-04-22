@@ -83,6 +83,16 @@ namespace TravelApp.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap default_image {
+            get {
+                object obj = ResourceManager.GetObject("default_image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap navi2 {
             get {
                 object obj = ResourceManager.GetObject("navi2", resourceCulture);

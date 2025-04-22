@@ -13,7 +13,7 @@ def get_db_connection(database=None):
     return mysql.connector.connect(
         host="localhost",
         user="root",
-        password="123123",
+        password="lwy2004926",
         database=database if database else "mysql"  # 默认连接到 mysql 数据库
     )
 
