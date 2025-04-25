@@ -829,6 +829,38 @@
   },
   {
     "ContainingType": "PythonController",
+    "Method": "GetJournalImage",
+    "RelativePath": "api/python/journal/image/{journalId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "journalId",
+        "Type": "System.Int64",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PythonController",
+    "Method": "ClearJournalImages",
+    "RelativePath": "api/python/journal/image/{journalId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "journalId",
+        "Type": "System.Int64",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PythonController",
     "Method": "GetJournal",
     "RelativePath": "api/python/journal/{journalId}",
     "HttpMethod": "GET",

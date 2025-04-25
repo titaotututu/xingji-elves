@@ -1,14 +1,8 @@
 {
   "version": 2,
-<<<<<<< HEAD
-  "dgSpecHash": "yvdWFhBHZPE1Sg8wBjzfPzCiXEUBZa/k0H/Rsvjnv1RwtTK6lNLeyusSO31VzEUZ9VGff1mF5cfE7GdgvmG1AA==",
+  "dgSpecHash": "tyWyw9IT2YPczD5XeriwFeRl1aiJ6f1KfPP2hhmO6/3hUq7LczO4ZzyEVSNMlJnMa/rd5x6XxD65ukS4YM6szw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\32188\\Desktop\\SE\\final\\C-Sharp\\TravelApi\\TravelApi\\TravelApi.csproj",
-=======
-  "dgSpecHash": "Gr2CR6pJF4tw6UX2nbXMCMKXPpQfmyMdHx7Rv3vozG4bbmYeTYEPrpZlUE9/DsVcrWnKbp6G94v+UYSthuuJWA==",
-  "success": true,
-  "projectFilePath": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp\\TravelApi\\TravelApi\\TravelApi.csproj",
->>>>>>> origin/master
+  "projectFilePath": "C:\\Users\\32188\\Desktop\\SE\\final2.0\\C-Sharp\\TravelApi\\TravelApi\\TravelApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\32188\\.nuget\\packages\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",
     "C:\\Users\\32188\\.nuget\\packages\\google.protobuf\\3.25.1\\google.protobuf.3.25.1.nupkg.sha512",

@@ -53,7 +53,8 @@ namespace TravelApp.controller
                         try
                         {
                             // 创建 CommunityCell 并设置内容
-                            CommunityCell cell = new CommunityCell();
+                            CommunityCell cell = new CommunityCell(journal.JournalId,this.ChangePanel);
+                            cell.title.Text = journal.Title;
                             cell.userName.Text = $"用户ID: {journal.UserId}";
                             cell.time.Text = journal.Time.ToString();
 
