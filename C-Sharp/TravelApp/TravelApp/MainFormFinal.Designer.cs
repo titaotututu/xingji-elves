@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainFormFinal));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button_feedback = new System.Windows.Forms.Button();
+            this.button_community = new System.Windows.Forms.Button();
             this.button_Journal = new System.Windows.Forms.Button();
             this.button_Other = new System.Windows.Forms.Button();
             this.button_Lighting = new System.Windows.Forms.Button();
@@ -39,18 +41,18 @@
             this.button_UserInfo = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panelControl = new System.Windows.Forms.Panel();
-            this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.button_chat = new System.Windows.Forms.Button();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button_community = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -62,9 +64,11 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(86)))), ((int)(((byte)(44)))));
+            this.panel1.Controls.Add(this.pictureBox7);
+            this.panel1.Controls.Add(this.button_chat);
+            this.panel1.Controls.Add(this.button_feedback);
             this.panel1.Controls.Add(this.button_community);
             this.panel1.Controls.Add(this.pictureBox8);
-            this.panel1.Controls.Add(this.pictureBox7);
             this.panel1.Controls.Add(this.pictureBox6);
             this.panel1.Controls.Add(this.pictureBox5);
             this.panel1.Controls.Add(this.pictureBox4);
@@ -82,8 +86,42 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(230, 619);
+            this.panel1.Size = new System.Drawing.Size(230, 664);
             this.panel1.TabIndex = 0;
+            // 
+            // button_feedback
+            // 
+            this.button_feedback.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(86)))), ((int)(((byte)(44)))));
+            this.button_feedback.FlatAppearance.BorderSize = 0;
+            this.button_feedback.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_feedback.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button_feedback.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.button_feedback.Location = new System.Drawing.Point(11, 508);
+            this.button_feedback.Margin = new System.Windows.Forms.Padding(2);
+            this.button_feedback.Name = "button_feedback";
+            this.button_feedback.Size = new System.Drawing.Size(233, 50);
+            this.button_feedback.TabIndex = 17;
+            this.button_feedback.Text = "反馈";
+            this.button_feedback.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button_feedback.UseVisualStyleBackColor = false;
+            this.button_feedback.Click += new System.EventHandler(this.button_feedback_Click);
+            // 
+            // button_community
+            // 
+            this.button_community.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(86)))), ((int)(((byte)(44)))));
+            this.button_community.FlatAppearance.BorderSize = 0;
+            this.button_community.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_community.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button_community.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.button_community.Location = new System.Drawing.Point(11, 454);
+            this.button_community.Margin = new System.Windows.Forms.Padding(2);
+            this.button_community.Name = "button_community";
+            this.button_community.Size = new System.Drawing.Size(233, 50);
+            this.button_community.TabIndex = 16;
+            this.button_community.Text = "社区";
+            this.button_community.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button_community.UseVisualStyleBackColor = false;
+            this.button_community.Click += new System.EventHandler(this.button_community_Click);
             // 
             // button_Journal
             // 
@@ -109,7 +147,7 @@
             this.button_Other.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_Other.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button_Other.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button_Other.Location = new System.Drawing.Point(0, 454);
+            this.button_Other.Location = new System.Drawing.Point(0, 612);
             this.button_Other.Margin = new System.Windows.Forms.Padding(2);
             this.button_Other.Name = "button_Other";
             this.button_Other.Size = new System.Drawing.Size(233, 50);
@@ -221,8 +259,35 @@
             this.panelControl.Location = new System.Drawing.Point(227, 0);
             this.panelControl.Margin = new System.Windows.Forms.Padding(2);
             this.panelControl.Name = "panelControl";
-            this.panelControl.Size = new System.Drawing.Size(948, 617);
+            this.panelControl.Size = new System.Drawing.Size(952, 666);
             this.panelControl.TabIndex = 1;
+            // 
+            // button_chat
+            // 
+            this.button_chat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(86)))), ((int)(((byte)(44)))));
+            this.button_chat.FlatAppearance.BorderSize = 0;
+            this.button_chat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_chat.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button_chat.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.button_chat.Location = new System.Drawing.Point(11, 562);
+            this.button_chat.Margin = new System.Windows.Forms.Padding(2);
+            this.button_chat.Name = "button_chat";
+            this.button_chat.Size = new System.Drawing.Size(233, 50);
+            this.button_chat.TabIndex = 18;
+            this.button_chat.Text = "智能助手";
+            this.button_chat.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button_chat.UseVisualStyleBackColor = false;
+            this.button_chat.Click += new System.EventHandler(this.button_chat_Click);
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Image = global::TravelApp.Properties.Resources.其他;
+            this.pictureBox7.Location = new System.Drawing.Point(153, 612);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(42, 42);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox7.TabIndex = 14;
+            this.pictureBox7.TabStop = false;
             // 
             // pictureBox8
             // 
@@ -233,16 +298,6 @@
             this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox8.TabIndex = 15;
             this.pictureBox8.TabStop = false;
-            // 
-            // pictureBox7
-            // 
-            this.pictureBox7.Image = global::TravelApp.Properties.Resources.其他;
-            this.pictureBox7.Location = new System.Drawing.Point(151, 462);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(42, 42);
-            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox7.TabIndex = 14;
-            this.pictureBox7.TabStop = false;
             // 
             // pictureBox6
             // 
@@ -304,29 +359,12 @@
             this.pictureBox1.TabIndex = 8;
             this.pictureBox1.TabStop = false;
             // 
-            // button_community
-            // 
-            this.button_community.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(86)))), ((int)(((byte)(44)))));
-            this.button_community.FlatAppearance.BorderSize = 0;
-            this.button_community.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_community.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button_community.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button_community.Location = new System.Drawing.Point(11, 518);
-            this.button_community.Margin = new System.Windows.Forms.Padding(2);
-            this.button_community.Name = "button_community";
-            this.button_community.Size = new System.Drawing.Size(233, 50);
-            this.button_community.TabIndex = 16;
-            this.button_community.Text = "社区";
-            this.button_community.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button_community.UseVisualStyleBackColor = false;
-            this.button_community.Click += new System.EventHandler(this.button_community_Click);
-            // 
             // MainFormFinal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Honeydew;
-            this.ClientSize = new System.Drawing.Size(1174, 611);
+            this.ClientSize = new System.Drawing.Size(1174, 663);
             this.Controls.Add(this.panelControl);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -338,8 +376,8 @@
             this.Load += new System.EventHandler(this.MainFormFianl_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
@@ -371,5 +409,7 @@
         private System.Windows.Forms.PictureBox pictureBox8;
         private System.Windows.Forms.Panel panelControl;
         private System.Windows.Forms.Button button_community;
+        private System.Windows.Forms.Button button_feedback;
+        private System.Windows.Forms.Button button_chat;
     }
 }

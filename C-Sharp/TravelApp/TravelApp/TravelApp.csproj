@@ -121,11 +121,23 @@
     <Compile Include="controller\AddTodo.Designer.cs">
       <DependentUpon>AddTodo.cs</DependentUpon>
     </Compile>
+    <Compile Include="controller\ChatPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controller\ChatPage.Designer.cs">
+      <DependentUpon>ChatPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="controller\CommunityDetail.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="controller\CommunityDetail.Designer.cs">
       <DependentUpon>CommunityDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="controller\Feedback.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controller\Feedback.Designer.cs">
+      <DependentUpon>Feedback.cs</DependentUpon>
     </Compile>
     <Compile Include="controller\HistoryPage.cs">
       <SubType>UserControl</SubType>
@@ -286,8 +298,14 @@
     <EmbeddedResource Include="controller\AddTodo.resx">
       <DependentUpon>AddTodo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="controller\ChatPage.resx">
+      <DependentUpon>ChatPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="controller\CommunityDetail.resx">
       <DependentUpon>CommunityDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="controller\Feedback.resx">
+      <DependentUpon>Feedback.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="controller\HistoryPage.resx">
       <DependentUpon>HistoryPage.cs</DependentUpon>

@@ -42,7 +42,7 @@
             this.panel1.Controls.Add(this.flowLayoutPanel1);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(848, 518);
+            this.panel1.Size = new System.Drawing.Size(951, 628);
             this.panel1.TabIndex = 0;
             // 
             // label2
@@ -72,7 +72,7 @@
             this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(20, 79);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(802, 418);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(888, 546);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // CommunityPage
@@ -81,7 +81,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel1);
             this.Name = "CommunityPage";
-            this.Size = new System.Drawing.Size(848, 518);
+            this.Size = new System.Drawing.Size(951, 629);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

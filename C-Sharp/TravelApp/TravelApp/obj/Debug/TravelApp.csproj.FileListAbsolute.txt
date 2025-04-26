@@ -41,3 +41,5 @@ C:\Users\32188\Desktop\SE\final2.0\C-Sharp\TravelApp\TravelApp\obj\Debug\TravelA
 C:\Users\32188\Desktop\SE\final2.0\C-Sharp\TravelApp\TravelApp\obj\Debug\TravelApp.exe
 C:\Users\32188\Desktop\SE\final2.0\C-Sharp\TravelApp\TravelApp\obj\Debug\TravelApp.pdb
 C:\Users\32188\Desktop\SE\final2.0\C-Sharp\TravelApp\TravelApp\obj\Debug\TravelApp.controller.CommunityDetail.resources
+C:\Users\32188\Desktop\SE\final2.0\C-Sharp\TravelApp\TravelApp\obj\Debug\TravelApp.controller.Feedback.resources
+C:\Users\32188\Desktop\SE\final2.0\C-Sharp\TravelApp\TravelApp\obj\Debug\TravelApp.controller.ChatPage.resources

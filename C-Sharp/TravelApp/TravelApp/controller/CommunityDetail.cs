@@ -77,8 +77,25 @@ namespace TravelApp.controller
                         tbEmotion.Text = journal.Emotion;
                         rtbDescription.Text = journal.Description;
 
-                        // 使用默认图片
-                        flpImage.BackgroundImage = Properties.Resources.default_image;
+                        // 拼接图片的完整路径
+                        string imagePath = $@"C:\Users\32188\Desktop\SE\final2.0\Python\{journal.Picture}";
+
+                        // 检查图片是否存在
+                        if (!string.IsNullOrEmpty(journal.Picture) && System.IO.File.Exists(imagePath))
+                        {
+                            // 从本地加载图片
+                            flpImage.BackgroundImage = Image.FromFile(imagePath);
+                            Console.WriteLine($"成功加载图片: {imagePath}"); // 调试语句
+                        }
+                        else
+                        {
+                            // 使用默认图片
+                            flpImage.BackgroundImage = Properties.Resources.default_image;
+                            Console.WriteLine($"图片不存在，使用默认图片: {journal.Picture}"); // 调试语句
+                        }
+
+                        // 设置图片自适应
+                        flpImage.BackgroundImageLayout = ImageLayout.Stretch;
                     }
                     else
                     {

@@ -137,6 +137,18 @@ namespace TravelApp
             CommunityPage communityPage = new CommunityPage(Uid, changePanel);
             AddControlsToPanel(communityPage); // 跳转到社区页
         }
+
+        private void button_feedback_Click(object sender, EventArgs e)
+        {
+            Feedback feedback = new Feedback(Uid, changePanel);
+            AddControlsToPanel(feedback); // 跳转到反馈页 
+
+        }
+
+        private void button_chat_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

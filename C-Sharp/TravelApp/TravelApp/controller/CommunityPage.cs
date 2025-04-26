@@ -53,14 +53,30 @@ namespace TravelApp.controller
                         try
                         {
                             // 创建 CommunityCell 并设置内容
-                            CommunityCell cell = new CommunityCell(journal.JournalId,this.ChangePanel);
+                            CommunityCell cell = new CommunityCell(journal.JournalId, this.ChangePanel);
                             cell.title.Text = journal.Title;
                             cell.userName.Text = $"用户ID: {journal.UserId}";
                             cell.time.Text = journal.Time.ToString();
 
-                            // 设置默认图片
-                            Console.WriteLine($"设置默认图片: {journal.Picture}"); // 调试语句
-                            cell.image.Image = Properties.Resources.default_image; // 使用默认图片
+                            // 拼接图片的完整路径
+                            string imagePath = $@"C:\Users\32188\Desktop\SE\final2.0\Python\{journal.Picture}";
+
+                            // 检查图片是否存在
+                            if (!string.IsNullOrEmpty(journal.Picture) && System.IO.File.Exists(imagePath))
+                            {
+                                // 从本地加载图片
+                                cell.image.Image = Image.FromFile(imagePath);
+                                Console.WriteLine($"成功加载图片: {imagePath}"); // 调试语句
+                            }
+                            else
+                            {
+                                // 使用默认图片
+                                cell.image.Image = Properties.Resources.default_image;
+                                Console.WriteLine($"图片不存在，使用默认图片: {journal.Picture}"); // 调试语句
+                            }
+
+                            // 设置图片自适应
+                            cell.image.SizeMode = PictureBoxSizeMode.StretchImage;
 
                             flowLayoutPanel1.Controls.Add(cell); // 添加到 FlowLayoutPanel
                             Console.WriteLine($"成功添加日志: {journal.Title}"); // 打印日志标题

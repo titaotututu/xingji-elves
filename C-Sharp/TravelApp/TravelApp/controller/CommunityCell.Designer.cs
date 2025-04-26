@@ -78,7 +78,7 @@
             // 
             // image
             // 
-            this.image.Location = new System.Drawing.Point(499, 3);
+            this.image.Location = new System.Drawing.Point(614, 3);
             this.image.Name = "image";
             this.image.Size = new System.Drawing.Size(164, 117);
             this.image.TabIndex = 0;
@@ -95,7 +95,7 @@
             this.Controls.Add(this.userName);
             this.Controls.Add(this.image);
             this.Name = "CommunityCell";
-            this.Size = new System.Drawing.Size(696, 131);
+            this.Size = new System.Drawing.Size(818, 136);
             ((System.ComponentModel.ISupportInitialize)(this.image)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

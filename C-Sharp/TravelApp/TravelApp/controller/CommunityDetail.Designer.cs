@@ -114,7 +114,7 @@
             this.flowLayoutPanel2.Controls.Add(this.tbWeather);
             this.flowLayoutPanel2.Controls.Add(this.label4);
             this.flowLayoutPanel2.Controls.Add(this.tbEmotion);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 157);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 151);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(950, 32);
             this.flowLayoutPanel2.TabIndex = 21;
@@ -197,15 +197,15 @@
             // 
             this.flpImage.AutoScroll = true;
             this.flpImage.BackColor = System.Drawing.Color.White;
-            this.flpImage.Location = new System.Drawing.Point(32, 198);
+            this.flpImage.Location = new System.Drawing.Point(223, 183);
             this.flpImage.Name = "flpImage";
-            this.flpImage.Size = new System.Drawing.Size(887, 160);
+            this.flpImage.Size = new System.Drawing.Size(480, 301);
             this.flpImage.TabIndex = 22;
             // 
             // rtbDescription
             // 
             this.rtbDescription.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.rtbDescription.Location = new System.Drawing.Point(6, 364);
+            this.rtbDescription.Location = new System.Drawing.Point(7, 481);
             this.rtbDescription.Name = "rtbDescription";
             this.rtbDescription.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
             this.rtbDescription.Size = new System.Drawing.Size(943, 178);
@@ -216,13 +216,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.flowLayoutPanel2);
             this.Controls.Add(this.rtbDescription);
             this.Controls.Add(this.flpImage);
-            this.Controls.Add(this.flowLayoutPanel2);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.flpTitle);
             this.Name = "CommunityDetail";
-            this.Size = new System.Drawing.Size(950, 556);
+            this.Size = new System.Drawing.Size(950, 662);
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbBack)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
