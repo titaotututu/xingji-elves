@@ -10,8 +10,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TravelApp.models;
+using System.IO;
 
 namespace TravelApp.controller
+
 {
     public partial class CommunityPage : UserControl
     {
@@ -53,26 +55,45 @@ namespace TravelApp.controller
                         try
                         {
                             // 创建 CommunityCell 并设置内容
-                            CommunityCell cell = new CommunityCell(journal.JournalId, this.ChangePanel);
+                            CommunityCell cell = new CommunityCell(this.UserId, journal.JournalId, this.ChangePanel);
                             cell.title.Text = journal.Title;
                             cell.userName.Text = $"用户ID: {journal.UserId}";
                             cell.time.Text = journal.Time.ToString();
 
-                            // 拼接图片的完整路径
-                            string imagePath = $@"C:\Users\32188\Desktop\SE\final2.0\Python\{journal.Picture}";
+                            // 调用 API 获取图片的 Base64 数据
+                            string imageApiUrl = $"http://localhost:5199/api/python/journal/image/{journal.JournalId}";
+                            HttpResponseMessage imageResponse = await client.Get(imageApiUrl);
 
-                            // 检查图片是否存在
-                            if (!string.IsNullOrEmpty(journal.Picture) && System.IO.File.Exists(imagePath))
+                            if (imageResponse.IsSuccessStatusCode)
                             {
-                                // 从本地加载图片
-                                cell.image.Image = Image.FromFile(imagePath);
-                                Console.WriteLine($"成功加载图片: {imagePath}"); // 调试语句
+                                string imageJson = await imageResponse.Content.ReadAsStringAsync();
+                                var imageResult = JsonConvert.DeserializeObject<ImageApiResponse>(imageJson);
+
+                                if (imageResult.Images != null && imageResult.Images.Count > 0)
+                                {
+                                    // 取第一张图片的 Base64 数据
+                                    string base64Data = imageResult.Images[0].Data;
+
+                                    // 将 Base64 转换为 Image 对象
+                                    byte[] imageBytes = Convert.FromBase64String(base64Data);
+                                    using (var ms = new MemoryStream(imageBytes))
+                                    {
+                                        cell.image.Image = Image.FromStream(ms);
+                                    }
+                                    Console.WriteLine($"成功加载图片: {journal.JournalId}"); // 调试语句
+                                }
+                                else
+                                {
+                                    // 使用默认图片
+                                    cell.image.Image = Properties.Resources.default_image;
+                                    Console.WriteLine($"图片不存在，使用默认图片: {journal.JournalId}"); // 调试语句
+                                }
                             }
                             else
                             {
                                 // 使用默认图片
                                 cell.image.Image = Properties.Resources.default_image;
-                                Console.WriteLine($"图片不存在，使用默认图片: {journal.Picture}"); // 调试语句
+                                Console.WriteLine($"图片加载失败，使用默认图片: {journal.JournalId}"); // 调试语句
                             }
 
                             // 设置图片自适应

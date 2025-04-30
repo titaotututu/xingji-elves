@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainFormFinal));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button_chat = new System.Windows.Forms.Button();
             this.button_feedback = new System.Windows.Forms.Button();
             this.button_community = new System.Windows.Forms.Button();
             this.button_Journal = new System.Windows.Forms.Button();
@@ -41,7 +42,8 @@
             this.button_UserInfo = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panelControl = new System.Windows.Forms.Panel();
-            this.button_chat = new System.Windows.Forms.Button();
+            this.pictureBox10 = new System.Windows.Forms.PictureBox();
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
@@ -50,7 +52,10 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
@@ -59,11 +64,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(86)))), ((int)(((byte)(44)))));
+            this.panel1.Controls.Add(this.pictureBox11);
+            this.panel1.Controls.Add(this.pictureBox10);
+            this.panel1.Controls.Add(this.pictureBox9);
             this.panel1.Controls.Add(this.pictureBox7);
             this.panel1.Controls.Add(this.button_chat);
             this.panel1.Controls.Add(this.button_feedback);
@@ -88,6 +97,23 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(230, 664);
             this.panel1.TabIndex = 0;
+            // 
+            // button_chat
+            // 
+            this.button_chat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(86)))), ((int)(((byte)(44)))));
+            this.button_chat.FlatAppearance.BorderSize = 0;
+            this.button_chat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_chat.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button_chat.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.button_chat.Location = new System.Drawing.Point(11, 558);
+            this.button_chat.Margin = new System.Windows.Forms.Padding(2);
+            this.button_chat.Name = "button_chat";
+            this.button_chat.Size = new System.Drawing.Size(233, 50);
+            this.button_chat.TabIndex = 18;
+            this.button_chat.Text = "智能助手";
+            this.button_chat.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button_chat.UseVisualStyleBackColor = false;
+            this.button_chat.Click += new System.EventHandler(this.button_chat_Click);
             // 
             // button_feedback
             // 
@@ -262,22 +288,25 @@
             this.panelControl.Size = new System.Drawing.Size(952, 666);
             this.panelControl.TabIndex = 1;
             // 
-            // button_chat
+            // pictureBox10
             // 
-            this.button_chat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(86)))), ((int)(((byte)(44)))));
-            this.button_chat.FlatAppearance.BorderSize = 0;
-            this.button_chat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_chat.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button_chat.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button_chat.Location = new System.Drawing.Point(11, 562);
-            this.button_chat.Margin = new System.Windows.Forms.Padding(2);
-            this.button_chat.Name = "button_chat";
-            this.button_chat.Size = new System.Drawing.Size(233, 50);
-            this.button_chat.TabIndex = 18;
-            this.button_chat.Text = "智能助手";
-            this.button_chat.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button_chat.UseVisualStyleBackColor = false;
-            this.button_chat.Click += new System.EventHandler(this.button_chat_Click);
+            this.pictureBox10.Image = global::TravelApp.Properties.Resources.反馈;
+            this.pictureBox10.Location = new System.Drawing.Point(150, 509);
+            this.pictureBox10.Name = "pictureBox10";
+            this.pictureBox10.Size = new System.Drawing.Size(45, 40);
+            this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox10.TabIndex = 20;
+            this.pictureBox10.TabStop = false;
+            // 
+            // pictureBox9
+            // 
+            this.pictureBox9.Image = global::TravelApp.Properties.Resources.社区;
+            this.pictureBox9.Location = new System.Drawing.Point(150, 455);
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.Size = new System.Drawing.Size(45, 40);
+            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox9.TabIndex = 19;
+            this.pictureBox9.TabStop = false;
             // 
             // pictureBox7
             // 
@@ -359,6 +388,16 @@
             this.pictureBox1.TabIndex = 8;
             this.pictureBox1.TabStop = false;
             // 
+            // pictureBox11
+            // 
+            this.pictureBox11.Image = global::TravelApp.Properties.Resources.智能助手;
+            this.pictureBox11.Location = new System.Drawing.Point(150, 558);
+            this.pictureBox11.Name = "pictureBox11";
+            this.pictureBox11.Size = new System.Drawing.Size(45, 40);
+            this.pictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox11.TabIndex = 21;
+            this.pictureBox11.TabStop = false;
+            // 
             // MainFormFinal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -376,6 +415,8 @@
             this.Load += new System.EventHandler(this.MainFormFianl_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
@@ -384,6 +425,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -411,5 +453,8 @@
         private System.Windows.Forms.Button button_community;
         private System.Windows.Forms.Button button_feedback;
         private System.Windows.Forms.Button button_chat;
+        private System.Windows.Forms.PictureBox pictureBox9;
+        private System.Windows.Forms.PictureBox pictureBox10;
+        private System.Windows.Forms.PictureBox pictureBox11;
     }
 }

@@ -30,19 +30,24 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpHead = new System.Windows.Forms.FlowLayoutPanel();
+            this.labelIcon = new System.Windows.Forms.Label();
+            this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
+            this.flpHead.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel1.Controls.Add(this.flpHead);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.flowLayoutPanel1);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(951, 628);
+            this.panel1.Size = new System.Drawing.Size(957, 658);
             this.panel1.TabIndex = 0;
             // 
             // label2
@@ -50,30 +55,52 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label2.Location = new System.Drawing.Point(-3, 58);
+            this.label2.Location = new System.Drawing.Point(0, 88);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(1072, 18);
             this.label2.TabIndex = 2;
             this.label2.Text = "————————————————————————————————————————————————————————";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("幼圆", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label1.Location = new System.Drawing.Point(90, 22);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(89, 36);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "社区";
-            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(20, 79);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 109);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(888, 546);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(941, 546);
             this.flowLayoutPanel1.TabIndex = 0;
+            // 
+            // flpHead
+            // 
+            this.flpHead.BackColor = System.Drawing.Color.White;
+            this.flpHead.Controls.Add(this.pictureBoxIcon);
+            this.flpHead.Controls.Add(this.labelIcon);
+            this.flpHead.Location = new System.Drawing.Point(3, 0);
+            this.flpHead.Name = "flpHead";
+            this.flpHead.Size = new System.Drawing.Size(954, 88);
+            this.flpHead.TabIndex = 3;
+            // 
+            // labelIcon
+            // 
+            this.labelIcon.AutoSize = true;
+            this.labelIcon.Font = new System.Drawing.Font("幼圆", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelIcon.ForeColor = System.Drawing.Color.DarkGreen;
+            this.labelIcon.Location = new System.Drawing.Point(101, 35);
+            this.labelIcon.Margin = new System.Windows.Forms.Padding(10, 35, 3, 0);
+            this.labelIcon.Name = "labelIcon";
+            this.labelIcon.Size = new System.Drawing.Size(81, 33);
+            this.labelIcon.TabIndex = 1;
+            this.labelIcon.Text = "社区";
+            // 
+            // pictureBoxIcon
+            // 
+            this.pictureBoxIcon.Image = global::TravelApp.Properties.Resources.社区__1_;
+            this.pictureBoxIcon.Location = new System.Drawing.Point(30, 20);
+            this.pictureBoxIcon.Margin = new System.Windows.Forms.Padding(30, 20, 3, 3);
+            this.pictureBoxIcon.Name = "pictureBoxIcon";
+            this.pictureBoxIcon.Size = new System.Drawing.Size(58, 57);
+            this.pictureBoxIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxIcon.TabIndex = 0;
+            this.pictureBoxIcon.TabStop = false;
             // 
             // CommunityPage
             // 
@@ -81,9 +108,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel1);
             this.Name = "CommunityPage";
-            this.Size = new System.Drawing.Size(951, 629);
+            this.Size = new System.Drawing.Size(957, 658);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.flpHead.ResumeLayout(false);
+            this.flpHead.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -92,7 +122,9 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.FlowLayoutPanel flpHead;
+        private System.Windows.Forms.PictureBox pictureBoxIcon;
+        private System.Windows.Forms.Label labelIcon;
     }
 }

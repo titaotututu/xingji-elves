@@ -38,7 +38,9 @@
             this.time = new System.Windows.Forms.Label();
             this.title = new System.Windows.Forms.Label();
             this.image = new System.Windows.Forms.PictureBox();
+            this.pictureBoxGoose = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.image)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGoose)).BeginInit();
             this.SuspendLayout();
             // 
             // userName
@@ -46,7 +48,7 @@
             this.userName.AutoSize = true;
             this.userName.Font = new System.Drawing.Font("幼圆", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.userName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.userName.Location = new System.Drawing.Point(55, 57);
+            this.userName.Location = new System.Drawing.Point(362, 26);
             this.userName.Name = "userName";
             this.userName.Size = new System.Drawing.Size(102, 28);
             this.userName.TabIndex = 1;
@@ -57,7 +59,7 @@
             // 
             this.time.AutoSize = true;
             this.time.Font = new System.Drawing.Font("幼圆", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.time.Location = new System.Drawing.Point(55, 85);
+            this.time.Location = new System.Drawing.Point(362, 78);
             this.time.Name = "time";
             this.time.Size = new System.Drawing.Size(102, 28);
             this.time.TabIndex = 2;
@@ -69,7 +71,7 @@
             this.title.AutoSize = true;
             this.title.Font = new System.Drawing.Font("幼圆", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.title.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.title.Location = new System.Drawing.Point(55, 18);
+            this.title.Location = new System.Drawing.Point(125, 26);
             this.title.Name = "title";
             this.title.Size = new System.Drawing.Size(109, 30);
             this.title.TabIndex = 3;
@@ -78,29 +80,45 @@
             // 
             // image
             // 
-            this.image.Location = new System.Drawing.Point(614, 3);
+            this.image.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.image.Location = new System.Drawing.Point(709, 3);
             this.image.Name = "image";
             this.image.Size = new System.Drawing.Size(164, 117);
             this.image.TabIndex = 0;
             this.image.TabStop = false;
             this.image.Click += new System.EventHandler(this.image_Click);
             // 
+            // pictureBoxGoose
+            // 
+            this.pictureBoxGoose.Image = global::TravelApp.Properties.Resources.鹅;
+            this.pictureBoxGoose.Location = new System.Drawing.Point(21, 26);
+            this.pictureBoxGoose.Margin = new System.Windows.Forms.Padding(30, 20, 3, 3);
+            this.pictureBoxGoose.Name = "pictureBoxGoose";
+            this.pictureBoxGoose.Size = new System.Drawing.Size(80, 64);
+            this.pictureBoxGoose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxGoose.TabIndex = 22;
+            this.pictureBoxGoose.TabStop = false;
+            // 
             // CommunityCell
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.Controls.Add(this.image);
+            this.Controls.Add(this.pictureBoxGoose);
             this.Controls.Add(this.title);
             this.Controls.Add(this.time);
             this.Controls.Add(this.userName);
-            this.Controls.Add(this.image);
             this.Name = "CommunityCell";
-            this.Size = new System.Drawing.Size(818, 136);
+            this.Size = new System.Drawing.Size(893, 122);
             ((System.ComponentModel.ISupportInitialize)(this.image)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGoose)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
+
+        private System.Windows.Forms.PictureBox pictureBoxGoose;
 
         //private System.Windows.Forms.Label title;
 

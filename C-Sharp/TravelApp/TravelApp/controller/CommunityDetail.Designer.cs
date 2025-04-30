@@ -1,4 +1,6 @@
-﻿namespace TravelApp.controller
+﻿using System;
+
+namespace TravelApp.controller
 {
     partial class CommunityDetail
     {
@@ -197,9 +199,9 @@
             // 
             this.flpImage.AutoScroll = true;
             this.flpImage.BackColor = System.Drawing.Color.White;
-            this.flpImage.Location = new System.Drawing.Point(223, 183);
+            this.flpImage.Location = new System.Drawing.Point(20, 183);
             this.flpImage.Name = "flpImage";
-            this.flpImage.Size = new System.Drawing.Size(480, 301);
+            this.flpImage.Size = new System.Drawing.Size(908, 301);
             this.flpImage.TabIndex = 22;
             // 
             // rtbDescription
@@ -216,6 +218,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.Controls.Add(this.flowLayoutPanel2);
             this.Controls.Add(this.rtbDescription);
             this.Controls.Add(this.flpImage);
@@ -250,5 +253,7 @@
         private System.Windows.Forms.TextBox tbEmotion;
         private System.Windows.Forms.FlowLayoutPanel flpImage;
         private System.Windows.Forms.RichTextBox rtbDescription;
+
+        //public EventHandler pbBack_Click { get; private set; }
     }
 }

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TravelApp.models;
 
+
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,7 @@ namespace TravelApp.controller
     public partial class CommunityDetail : UserControl
     {
         public long JournalId;
+        public long UserId;
         public string baseUrl = "http://localhost:5199/api/python/Journals";
         public ChangePanel ChangePanel;
         public Refresh Refresh;
@@ -39,9 +41,10 @@ namespace TravelApp.controller
         public Travel travel;
 
 
-        public CommunityDetail(long journalId, ChangePanel changePanel)
+        public CommunityDetail(long userId,long journalId, ChangePanel changePanel)
         {
             InitializeComponent();
+            this.UserId = userId;
             this.JournalId = journalId;
             this.ChangePanel = changePanel;
 
@@ -77,25 +80,32 @@ namespace TravelApp.controller
                         tbEmotion.Text = journal.Emotion;
                         rtbDescription.Text = journal.Description;
 
-                        // 拼接图片的完整路径
-                        string imagePath = $@"C:\Users\32188\Desktop\SE\final2.0\Python\{journal.Picture}";
-
-                        // 检查图片是否存在
-                        if (!string.IsNullOrEmpty(journal.Picture) && System.IO.File.Exists(imagePath))
+                        // 解析图片路径并加载图片
+                        if (!string.IsNullOrEmpty(journal.Picture))
                         {
-                            // 从本地加载图片
-                            flpImage.BackgroundImage = Image.FromFile(imagePath);
-                            Console.WriteLine($"成功加载图片: {imagePath}"); // 调试语句
+                            // 打印原始图片路径
+                            Console.WriteLine($"原始图片路径: {journal.Picture}");
+
+                            // 分割图片路径并去重
+                            string[] picturePaths = journal.Picture.Split(',').Distinct().ToArray();
+
+                            // 打印去重后的图片路径
+                            Console.WriteLine("去重后的图片路径:");
+                            foreach (string path in picturePaths)
+                            {
+                                Console.WriteLine(path);
+                            }
+
+                            foreach (string picturePath in picturePaths)
+                            {
+                                await LoadImg(this.JournalId);
+                            }
                         }
                         else
                         {
-                            // 使用默认图片
-                            flpImage.BackgroundImage = Properties.Resources.default_image;
-                            Console.WriteLine($"图片不存在，使用默认图片: {journal.Picture}"); // 调试语句
+                            Console.WriteLine("日志中未包含图片路径");
+                            AddDefaultImage();
                         }
-
-                        // 设置图片自适应
-                        flpImage.BackgroundImageLayout = ImageLayout.Stretch;
                     }
                     else
                     {
@@ -121,6 +131,135 @@ namespace TravelApp.controller
             }
         }
 
+        private async Task LoadImg(long journalId)
+        {
+            flpImage.Controls.Clear(); // 清空之前的图片
+
+            string imageApiUrl = $"http://localhost:5199/api/python/journal/image/{journalId}";
+            Client client = new Client();
+
+            try
+            {
+                HttpResponseMessage response = await client.Get(imageApiUrl);
+                string jsonContent = await response.Content.ReadAsStringAsync();
+                Console.WriteLine("imageAPI 返回的 JSON 数据:");
+                Console.WriteLine(jsonContent);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var imageResult = JsonConvert.DeserializeObject<ImageApiResponse>(jsonContent);
+
+                    // Debugging: Print the deserialized object to verify correctness
+                    Console.WriteLine("Deserialized ImageApiResponse:");
+                    Console.WriteLine(JsonConvert.SerializeObject(imageResult, Formatting.Indented));
+
+                    if (imageResult?.Images != null && imageResult.Images.Count > 0)
+                    {
+                        foreach (var imageData in imageResult.Images)
+                        {
+                            if (string.IsNullOrEmpty(imageData?.Data))
+                            {
+                                Console.WriteLine("图片数据为空，添加默认图片。");
+                                AddDefaultImage();
+                                continue;
+                            }
+
+                            try
+                            {
+                                Console.WriteLine($"图片文件名: {imageData.Filename}");
+                                Console.WriteLine($"Base64 数据长度: {imageData.Data.Length}");
+                                Console.WriteLine($"Base64 数据前50字符: {imageData.Data.Substring(0, Math.Min(50, imageData.Data.Length))}");
+
+                                byte[] imageBytes = Convert.FromBase64String(imageData.Data);
+                                using (var ms = new MemoryStream(imageBytes))
+                                {
+                                    Image image = Image.FromStream(ms);
+
+                                    System.Windows.Forms.PictureBox pb = new System.Windows.Forms.PictureBox
+                                    {
+                                        Image = ResizeImage(image, new Size(280, 160)),
+                                        SizeMode = PictureBoxSizeMode.StretchImage,
+                                        Margin = new Padding(5),
+                                        Anchor = AnchorStyles.None,
+                                        Width = 280,
+                                        Height = 160
+                                    };
+
+                                    flpImage.Controls.Add(pb);
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine($"单张图片处理失败: {ex.Message}");
+                                AddDefaultImage();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("返回结果无图片，添加默认图片。");
+                        AddDefaultImage();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"请求图片接口失败，状态码: {response.StatusCode}");
+                    AddDefaultImage();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"请求或解析图片失败: {ex.Message}");
+                AddDefaultImage();
+            }
+
+            flpImage.Refresh(); // 最后刷新界面
+        }
+
+
+        private Image ResizeImage(Image imgToResize, Size containerSize)
+        {
+            int sourceWidth = imgToResize.Width;
+            int sourceHeight = imgToResize.Height;
+
+            float nPercentW = (float)containerSize.Width / sourceWidth;
+            float nPercentH = (float)containerSize.Height / sourceHeight;
+            float nPercent = Math.Min(nPercentW, nPercentH); // Use Min to fit the image within the container without cropping
+
+            int destWidth = (int)(sourceWidth * nPercent);
+            int destHeight = (int)(sourceHeight * nPercent);
+
+            Bitmap b = new Bitmap(containerSize.Width, containerSize.Height);
+            using (Graphics g = Graphics.FromImage(b))
+            {
+            g.Clear(Color.White); // Optional: Set background color
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+
+            // Calculate position to center the image
+            int x = (containerSize.Width - destWidth) / 2;
+            int y = (containerSize.Height - destHeight) / 2;
+
+            g.DrawImage(imgToResize, x, y, destWidth, destHeight);
+            }
+
+            return b;
+        }
+
+        private void AddDefaultImage()
+        {
+            System.Windows.Forms.PictureBox pb = new System.Windows.Forms.PictureBox
+            {
+                Image = Properties.Resources.default_image,
+                SizeMode = PictureBoxSizeMode.StretchImage,
+                Margin = new Padding(5),
+                Anchor = AnchorStyles.None,
+                Width = 280,
+                Height = 160
+            };
+
+            flpImage.Controls.Add(pb); // 添加到 FlowLayoutPanel
+        }
+
         private void pbBack_Click(object sender, EventArgs e)
         {
             // 创建 CommunityPage 实例并切换回主页面
@@ -128,4 +267,7 @@ namespace TravelApp.controller
             this.ChangePanel(communityPage);
         }
     }
+
+
 }
+

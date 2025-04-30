@@ -14,11 +14,13 @@ namespace TravelApp.controller
     public partial class CommunityCell : UserControl
     {
         public long JournalId;
+        public long UserId;
         public Refresh Refresh;
         public ChangePanel ChangePanel;
-        public CommunityCell(long journalId, ChangePanel changePanel)
+        public CommunityCell(long userId,long journalId, ChangePanel changePanel)
         {
             InitializeComponent();
+            this.UserId = userId;
             this.JournalId = journalId;
             this.ChangePanel = changePanel;
             
@@ -28,7 +30,7 @@ namespace TravelApp.controller
         private void CommunityCell_Click(object sender, EventArgs e)
         {
             long id = this.JournalId;
-            CommunityDetail CommunityDetail = new CommunityDetail(id, ChangePanel);
+            CommunityDetail CommunityDetail = new CommunityDetail(this.UserId,id, ChangePanel);
             this.ChangePanel(CommunityDetail);
         }
 

@@ -513,5 +513,23 @@
   <ItemGroup>
     <None Include="Resources\default_image.bmp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\community.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\社区.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\反馈.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\智能助手.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\社区 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\反馈 %281%29.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
