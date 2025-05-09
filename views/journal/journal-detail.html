@@ -21,9 +21,9 @@
             align-items: center;
         }
         .log-detail-container {
-            margin-top:150px;
-            width: 100%;
-            max-width: 600px;
+            margin-top:100px; /* 增加顶部间距，避免返回按钮和标题重叠 */
+            width: 90%; /* 增加宽度 */
+            max-width: 700px; /* 增加最大宽度 */
             background-color: #ffffff;
             border-radius: 12px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
@@ -35,8 +35,8 @@
         /* 返回按钮样式 */
         .back-button {
             position: absolute;
-            top: 15px;
-            left: 15px;
+            top: 20px; /* 调整返回按钮的顶部位置 */
+            left: 20px; /* 调整返回按钮的左侧位置 */
             width: 40px; /* 按钮宽度 */
             height: 40px; /* 按钮高度 */
             background-color: transparent; /* 移除背景色 */
@@ -109,6 +109,7 @@
             font-size: 1rem;
             transition: all 0.3s ease;
             margin-bottom: 15px;
+            margin-top: 20px; /* 增加日志标题的顶部间距 */
         }
         input.log-input:focus, textarea.log-textarea:focus {
             border-color: #007bff;
@@ -178,16 +179,8 @@
             <img src="../../images/return.svg" alt="返回" class="back-icon" />
         </button>
 
-        <!-- 旅行名称 -->
-        <div class="travel-title">
-            <label for="travelSelect">旅行名称：</label>
-            <select id="travelSelect" class="log-input" >
-                <option value="">请选择行程</option>
-                <option value="custom">自定义名称</option>
-            </select>
-            <input type="text" id="travelNameInput" class="log-input" placeholder="请输入旅行名称" style="display: none;" />
-            <span id="autoTravelName" class="log-input" style="display: none;"></span>
-        </div>
+        <!-- 日志标题 -->
+        <input type="text" id="logTitle" class="log-input" placeholder="日志标题" />
 
         <!-- 日志头部（天气和心情） -->
         <div class="log-header">
@@ -213,11 +206,14 @@
             </div>
         </div>
 
-        <!-- 日志标题 -->
-        <input type="text" id="logTitle" class="log-input" placeholder="日志标题" />
-
         <!-- 日志描述 -->
         <textarea id="description" class="log-textarea" placeholder="写下你的旅行故事..."></textarea>
+
+        <!-- 是否公开 -->
+        <div>
+            <label for="isPublic">是否公开：</label>
+            <input type="checkbox" id="isPublic" />
+        </div>
 
         <!-- 图片上传 -->
         <div>
@@ -231,82 +227,36 @@
     </div>
 
     <script>
-        // 获取 URL 参数
-        const queryParams = new URLSearchParams(window.location.search);
-        const logId = queryParams.get("id");
-        const travelTitleFromUrl = queryParams.get("travelTitle");
-
-        // 加载所有行程
-        function loadTravels() {
-            const travels = JSON.parse(localStorage.getItem("travels")) || [];
-            const travelSelect = document.getElementById("travelSelect");
-            travelSelect.innerHTML = '<option value="">请选择行程</option>';
-
-            travels.forEach(travel => {
-                const option = document.createElement("option");
-                option.value = travel.name; // 使用行程名称作为值
-                option.textContent = travel.name;
-                travelSelect.appendChild(option);
-            });
-                // 添加“自定义名称”选项
-            const customOption = document.createElement("option");
-            customOption.value = "custom";
-            customOption.textContent = "自定义名称";
-            travelSelect.appendChild(customOption);
-        }
-
         // 初始化页面
-        function initializePage() {
-            const travelSelect = document.getElementById("travelSelect");
-            const travelNameInput = document.getElementById("travelNameInput");
-            const autoTravelName = document.getElementById("autoTravelName");
-
-            if (travelTitleFromUrl) {
-                // 如果有 travelTitle 参数，表示是从待办事项跳转过来的
-                autoTravelName.textContent = travelTitleFromUrl;
-                autoTravelName.style.display = "inline-block";
-                travelSelect.style.display = "none";
-                travelNameInput.style.display = "none";
-            } else {
-                // 如果没有 travelTitle 参数，表示是手动创建日志
-                travelSelect.style.display = "inline-block";
-                loadTravels();
-                
-                // 监听下拉框变化
-            travelSelect.addEventListener("change", function () {
-                if (travelSelect.value === "custom") {
-                    // 如果选择“自定义”，显示输入框
-                    travelNameInput.style.display = "inline-block";
-                    travelNameInput.value = ""; // 清空输入框
-                } else {
-                    // 如果选择其他选项，隐藏输入框
-                    travelNameInput.style.display = "none";
+        window.onload = async function () {
+            const logId = new URLSearchParams(window.location.search).get("id");
+            if (logId) {
+                try {
+                    const response = await fetch(`http://localhost:5199/api/Journal/get?journalid=${logId}`);
+                    if (!response.ok) throw new Error(await response.text());
+                    const log = await response.json();
+                    // 填充表单
+                    document.getElementById("logTitle").value = log.title || "";
+                    document.getElementById("weather").value = log.weather || "";
+                    document.getElementById("mood").value = log.emotion || "";
+                    document.getElementById("description").value = log.description || "";
+                    document.getElementById("isPublic").checked = log.isPublic || false;
+                    // 图片显示
+                    if (log.picture) {
+                        const imagePreview = document.getElementById("imagePreview");
+                        log.picture.split(" ").forEach(fileName => {
+                            if (fileName.trim()) {
+                                const img = document.createElement("img");
+                                img.src = `http://localhost:5199/api/File/download?fileName=${fileName}`;
+                                imagePreview.appendChild(img);
+                            }
+                        });
+                    }
+                } catch (e) {
+                    alert("加载日志失败：" + e.message);
                 }
-            });
-
             }
-
-
-            // 加载日志数据
-            let logs = JSON.parse(localStorage.getItem("logs")) || [];
-            if (logId !== null && logs[logId]) {
-                const log = logs[logId];
-                if (travelTitleFromUrl) {
-                    autoTravelName.textContent = log.travelTitle || "";
-                } else {
-                    travelSelect.value = log.travelTitle || "";
-                }
-                document.getElementById("logTitle").value = log.title || "";
-                document.getElementById("weather").value = log.weather || "";
-                document.getElementById("mood").value = log.mood || "";
-                document.getElementById("description").value = log.description || "";
-
-                log.images?.forEach(imageUrl => {
-                    const imgElement = `<img src="${imageUrl}" alt="日志图片" />`;
-                    document.getElementById("imagePreview").innerHTML += imgElement;
-                });
-            }
-        }
+        };
 
         // 图片上传
         document.getElementById("imageUpload").addEventListener("change", function (e) {
@@ -322,52 +272,96 @@
         });
 
         // 保存日志
-        document.querySelector(".save-log-button").addEventListener("click", function () {
-            const travelSelect = document.getElementById("travelSelect");
-            const travelNameInput = document.getElementById("travelNameInput");
-
-            // 获取旅行名称
-            let selectedTravel = "";
-            if (travelSelect.value === "custom") {
-                // 如果选择“自定义”，使用输入框的值
-                selectedTravel = travelNameInput.value.trim();
-                if (!selectedTravel) {
-                    alert("请输入旅行名称！");
-                    return;
-                }
-            } else {
-                // 否则使用下拉框的值
-                selectedTravel = travelSelect.value;
-                if (!selectedTravel) {
-                    alert("请选择旅行名称！");
-                    return;
-                }
-            }
+        document.querySelector(".save-log-button").addEventListener("click", async function () {
+            const userId = sessionStorage.getItem('userId');
+            const isPublic = document.getElementById("isPublic").checked;
 
             const logData = {
-                travelTitle: selectedTravel,
-                title: document.getElementById("logTitle").value,
-                weather: document.getElementById("weather").value,
-                mood: document.getElementById("mood").value,
-                description: document.getElementById("description").value,
-                images: Array.from(document.querySelectorAll("#imagePreview img")).map(img => img.src),
-                date: new Date().toLocaleDateString(),
+                Time: new Date().toISOString(),
+                Title: document.getElementById("logTitle").value,
+                Weather: document.getElementById("weather").value,
+                Emotion: document.getElementById("mood").value,
+                Description: document.getElementById("description").value,
+                Picture: "", // 先不传图片，图片单独上传
+                UserId: Number(userId),
+                IsPublic: isPublic
             };
 
-            let logs = JSON.parse(localStorage.getItem("logs")) || [];
-            if (logId !== null) {
-                logs[logId] = logData;
-            } else {
-                logs.push(logData);
+            try {
+                // 新建日志（本地数据库）
+                const response = await fetch('http://localhost:5199/api/Journal', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(logData)
+                });
+                if (!response.ok) throw new Error(await response.text());
+                const journal = await response.json();
+
+
+                // 上传图片
+                const files = document.getElementById("imageUpload").files;
+                if (files.length > 0) {
+                    const formData = new FormData();
+                    for (let file of files) {
+                        formData.append('file', file);
+                    }
+                    await fetch(`http://localhost:5199/api/File/upload?journalId=${journal.journalId}`, {
+                        method: 'POST',
+                        body: formData
+                    });
+                }
+
+                // 如果选择公开，调用 Python 服务器 API
+                const PythonlogData = {
+                    JournalId: String(journal.journalId), // 加入 JournalId
+                    Time: new Date().toISOString(),
+                    Title: document.getElementById("logTitle").value,
+                    Weather: document.getElementById("weather").value,
+                    Emotion: document.getElementById("mood").value,
+                    Description: document.getElementById("description").value,
+                    Picture: "", // 先不传图片，图片单独上传
+                    UserId: Number(userId)
+                };
+                PythonlogData.Time = PythonlogData.Time.replace('Z', '');
+
+
+                const jsonData = JSON.stringify(PythonlogData);
+                console.log("Serialized JSON:", jsonData);
+                console.log("PythonlogData:", PythonlogData);
+                if (isPublic) {
+                    const pythonResponse = await fetch('http://localhost:5199/api/python/journal', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: jsonData
+                    });
+                    if (!pythonResponse.ok) throw new Error(await pythonResponse.text());
+
+                    // 上传图片到 Python 服务器
+                    if (files.length > 0) {
+                        for (let file of files) {
+                            const pythonFormData = new FormData();
+                            pythonFormData.append('image', file);
+
+                            const uploadResponse = await fetch(`http://localhost:5199/api/python/journal/${userId}${journal.journalId}/image`, {
+                                method: 'POST',
+                                body: pythonFormData
+                            });
+
+                            if (!uploadResponse.ok) {
+                                console.error(`图片上传失败: ${file.name}`);
+                                throw new Error(await uploadResponse.text());
+                            }
+                        }
+                    }
+                }
+
+                alert("日志已保存！");
+                window.location.href = "../journal.html";
+            } catch (error) {
+                alert("保存失败：" + error.message);
             }
-
-            localStorage.setItem("logs", JSON.stringify(logs));
-            alert("日志已保存！");
-            window.location.href = "../journal.html";
         });
-
-        // 页面加载时初始化
-        window.onload = initializePage;
     </script>
 </body>
 </html>
+``` 

@@ -98,6 +98,106 @@
     </script>
 
     <!-- 加载社区数据 -->
-    <script src="community.js"></script>
+    <script>
+    // 加载社区日志数据
+    async function loadCommunityJournals() {
+        const journalsList = document.getElementById("approved-journals");
+        journalsList.innerHTML = ""; // 清空之前的内容
+
+        try {
+            // 调用 Python 服务器 API 获取所有日志
+            const response = await fetch("http://localhost:5199/api/python/journals");
+            if (!response.ok) throw new Error(await response.text());
+
+            const text = await response.text();
+            console.log("原始返回文本：", text);  // 🟡 打印原始 JSON 字符串
+
+            // 自定义 JSON.parse reviver，强制把 journalId 和 userId 等大整数变为字符串
+            const journals = JSON.parse(text, (key, value) => {
+                if (["journalId", "userId"].includes(key)) {
+                    return value.toString(); // 先将其转为字符串，避免丢失精度
+                }
+                return value;
+            });
+
+
+            console.log("处理后的日志对象：", journals); 
+
+            if (journals.length === 0) {
+                journalsList.innerHTML = "<p class='text-center text-muted'>暂无日志。</p>";
+                return;
+            }
+
+            // 遍历日志数据并生成日志项
+            for (const journal of journals) {
+                const journalItem = document.createElement("div");
+                journalItem.className = "journal-item";
+
+                // 日志标题
+                const title = document.createElement("h3");
+                title.textContent = journal.title || "无标题";
+                journalItem.appendChild(title);
+
+                // 日志时间
+                const time = document.createElement("p");
+                time.textContent = `时间：${new Date(journal.time).toLocaleString()}`;
+                journalItem.appendChild(time);
+
+                // 日志描述
+                const description = document.createElement("p");
+                description.textContent = journal.description || "无描述";
+                journalItem.appendChild(description);
+
+                const imageContainer = document.createElement("div");
+                imageContainer.className = "journal-images";
+
+                if (journal.picture) {
+                    try {
+                        const response = await fetch(`http://localhost:5199/api/python/journal/image/${journal.journalId}`);
+                        const result = await response.json();
+
+                        if (result.images && result.images.length > 0) {
+                            result.images.forEach(image => {
+                                const img = document.createElement("img");
+                                img.src = `data:image/jpeg;base64,${image.data}`;  // 根据实际图片类型修改为 image/png 等
+                                img.alt = image.filename || "日志图片";
+                                img.style.width = "100px";
+                                img.style.height = "100px";
+                                img.style.objectFit = "cover";
+                                img.style.marginRight = "10px";
+                                imageContainer.appendChild(img);
+                            });
+                        } else {
+                            const noImage = document.createElement("p");
+                            noImage.textContent = "无图片";
+                            imageContainer.appendChild(noImage);
+                        }
+                    } catch (error) {
+                        const errorMsg = document.createElement("p");
+                        errorMsg.textContent = "图片加载失败";
+                        imageContainer.appendChild(errorMsg);
+                        console.error("图片加载出错：", error);
+                    }
+                } else {
+                    const noImage = document.createElement("p");
+                    noImage.textContent = "无图片";
+                    imageContainer.appendChild(noImage);
+                }
+
+                journalItem.appendChild(imageContainer);
+
+
+                // 添加日志项到列表
+                journalsList.appendChild(journalItem);
+            }
+        } catch (error) {
+            console.error("加载日志失败：", error);
+            journalsList.innerHTML = "<p class='text-center text-danger'>加载日志失败，请稍后重试。</p>";
+        }
+    }
+
+    // 页面加载时调用
+    document.addEventListener("DOMContentLoaded", loadCommunityJournals);
+    </script>
 </body>
 </html>

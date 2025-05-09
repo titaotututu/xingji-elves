@@ -30,16 +30,13 @@
 
     <script>
         document.getElementById("show-login").addEventListener("click", function() {
-            window.location.href = "index.html"; // 返回登录页面
+            window.location.href = "index.html";
         });
 
-        document.getElementById("register-btn").addEventListener("click", function () {
+        document.getElementById("register-btn").addEventListener("click", async function () {
             const username = document.getElementById("new-username").value;
             const password = document.getElementById("new-password").value;
             const confirmPassword = document.getElementById("confirm-password").value;
-
-            // 清空错误信息
-            document.getElementById("error-message").innerText = "";
 
             if (!username || !password || !confirmPassword) {
                 showErrorPopup("请填写所有字段！");
@@ -51,21 +48,46 @@
                 return;
             }
 
-            // 获取现有的用户列表
-            let users = JSON.parse(localStorage.getItem("users")) || [];
+            try {
+                const userData = {
+                    UserId: Date.now().toString().slice(-4),
+                    UserName: username,
+                    Password: password
+                };
 
-            // 检查用户名是否已经存在
-            if (users.find(u => u.username === username)) {
-                showErrorPopup("用户名已存在！");
-                return;
+                // 本地数据库注册
+                const localResponse = await fetch('http://localhost:5199/api/User', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(userData)
+                });
+
+                if (!localResponse.ok) {
+                    throw new Error(await localResponse.text() || '本地注册失败');
+                }
+
+                // 服务器端注册
+                const serverResponse = await fetch('http://localhost:5199/api/python/user', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(userData)
+                });
+
+                if (!serverResponse.ok) {
+                    throw new Error(await serverResponse.text() || '服务器注册失败');
+                }
+
+                alert(`注册成功，请登录！您的用户ID是：${userData.UserId}`);
+                window.location.href = "index.html";
+            } catch (error) {
+                showErrorPopup(error.message || "注册失败，请稍后重试！");
             }
-
-            // 如果用户名不重复，将新用户信息保存到 localStorage
-            users.push({ username, password });
-            localStorage.setItem("users", JSON.stringify(users));
-
-            alert("注册成功，请登录！");
-            window.location.href = "index.html"; // 跳转回登录页
         });
 
         // 显示弹窗的函数

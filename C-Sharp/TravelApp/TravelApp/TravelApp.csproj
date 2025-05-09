@@ -199,12 +199,6 @@
     <Compile Include="controller\TodoPage.Designer.cs">
       <DependentUpon>TodoPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="controller\Travel_Weather.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="controller\Travel_Weather.Designer.cs">
-      <DependentUpon>Travel_Weather.cs</DependentUpon>
-    </Compile>
     <Compile Include="controller\CommunityPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -216,6 +210,12 @@
     </Compile>
     <Compile Include="controller\CommunityCell.Designer.cs">
       <DependentUpon>CommunityCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="controller\WeatherController.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controller\WeatherController.Designer.cs">
+      <DependentUpon>WeatherController.cs</DependentUpon>
     </Compile>
     <Compile Include="Else.cs">
       <SubType>Form</SubType>
@@ -252,7 +252,6 @@
     <Compile Include="Navigation.Designer.cs">
       <DependentUpon>Navigation.cs</DependentUpon>
     </Compile>
-    <Compile Include="Place.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -278,14 +277,6 @@
     <Compile Include="Walk_Routing.Designer.cs">
       <DependentUpon>Walk_Routing.cs</DependentUpon>
     </Compile>
-    <Compile Include="controller\WeatherDay.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="controller\WeatherDay.Designer.cs">
-      <DependentUpon>WeatherDay.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WeatherDetail.cs" />
-    <Compile Include="XmlOperator.cs" />
     <EmbeddedResource Include="Bike_Routing.resx">
       <DependentUpon>Bike_Routing.cs</DependentUpon>
     </EmbeddedResource>
@@ -340,17 +331,14 @@
     <EmbeddedResource Include="controller\TodoPage.resx">
       <DependentUpon>TodoPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="controller\Travel_Weather.resx">
-      <DependentUpon>Travel_Weather.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="controller\CommunityPage.resx">
       <DependentUpon>CommunityPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="controller\CommunityCell.resx">
       <DependentUpon>CommunityCell.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="controller\WeatherDay.resx">
-      <DependentUpon>WeatherDay.cs</DependentUpon>
+    <EmbeddedResource Include="controller\WeatherController.resx">
+      <DependentUpon>WeatherController.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Else.resx">
       <DependentUpon>Else.cs</DependentUpon>

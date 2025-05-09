@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
     <title>行迹精灵 - 城市点亮</title>
-    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/> 
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/>
     <link rel="icon" href="/xingji-elves/images/logo1.svg" type="image/svg+xml">
     <link rel="stylesheet" href="style-views.css">
     <style>
@@ -110,7 +110,7 @@
                 <a href="feedback.html">反馈</a>
             </div>
         </div>
-        
+
         <a href="#" id="logout-btn">退出</a>
     </nav>
 
@@ -222,24 +222,70 @@
 
         // 模拟从后端获取城市字段并填充到输入框
         function simulateBackendData() {
-            // 模拟从数据库获取的城市字段，例如 "北京,上海,广州"
-            var citiesFromDatabase = "北京,上海,广州";
+            // 模拟从数据库获取的城市字段，例如 ""
+            var citiesFromDatabase = "";
             localStorage.setItem('citiesToLight', citiesFromDatabase); // 存储到 localStorage 模拟后端数据
             return citiesFromDatabase;
         }
 
+        function clearVisitedCities() {
+            visitedCities.clear();
+            localStorage.removeItem('visitedCities');
+            const cityList = document.getElementById('visitedCities');
+            while (cityList.firstChild) {
+                cityList.removeChild(cityList.firstChild);
+            }
+            map.clearMap(); // 清除地图上的所有图层
+        }
+
+        async function fetchUserCities() {
+        const userId = sessionStorage.getItem('userId');
+        if (!userId) return null;
+
+        const url = `http://localhost:5199/api/Travel/get?uid=${userId}`;
+
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(await response.text());
+
+            const travels = await response.json();
+
+            const cityNames = new Set();
+            travels.forEach(travel => {
+                if (travel.travelCity) {
+                    cityNames.add(travel.travelCity);
+                }
+            });
+
+            const cities = Array.from(cityNames).join(',');
+            localStorage.setItem('citiesToLight', cities); // 缓存
+            return cities;
+        } catch (err) {
+            console.error("获取后端城市数据失败：", err);
+            return null;
+        }
+
+        }
         // 页面加载时加载已点亮的城市
         window.onload = function () {
             loadVisitedCities();
         };
 
         // 点亮按钮点击事件
-        document.getElementById('lightingBtn').onclick = function () {
-            var citiesToLight = localStorage.getItem('citiesToLight') || simulateBackendData(); // 获取城市字段
-            if (!citiesToLight) {
-                alert('没有可点亮的城市');
-                return;
-            }
+        document.getElementById('lightingBtn').onclick = async function () {
+        // 优先尝试从后端获取
+        clearVisitedCities();
+        let citiesToLight = await fetchUserCities();
+        console.log("Cities to light:", citiesToLight);
+        // 若后端无数据则退回使用模拟数据
+        if (!citiesToLight) {
+            citiesToLight = localStorage.getItem('citiesToLight') || simulateBackendData();
+        }
+
+        if (!citiesToLight) {
+            alert('没有可点亮的城市');
+            return;
+        }
             drawBounds(citiesToLight);
         };
     </script>

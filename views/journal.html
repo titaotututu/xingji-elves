@@ -96,73 +96,88 @@
     <!-- 引入外部脚本库 -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function () {
+        // 获取当前登录用户ID
+        const userId = sessionStorage.getItem('userId');
+
+        async function loadLogs() {
             const logList = $("#logList");
+            logList.empty();
 
-            // 从 localStorage 加载日志数据
-            function loadLogs() {
-                const logs = JSON.parse(localStorage.getItem("logs")) || [];
-                return logs;
+            if (!userId) {
+                logList.append("<p class='text-center text-muted'>未检测到登录用户，请先登录。</p>");
+                return;
             }
 
-            // 保存日志数据到 localStorage
-            function saveLogs(logs) {
-                localStorage.setItem("logs", JSON.stringify(logs));
-            }
-
-            // 删除日志并更新 localStorage
-            function deleteLog(index) {
-                if (confirm("确定要删除此日志吗？")) {
-                    const logs = loadLogs();
-                    logs.splice(index, 1); // 删除对应的日志
-                    saveLogs(logs); // 保存更新后的日志数据到 localStorage
-                    renderLogs(); // 重新渲染日志列表
-                }
-            }
-
-            // 渲染日志列表
-            function renderLogs() {
-                const logs = loadLogs();
-                logList.empty();
+            try {
+                const response = await fetch(`http://localhost:5199/api/Journal/getByUser?userId=${userId}`);
+                if (!response.ok) throw new Error(await response.text());
+                const logs = await response.json();
 
                 if (logs.length === 0) {
                     logList.append("<p class='text-center text-muted'>暂无日志，请点击下方按钮新建日志。</p>");
                 } else {
                     logs.forEach((log, index) => {
                         const logItem = `
-                            <div class="log-item" data-id="${index}">
+                            <div class="log-item" data-id="${log.journalId}">
                                 <div>
                                     <div class="log-title">${log.title}</div>
-                                    <div class="log-date">${log.date}</div>
+                                    <div class="log-date">${log.time ? log.time.split('T')[0] : ''}</div>
                                 </div>
                                 <div>
-                                    <span class="badge bg-secondary">${log.travelTitle}</span>
-                                    <button class="delete-log-button btn btn-danger btn-sm" data-index="${index}">删除</button>
+                                    <span class="badge bg-secondary">${log.travelId || ''}</span>
+                                    <button class="delete-log-button btn btn-danger btn-sm" data-id="${log.journalId}">删除</button>
                                 </div>
                             </div>
                         `;
                         logList.append(logItem);
                     });
 
-                    // 绑定点击事件，跳转到详细页面
+                    // 跳转详情
                     $(".log-item").on("click", function () {
                         const logId = $(this).data("id");
-                        console.log("Log ID:", logId); // 调试用
                         window.location.href = `journal/journal-detail.html?id=${logId}`;
                     });
 
-                    // 绑定删除按钮事件
+                    // 删除
                     $(".delete-log-button").on("click", function (event) {
-                        event.stopPropagation(); // 阻止事件冒泡，避免触发父级的点击事件
-                        const index = $(this).data("index");
-                        deleteLog(index);
+                        event.stopPropagation();
+                        const journalId = $(this).data("id");
+                        deleteLog(journalId);
                     });
                 }
+            } catch (error) {
+                logList.append(`<p class='text-center text-danger'>加载失败：${error.message}</p>`);
             }
+        }
 
-            // 初始加载日志列表
-            renderLogs();
-        });
+        async function deleteLog(journalId) {
+            if (!confirm("确定要删除此日志吗？")) return;
+
+            try {
+                // 删除本地日志
+                const localResponse = await fetch(`http://localhost:5199/api/Journal/delete?journalId=${journalId}`, {
+                    method: 'DELETE'
+                });
+                if (!localResponse.ok) throw new Error(await localResponse.text());
+
+                // 检查并删除 Python 服务器上的日志
+                const pythonResponse = await fetch(`http://localhost:5199/api/python/journal/${userId}${journalId}`, {
+                    method: 'DELETE'
+                });
+
+                if (!pythonResponse.ok) {
+                    const errorMessage = await pythonResponse.text();
+                    console.warn(`Python 服务器日志删除失败: ${errorMessage}`);
+                }
+
+                alert("日志删除成功！");
+                loadLogs(); // 重新加载日志列表
+            } catch (error) {
+                alert("删除失败：" + error.message);
+            }
+        }
+
+        $(document).ready(loadLogs);
     </script>
 </body>
 </html>

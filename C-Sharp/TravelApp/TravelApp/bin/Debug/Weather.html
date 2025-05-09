@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>天气查询 - 行迹精灵</title>
+    <link rel="stylesheet" href="style-views.css">  
+    <link rel="icon" href="/xingji-elves/images/logo1.svg" type="image/svg+xml">
+    <script type="text/javascript">
+        window._AMapSecurityConfig = {
+            securityJsCode: '18e9f5dc97240123ea944c31c008d1f7',
+        }
+    </script>
+    <style type="text/css">
+        /* 🌍 页面整体背景 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #87CEEB, #ffffff); /* 天空蓝到白色渐变 */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 解决导航栏遮挡问题 */
+        .content {
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 500px; /* 限制最大宽度 */
+            margin-top: 20px;
+        }
+
+        /* 🌟 标题样式 */
+        h1 {
+            font-size: 36px;
+            font-weight: bold;
+            color: #333;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        input {
+            padding: 12px;
+            margin-top: 15px;
+            width: 50%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #007BFF;
+            outline: none;
+        }
+
+        button {
+            padding: 12px 25px;
+            margin-top: 20px;
+            background: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        /* 📝 描述文字 */
+        p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        #weather-info {
+            margin-top: 20px;
+            font-size: 1.2em;
+            text-align: left;
+        }
+
+        #forecast {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .forecast-day {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 30%;
+        }
+
+        .forecast-day img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 20px;
+            font-size: 1.1em;
+        }
+
+        .forecast-day p {
+            margin: 8px 0;
+        }
+
+        /* 使所有元素响应式 */
+        @media (max-width: 768px) {
+            .forecast-day {
+                width: 48%;
+                margin-bottom: 15px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <script src="../components/auth.js"></script>
+    <!-- 📌 导航栏 -->
+    <nav>
+        <a href="main.html">首页</a>
+        <a href="travel.html">行程</a>
+        <a href="map.html">导航</a>
+        <a href="weather.html">天气</a>
+        <a href="lighting.html">点亮地标</a>
+        <a href="journal.html">旅行日志</a>
+        <a href="assistant.html">智能助手</a>
+        <a href="feedback.html">反馈</a>
+        <a href="profile.html">个人信息</a>
+        <a href="#" id="logout-btn">退出</a>
+    </nav>
+    
+    <div class="container">
+        <h1>天气查询</h1>
+        <div class="form-group">
+            <label for="city">请输入查询地点：</label>
+            <input type="text" id="city" placeholder="例如：朝阳区" />
+        </div>
+        <button onclick="getWeather()">查询天气</button>
+
+        <div id="weather-result" class="weather-info" style="display:none;">
+            <h4>实时天气：</h4>
+            <p id="city-name"></p>
+            <p id="weather"></p>
+            <p id="temperature"></p>
+            <p id="wind"></p>
+            <p id="humidity"></p>
+        </div>
+
+        <div id="forecast-result" class="forecast-info" style="display:none;">
+            <h4>未来三天天气预报：</h4>
+            <div id="forecast"></div>
+        </div>
+
+        <div id="error-message" class="error-message" style="display:none;">
+            <p>无法获取天气数据，请检查城市名或稍后再试。</p>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=2.0&key=6e55ea6069492d3b69f2bb419e1bcd86"></script>
+    <script type="text/javascript">
+        function getWeather() {
+            var city = document.getElementById('city').value.trim();
+
+            if (!city) {
+                alert("请输入查询地点！");
+                return;
+            }
+
+            // 初始化高德天气插件
+            AMap.plugin('AMap.Weather', function() {
+                var weather = new AMap.Weather();
+                
+                // 查询实时天气信息
+                weather.getLive(city, function(err, data) {
+                    if (!err) {
+                        // 显示实时天气信息
+                        // document.getElementById('city-name').innerHTML = `城市/区：${data.city}`;
+                        document.getElementById('weather').innerHTML = `天气：${data.weather}`;
+                        document.getElementById('temperature').innerHTML = `温度：${data.temperature}℃`;
+                        document.getElementById('wind').innerHTML = `风向：${data.windDirection} 风力：${data.windPower}级`;
+                        document.getElementById('humidity').innerHTML = `空气湿度：${data.humidity}%`;
+
+                        // 隐藏错误信息并显示天气结果
+                        document.getElementById('error-message').style.display = 'none';
+                        document.getElementById('weather-result').style.display = 'block';
+                    } else {
+                        // 显示错误信息
+                        document.getElementById('error-message').style.display = 'block';
+                        document.getElementById('weather-result').style.display = 'none';
+                        document.getElementById('forecast-result').style.display = 'none';
+                    }
+                });
+
+                // 查询未来三天的天气预报
+                weather.getForecast(city, function(err, data) {
+    if (!err && data.forecasts.length > 0) {
+        var forecastInfo = '';
+        // 仅显示未来三天的天气预报
+        for (var i = 0; i < 3; i++) {
+            var dayWeather = data.forecasts[i];
+            // OpenWeatherMap 图标
+            forecastInfo += `
+                <div class="forecast-day">
+                    <p>${dayWeather.date}</p>
+                    <p>${dayWeather.dayWeather}</p>
+                    <p>${dayWeather.nightTemp}~${dayWeather.dayTemp}℃</p>
+                </div>
+            `;
+        }
+        document.getElementById('forecast').innerHTML = forecastInfo;
+        document.getElementById('forecast-result').style.display = 'block';
+    } else {
+        document.getElementById('forecast-result').style.display = 'none';
+    }
+});
+            });
+        }
+    </script>
+</body>
+</html>

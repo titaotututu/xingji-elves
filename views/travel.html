@@ -163,49 +163,72 @@
     </div>
 
     <script>
-        function loadTrips() {
+        async function loadTrips() {
             const tripList = document.getElementById("tripList");
             tripList.innerHTML = ""; // 清空列表
 
-            const travels = JSON.parse(localStorage.getItem("travels")) || [];
-            
-            if (travels.length === 0) {
-                tripList.innerHTML = "<p>暂无行程，请创建新行程。</p>";
+            // 获取当前登录用户ID
+            const userId = sessionStorage.getItem('userId');
+            if (!userId) {
+                tripList.innerHTML = "<p>未检测到登录用户，请先登录。</p>";
                 return;
             }
 
-            travels.forEach((travel, index) => {
-                const listItem = document.createElement("div");
-                listItem.className = "list-item";
+            try {
+                const response = await fetch(`http://localhost:5199/api/Travel/get?uid=${userId}`);
+                if (!response.ok) {
+                    const error = await response.text();
+                    throw new Error(error);
+                }
+                const travels = await response.json();
 
-                // 行程链接
-                const a = document.createElement("a");
-                a.textContent = `${travel.name} (${travel.city}) - ${travel.date}`;
-                a.href = `travel/todo.html?travelId=${travel.id}`;
-                a.className = "trip-link";
+                if (travels.length === 0) {
+                    tripList.innerHTML = "<p>暂无行程，请创建新行程。</p>";
+                    return;
+                }
 
-                // 删除按钮
-                const deleteBtn = document.createElement("button");
-                deleteBtn.textContent = "删除";
-                deleteBtn.className = "delete-btn";
-                deleteBtn.onclick = function () {
-                    deleteTrip(index);
-                };
+                travels.forEach((travel) => {
+                    const listItem = document.createElement("div");
+                    listItem.className = "list-item";
 
-                listItem.appendChild(a);
-                listItem.appendChild(deleteBtn);
-                tripList.appendChild(listItem);
-            });
+                    // 行程链接
+                    const a = document.createElement("a");
+                    a.textContent = `${travel.travelTitle} (${travel.travelCity}) - ${travel.travelTime}`;
+                    a.href = `travel/todo.html?travelId=${travel.travelId}`;
+                    a.className = "trip-link";
+
+                    // 删除按钮
+                    const deleteBtn = document.createElement("button");
+                    deleteBtn.textContent = "删除";
+                    deleteBtn.className = "delete-btn";
+                    deleteBtn.onclick = function () {
+                        deleteTrip(travel.travelId, travel.travelTitle);
+                    };
+
+                    listItem.appendChild(a);
+                    listItem.appendChild(deleteBtn);
+                    tripList.appendChild(listItem);
+                });
+            } catch (error) {
+                tripList.innerHTML = `<p>加载行程失败：${error.message}</p>`;
+            }
         }
 
         // 删除行程函数
-        function deleteTrip(index) {
-            const travels = JSON.parse(localStorage.getItem("travels")) || [];
-            if (index >= 0 && index < travels.length) {
-                const deletedTrip = travels.splice(index, 1); // 删除对应的行程
-                localStorage.setItem("travels", JSON.stringify(travels)); // 更新 localStorage
-                alert(`行程 "${deletedTrip[0].name}" 已删除！`);
-                loadTrips(); // 重新加载行程列表
+        async function deleteTrip(travelId, travelTitle) {
+            if (!confirm(`确定要删除行程 "${travelTitle}" 吗？`)) return;
+            try {
+                const response = await fetch(`http://localhost:5199/api/Travel/delete?travelId=${travelId}`, {
+                    method: 'DELETE'
+                });
+                if (!response.ok) {
+                    const error = await response.text();
+                    throw new Error(error);
+                }
+                alert(`行程 "${travelTitle}" 已删除！`);
+                loadTrips();
+            } catch (error) {
+                alert(`删除失败：${error.message}`);
             }
         }
 

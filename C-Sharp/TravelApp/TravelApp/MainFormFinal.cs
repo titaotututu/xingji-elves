@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TravelApp.controller;
-using Weather_space;
+
 
 namespace TravelApp
 {
@@ -35,8 +35,8 @@ namespace TravelApp
 
         private void button_Weather_Click(object sender, EventArgs e)
         {
-            Travel_Weather travel_weather= new Travel_Weather(changePanel);
-            AddControlsToPanel(travel_weather);
+            WeatherController w = new WeatherController();
+            AddControlsToPanel(w);
         }
 
         private void button_Travel_Click(object sender, EventArgs e)
