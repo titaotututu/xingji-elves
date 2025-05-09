@@ -14,7 +14,7 @@ namespace TravelApp.controller
 {
     public partial class WeatherController : UserControl
     {
-        private string amapKey = "6e55ea6069492d3b69f2bb419e1bcd86"; // 请替换为你的高德 Web 服务 Key
+        private string amapKey = "065e38a43cab8972362f3ee0ea32f1f6"; // 请替换为你的高德 Web 服务 Key
         public WeatherController()
         {
             InitializeComponent();
