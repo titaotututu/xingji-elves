@@ -363,6 +363,16 @@ namespace TravelApp.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap 智能助手__1_ {
+            get {
+                object obj = ResourceManager.GetObject("智能助手 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap 步行icon {
             get {
                 object obj = ResourceManager.GetObject("步行icon", resourceCulture);

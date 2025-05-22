@@ -121,9 +121,6 @@
   <data name="天气预报" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\天气预报.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="route" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\route.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="删除" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\删除.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -136,14 +133,23 @@
   <data name="add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="社区" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\社区.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="日志" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\日志.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="反馈" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\反馈.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="社区__1_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\社区 (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="退出black " type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\退出black .png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="打卡_成功打卡" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\打卡_成功打卡.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="route" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\route.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="导航地址" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\导航地址.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -166,6 +172,9 @@
   <data name="点亮" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\点亮.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="反馈__1_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\反馈 (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="旅游" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\旅游.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -187,6 +196,9 @@
   <data name="历史行程" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\历史行程.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="智能助手" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\智能助手.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="test4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\pictures\test4.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -195,6 +207,9 @@
   </data>
   <data name="微信图片_20240605163032" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\微信图片_20240605163032.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="streetsign" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\streetsign.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="旅行日志" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\旅行日志.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -207,6 +222,9 @@
   </data>
   <data name="骑行icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\骑行icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="打卡_成功打卡" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\打卡_成功打卡.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="test1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\pictures\test1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -223,25 +241,10 @@
   <data name="navi2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\navi2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="streetsign" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\streetsign.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="default_image" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\default_image.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="反馈" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\反馈.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="反馈__1_" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\反馈 (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="智能助手" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\智能助手.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="社区" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\社区.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="社区__1_" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\社区 (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="智能助手 (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\智能助手 (1)1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

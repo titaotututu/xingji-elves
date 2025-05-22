@@ -45,3 +45,27 @@ const apiKey = 'dc49e4062796f8aa751aadd950f417ed';   //天气查询的密钥
 
 4/8 
 点亮的前端已经做了 看连上的效果吧 我先不在Localstorage模拟了，只要获取的字段正常就可以正常显示 跟之前在winform中是一样的
+
+----------------
+5/22
+### C sharp 前端进度：
+- 已完成智能助手前端（没有删除不知道要不要做）
+- 接入大模型
+- 优化UI，现在有点凑
+
+### 对Chat_api有修改
+- 新建会话的时候有初始欢迎语
+- 修改了端口，运行在8001端口上
+
+# 运行
+- 我设置dh的python数据库脚本运行在8000端口上
+
+```bash
+cd Python
+python Service_api.py
+```
+
+- tzc的python数据库脚本8001端口上
+```bash
+uvicorn Chat_api:app --reload --host 0.0.0.0 --port 8001
+```

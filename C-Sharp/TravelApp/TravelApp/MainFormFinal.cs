@@ -147,7 +147,8 @@ namespace TravelApp
 
         private void button_chat_Click(object sender, EventArgs e)
         {
-
+            ChatPage chat = new ChatPage(Uid, changePanel);
+            AddControlsToPanel(chat); // 跳转到聊天页
         }
     }
 
