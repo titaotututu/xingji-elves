@@ -83,6 +83,16 @@ namespace TravelApp.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap default_image {
+            get {
+                object obj = ResourceManager.GetObject("default_image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap navi2 {
             get {
                 object obj = ResourceManager.GetObject("navi2", resourceCulture);
@@ -213,6 +223,26 @@ namespace TravelApp.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap 反馈 {
+            get {
+                object obj = ResourceManager.GetObject("反馈", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 反馈__1_ {
+            get {
+                object obj = ResourceManager.GetObject("反馈__1_", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap 在路上旅行 {
             get {
                 object obj = ResourceManager.GetObject("在路上旅行", resourceCulture);
@@ -323,6 +353,26 @@ namespace TravelApp.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap 智能助手 {
+            get {
+                object obj = ResourceManager.GetObject("智能助手", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 智能助手__1_ {
+            get {
+                object obj = ResourceManager.GetObject("智能助手 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap 步行icon {
             get {
                 object obj = ResourceManager.GetObject("步行icon", resourceCulture);
@@ -366,6 +416,26 @@ namespace TravelApp.Properties {
         internal static System.Drawing.Bitmap 用户 {
             get {
                 object obj = ResourceManager.GetObject("用户", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 社区 {
+            get {
+                object obj = ResourceManager.GetObject("社区", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 社区__1_ {
+            get {
+                object obj = ResourceManager.GetObject("社区__1_", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

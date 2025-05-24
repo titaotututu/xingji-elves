@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TravelApp.controller;
-using Weather_space;
+
 
 namespace TravelApp
 {
@@ -22,6 +22,7 @@ namespace TravelApp
         {
             InitializeComponent();
             this.Uid = Uid;
+
         }
 
         public void AddControlsToPanel(Control c)
@@ -34,8 +35,8 @@ namespace TravelApp
 
         private void button_Weather_Click(object sender, EventArgs e)
         {
-            Travel_Weather travel_weather= new Travel_Weather(changePanel);
-            AddControlsToPanel(travel_weather);
+            WeatherController w = new WeatherController();
+            AddControlsToPanel(w);
         }
 
         private void button_Travel_Click(object sender, EventArgs e)
@@ -102,7 +103,9 @@ namespace TravelApp
             panelControl.Controls.Clear();//清除splitContainer1.Panel2内容
             panelControl.Controls.Add(el);//将frmHome添加到splitContainer1.Panel2中
         }
-        private void button_UserInfo_Click(object sender, EventArgs e)
+
+ 
+    private void button_UserInfo_Click(object sender, EventArgs e)
         {
             Personalinfo p = new Personalinfo(Uid,changePanel);
             AddControlsToPanel(p);
@@ -128,5 +131,26 @@ namespace TravelApp
             JournalList journalList = new JournalList(Uid, changePanel);
             AddControlsToPanel(journalList);
         }
+
+        private void button_community_Click(object sender, EventArgs e)
+        {
+            CommunityPage communityPage = new CommunityPage(Uid, changePanel);
+            AddControlsToPanel(communityPage); // 跳转到社区页
+        }
+
+        private void button_feedback_Click(object sender, EventArgs e)
+        {
+            Feedback feedback = new Feedback(Uid, changePanel);
+            AddControlsToPanel(feedback); // 跳转到反馈页 
+
+        }
+
+        private void button_chat_Click(object sender, EventArgs e)
+        {
+            ChatPage chat = new ChatPage(Uid, changePanel);
+            AddControlsToPanel(chat); // 跳转到聊天页
+        }
     }
+
 }
+

@@ -180,6 +180,8 @@
     <!-- 引入外部脚本库 -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        const API_BASE = 'http://localhost:8001';
+
         $(document).ready(function () {
             const chatBox = $("#chatBox");
             const userInput = $("#userInput");
@@ -187,8 +189,16 @@
             const loading = $("#loading");
             const historyList = $("#historyList");
 
-            let currentChatId = null; // 当前聊天会话的 ID
-            let chatHistory = {}; // 本地缓存的聊天记录
+            let currentSessionId = null; // 当前聊天会话ID
+            let userId = sessionStorage.getItem('userId');
+
+            // 检查用户是否登录
+            if (!userId) {
+                chatBox.html('<div class="message bot">请先登录后再使用智能助手。</div>');
+                userInput.prop('disabled', true);
+                sendButton.prop('disabled', true);
+                return;
+            }
 
             // 滚动到底部
             function scrollToBottom() {
@@ -208,36 +218,66 @@
                 chatBox.empty();
             }
 
-            // 更新历史记录列表
-            function updateHistoryList() {
-                historyList.empty();
-                for (const [id, messages] of Object.entries(chatHistory)) {
-                    const firstMessage = messages[0]?.message || "无标题";
-                    const historyItem = `
-                        <div class="history-item" data-id="${id}">
-                            ${firstMessage}
-                        </div>
-                    `;
-                    historyList.append(historyItem);
+            // 创建新的聊天会话
+            async function createNewSession() {
+                try {
+                    const response = await fetch(`${API_BASE}/chat/session`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ user_id: userId })
+                    });
+                    const data = await response.json();
+                    currentSessionId = data.SessionId;
+                    return currentSessionId;
+                } catch (error) {
+                    console.error("创建会话失败:", error);
+                    return null;
                 }
-                bindHistoryItemClick();
+            }
+
+            // 加载聊天历史
+            async function loadChatHistory(sessionId) {
+                try {
+                    const response = await fetch(`${API_BASE}/chat/session/${sessionId}`);
+                    const data = await response.json();
+                    clearChatBox();
+                    data.history.forEach(msg => {
+                        addMessage(msg.sender, msg.content);
+                    });
+                    scrollToBottom();
+                } catch (error) {
+                    console.error("加载历史记录失败:", error);
+                }
+            }
+
+            // 更新历史记录列表
+            async function updateHistoryList() {
+                try {
+                    const response = await fetch(`${API_BASE}/chat/user/${userId}`);
+                    const data = await response.json();
+                    historyList.empty();
+                    for (const [sessionId, messages] of Object.entries(data.history)) {
+                        const firstMessage = messages[0]?.content || "新会话";
+                        const historyItem = `
+                            <div class="history-item" data-id="${sessionId}">
+                                ${firstMessage}
+                            </div>
+                        `;
+                        historyList.append(historyItem);
+                    }
+                    bindHistoryItemClick();
+                } catch (error) {
+                    console.error("更新历史记录列表失败:", error);
+                }
             }
 
             // 绑定历史记录点击事件
             function bindHistoryItemClick() {
                 $(".history-item").off("click").on("click", function () {
-                    const chatId = $(this).data("id");
-                    loadChatHistory(chatId);
+                    const sessionId = $(this).data("id");
+                    currentSessionId = sessionId;
+                    loadChatHistory(sessionId);
                 });
-            }
-
-            // 加载指定聊天记录
-            function loadChatHistory(chatId) {
-                currentChatId = chatId;
-                clearChatBox();
-                const messages = chatHistory[chatId];
-                messages.forEach(msg => addMessage(msg.sender, msg.message));
-                scrollToBottom();
             }
 
             // 发送消息
@@ -247,46 +287,36 @@
 
                 // 显示用户消息
                 addMessage("user", userMessage);
-
-                // 清空输入框
                 userInput.val("");
 
-                // 如果当前没有聊天会话，则创建一个新的
-                if (!currentChatId) {
-                    currentChatId = Date.now(); // 使用时间戳作为唯一 ID
-                    chatHistory[currentChatId] = [];
+                // 如果没有当前会话，创建新会话
+                if (!currentSessionId) {
+                    currentSessionId = await createNewSession();
+                    if (!currentSessionId) {
+                        addMessage("bot", "创建会话失败，请稍后重试");
+                        return;
+                    }
                 }
-
-                // 保存用户消息到历史记录
-                chatHistory[currentChatId].push({ sender: "user", message: userMessage });
 
                 // 显示加载提示
                 loading.show();
 
                 try {
-                    // 模拟与后端Python大模型交互
-                    const response = await fetch("/api/chat", {
+                    const response = await fetch(`${API_BASE}/chat`, {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ message: userMessage }),
+                        body: JSON.stringify({
+                            session_id: currentSessionId,
+                            input: userMessage
+                        })
                     });
-
                     const data = await response.json();
-                    const botMessage = data.reply || "抱歉，我暂时无法回答您的问题。";
-
-                    // 显示助手回复
-                    addMessage("bot", botMessage);
-
-                    // 保存助手回复到历史记录
-                    chatHistory[currentChatId].push({ sender: "bot", message: botMessage });
-
-                    // 更新历史记录列表
+                    addMessage("bot", data.response);
                     updateHistoryList();
                 } catch (error) {
-                    console.error("Error:", error);
+                    console.error("发送消息失败:", error);
                     addMessage("bot", "网络错误，请稍后再试！");
                 } finally {
-                    // 隐藏加载提示
                     loading.hide();
                 }
             });
@@ -298,20 +328,37 @@
                 }
             });
 
-            // 初始化历史记录（模拟从数据库加载）
-            async function loadHistoryFromDatabase() {
-                try {
-                    const response = await fetch("/api/history");
-                    const data = await response.json();
-                    chatHistory = data.history || {};
-                    updateHistoryList();
-                } catch (error) {
-                    console.error("Error loading history:", error);
-                }
-            }
+            // 初始化加载历史记录
+            updateHistoryList();
+        });
 
-            // 模拟加载历史记录
-            loadHistoryFromDatabase();
+                // 延迟隐藏的时间（毫秒）
+        const hideDelay = 4000;
+        let hideTimer = null;
+
+        const dropdown = document.querySelector('.dropdown');
+        const dropdownContent = document.querySelector('.dropdown-content');
+
+        dropdown.addEventListener('mouseenter', function() {
+            clearTimeout(hideTimer);
+            dropdownContent.style.display = 'block';
+        });
+
+        dropdown.addEventListener('mouseleave', function() {
+            hideTimer = setTimeout(() => {
+                dropdownContent.style.display = 'none';
+            }, hideDelay);
+        });
+
+        dropdownContent.addEventListener('mouseenter', function() {
+            clearTimeout(hideTimer);
+            dropdownContent.style.display = 'block';
+        });
+
+        dropdownContent.addEventListener('mouseleave', function() {
+            hideTimer = setTimeout(() => {
+                dropdownContent.style.display = 'none';
+            }, hideDelay);
         });
     </script>
 </body>

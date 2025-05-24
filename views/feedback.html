@@ -139,37 +139,44 @@
                     return;
                 }
 
+                // 获取用户 ID（假设存储在 sessionStorage 中）
+                const userId = sessionStorage.getItem("userId") || "0"; // 如果没有 userId，默认为 0
+
+                // 构造反馈数据
+                const feedbackData = {
+                    userId: parseInt(userId), // 转换为整数
+                    content: userMessage,
+                    time: new Date().toISOString(), // 当前时间
+                    status: "未处理"
+                };
+
                 // 显示加载状态
                 $(".feedback-button").prop("disabled", true);
                 $(".feedback-button").text("正在发送...");
 
                 try {
-                    // 调用后端接口（您需要实现这个接口）
-                    const response = await fetch("/api/feedback", { // 替换为实际的后端接口地址
+                    // 调用后端接口
+                    const response = await fetch("http://localhost:5199/api/python/feedback", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                            name: userName,
-                            email: userEmail,
-                            message: userMessage,
-                        }),
+                        body: JSON.stringify(feedbackData),
                     });
 
-                    const data = await response.json();
-
-                    if (data.success) {
+                    if (response.ok) {
                         // 显示成功消息
                         successMessage.show();
                         errorMessage.hide();
                         feedbackForm[0].reset(); // 清空表单
                     } else {
                         // 显示错误消息
-                        errorMessage.show();
+                        const errorText = await response.text();
+                        console.error("Error:", errorText);
+                        errorMessage.text("发送失败：" + errorText).show();
                         successMessage.hide();
                     }
                 } catch (error) {
                     console.error("Error:", error);
-                    errorMessage.show();
+                    errorMessage.text("发送失败，请稍后再试。").show();
                     successMessage.hide();
                 } finally {
                     // 恢复按钮状态

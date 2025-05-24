@@ -30,14 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainFormFinal));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox8 = new System.Windows.Forms.PictureBox();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button_chat = new System.Windows.Forms.Button();
+            this.button_feedback = new System.Windows.Forms.Button();
+            this.button_community = new System.Windows.Forms.Button();
             this.button_Journal = new System.Windows.Forms.Button();
             this.button_Other = new System.Windows.Forms.Button();
             this.button_Lighting = new System.Windows.Forms.Button();
@@ -47,22 +42,42 @@
             this.button_UserInfo = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panelControl = new System.Windows.Forms.Panel();
+            this.pictureBox10 = new System.Windows.Forms.PictureBox();
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(86)))), ((int)(((byte)(44)))));
-            this.panel1.Controls.Add(this.pictureBox8);
+            this.panel1.Controls.Add(this.pictureBox11);
+            this.panel1.Controls.Add(this.pictureBox10);
+            this.panel1.Controls.Add(this.pictureBox9);
             this.panel1.Controls.Add(this.pictureBox7);
+            this.panel1.Controls.Add(this.button_chat);
+            this.panel1.Controls.Add(this.button_feedback);
+            this.panel1.Controls.Add(this.button_community);
+            this.panel1.Controls.Add(this.pictureBox8);
             this.panel1.Controls.Add(this.pictureBox6);
             this.panel1.Controls.Add(this.pictureBox5);
             this.panel1.Controls.Add(this.pictureBox4);
@@ -80,88 +95,59 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(230, 544);
+            this.panel1.Size = new System.Drawing.Size(230, 664);
             this.panel1.TabIndex = 0;
             // 
-            // pictureBox8
+            // button_chat
             // 
-            this.pictureBox8.Image = global::TravelApp.Properties.Resources.精灵;
-            this.pictureBox8.Location = new System.Drawing.Point(25, 16);
-            this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(92, 78);
-            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox8.TabIndex = 15;
-            this.pictureBox8.TabStop = false;
+            this.button_chat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(86)))), ((int)(((byte)(44)))));
+            this.button_chat.FlatAppearance.BorderSize = 0;
+            this.button_chat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_chat.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button_chat.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.button_chat.Location = new System.Drawing.Point(11, 558);
+            this.button_chat.Margin = new System.Windows.Forms.Padding(2);
+            this.button_chat.Name = "button_chat";
+            this.button_chat.Size = new System.Drawing.Size(233, 50);
+            this.button_chat.TabIndex = 18;
+            this.button_chat.Text = "智能助手";
+            this.button_chat.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button_chat.UseVisualStyleBackColor = false;
+            this.button_chat.Click += new System.EventHandler(this.button_chat_Click);
             // 
-            // pictureBox7
+            // button_feedback
             // 
-            this.pictureBox7.Image = global::TravelApp.Properties.Resources.其他;
-            this.pictureBox7.Location = new System.Drawing.Point(151, 462);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(42, 42);
-            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox7.TabIndex = 14;
-            this.pictureBox7.TabStop = false;
+            this.button_feedback.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(86)))), ((int)(((byte)(44)))));
+            this.button_feedback.FlatAppearance.BorderSize = 0;
+            this.button_feedback.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_feedback.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button_feedback.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.button_feedback.Location = new System.Drawing.Point(11, 508);
+            this.button_feedback.Margin = new System.Windows.Forms.Padding(2);
+            this.button_feedback.Name = "button_feedback";
+            this.button_feedback.Size = new System.Drawing.Size(233, 50);
+            this.button_feedback.TabIndex = 17;
+            this.button_feedback.Text = "反馈";
+            this.button_feedback.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button_feedback.UseVisualStyleBackColor = false;
+            this.button_feedback.Click += new System.EventHandler(this.button_feedback_Click);
             // 
-            // pictureBox6
+            // button_community
             // 
-            this.pictureBox6.Image = global::TravelApp.Properties.Resources.日志;
-            this.pictureBox6.Location = new System.Drawing.Point(151, 402);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(45, 47);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox6.TabIndex = 13;
-            this.pictureBox6.TabStop = false;
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Image = global::TravelApp.Properties.Resources.点亮;
-            this.pictureBox5.Location = new System.Drawing.Point(151, 348);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(45, 48);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox5.TabIndex = 12;
-            this.pictureBox5.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = global::TravelApp.Properties.Resources.天气;
-            this.pictureBox4.Location = new System.Drawing.Point(151, 299);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(45, 43);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox4.TabIndex = 11;
-            this.pictureBox4.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = global::TravelApp.Properties.Resources.导航地址;
-            this.pictureBox3.Location = new System.Drawing.Point(151, 246);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(46, 41);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 10;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::TravelApp.Properties.Resources.历史行程;
-            this.pictureBox2.Location = new System.Drawing.Point(151, 185);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(46, 49);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 9;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::TravelApp.Properties.Resources.个人信息;
-            this.pictureBox1.Location = new System.Drawing.Point(151, 130);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(46, 49);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 8;
-            this.pictureBox1.TabStop = false;
+            this.button_community.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(86)))), ((int)(((byte)(44)))));
+            this.button_community.FlatAppearance.BorderSize = 0;
+            this.button_community.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_community.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button_community.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.button_community.Location = new System.Drawing.Point(11, 454);
+            this.button_community.Margin = new System.Windows.Forms.Padding(2);
+            this.button_community.Name = "button_community";
+            this.button_community.Size = new System.Drawing.Size(233, 50);
+            this.button_community.TabIndex = 16;
+            this.button_community.Text = "社区";
+            this.button_community.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button_community.UseVisualStyleBackColor = false;
+            this.button_community.Click += new System.EventHandler(this.button_community_Click);
             // 
             // button_Journal
             // 
@@ -187,7 +173,7 @@
             this.button_Other.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_Other.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button_Other.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button_Other.Location = new System.Drawing.Point(0, 454);
+            this.button_Other.Location = new System.Drawing.Point(0, 612);
             this.button_Other.Margin = new System.Windows.Forms.Padding(2);
             this.button_Other.Name = "button_Other";
             this.button_Other.Size = new System.Drawing.Size(233, 50);
@@ -296,18 +282,128 @@
             // panelControl
             // 
             this.panelControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(204)))), ((int)(((byte)(172)))));
-            this.panelControl.Location = new System.Drawing.Point(227, 1);
+            this.panelControl.Location = new System.Drawing.Point(227, 0);
             this.panelControl.Margin = new System.Windows.Forms.Padding(2);
             this.panelControl.Name = "panelControl";
-            this.panelControl.Size = new System.Drawing.Size(948, 546);
+            this.panelControl.Size = new System.Drawing.Size(952, 666);
             this.panelControl.TabIndex = 1;
+            // 
+            // pictureBox10
+            // 
+            this.pictureBox10.Image = global::TravelApp.Properties.Resources.反馈;
+            this.pictureBox10.Location = new System.Drawing.Point(150, 509);
+            this.pictureBox10.Name = "pictureBox10";
+            this.pictureBox10.Size = new System.Drawing.Size(45, 40);
+            this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox10.TabIndex = 20;
+            this.pictureBox10.TabStop = false;
+            // 
+            // pictureBox9
+            // 
+            this.pictureBox9.Image = global::TravelApp.Properties.Resources.社区;
+            this.pictureBox9.Location = new System.Drawing.Point(150, 455);
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.Size = new System.Drawing.Size(45, 40);
+            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox9.TabIndex = 19;
+            this.pictureBox9.TabStop = false;
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Image = global::TravelApp.Properties.Resources.其他;
+            this.pictureBox7.Location = new System.Drawing.Point(153, 612);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(42, 42);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox7.TabIndex = 14;
+            this.pictureBox7.TabStop = false;
+            // 
+            // pictureBox8
+            // 
+            this.pictureBox8.Image = global::TravelApp.Properties.Resources.精灵;
+            this.pictureBox8.Location = new System.Drawing.Point(25, 16);
+            this.pictureBox8.Name = "pictureBox8";
+            this.pictureBox8.Size = new System.Drawing.Size(92, 78);
+            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox8.TabIndex = 15;
+            this.pictureBox8.TabStop = false;
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Image = global::TravelApp.Properties.Resources.日志;
+            this.pictureBox6.Location = new System.Drawing.Point(151, 402);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(45, 47);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox6.TabIndex = 13;
+            this.pictureBox6.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = global::TravelApp.Properties.Resources.点亮;
+            this.pictureBox5.Location = new System.Drawing.Point(151, 348);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(45, 48);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox5.TabIndex = 12;
+            this.pictureBox5.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::TravelApp.Properties.Resources.天气;
+            this.pictureBox4.Location = new System.Drawing.Point(151, 299);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(45, 43);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox4.TabIndex = 11;
+            this.pictureBox4.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::TravelApp.Properties.Resources.导航地址;
+            this.pictureBox3.Location = new System.Drawing.Point(151, 246);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(46, 41);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 10;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::TravelApp.Properties.Resources.历史行程;
+            this.pictureBox2.Location = new System.Drawing.Point(151, 185);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(46, 49);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 9;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::TravelApp.Properties.Resources.个人信息;
+            this.pictureBox1.Location = new System.Drawing.Point(151, 130);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(46, 49);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 8;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox11
+            // 
+            this.pictureBox11.Image = global::TravelApp.Properties.Resources.智能助手;
+            this.pictureBox11.Location = new System.Drawing.Point(150, 558);
+            this.pictureBox11.Name = "pictureBox11";
+            this.pictureBox11.Size = new System.Drawing.Size(45, 40);
+            this.pictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox11.TabIndex = 21;
+            this.pictureBox11.TabStop = false;
             // 
             // MainFormFinal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Honeydew;
-            this.ClientSize = new System.Drawing.Size(1174, 544);
+            this.ClientSize = new System.Drawing.Size(1174, 663);
             this.Controls.Add(this.panelControl);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -319,14 +415,17 @@
             this.Load += new System.EventHandler(this.MainFormFianl_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -351,5 +450,11 @@
         private System.Windows.Forms.PictureBox pictureBox7;
         private System.Windows.Forms.PictureBox pictureBox8;
         private System.Windows.Forms.Panel panelControl;
+        private System.Windows.Forms.Button button_community;
+        private System.Windows.Forms.Button button_feedback;
+        private System.Windows.Forms.Button button_chat;
+        private System.Windows.Forms.PictureBox pictureBox9;
+        private System.Windows.Forms.PictureBox pictureBox10;
+        private System.Windows.Forms.PictureBox pictureBox11;
     }
 }

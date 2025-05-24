@@ -47,9 +47,9 @@ namespace TravelApp
                 {
                     // 设置用户信息
                     user.UserName = reg_name.Text;
-                    user.password = SimpleEncryptionHelper.EncryptLong(long.Parse(reg_pwd.Text));
+                    user.password = long.Parse(reg_pwd.Text);
                     long ticks = DateTime.Now.Ticks;
-                    long randomNum = ticks % 100000;
+                    long randomNum = ticks % 10000;
                     user.UserId = randomNum;
 
                     // 1. 先调用本地数据库API

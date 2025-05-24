@@ -143,18 +143,25 @@
     </div>
 
     <script>
-        function createNewTrip() {
-            var tripTitle = document.getElementById('tripTitle').value;
-            var tripCity = document.getElementById('tripCity').value;
-            var tripDate = document.getElementById('tripDate').value;
+        async function createNewTrip() {
+            const tripTitle = document.getElementById('tripTitle').value;
+            const tripCity = document.getElementById('tripCity').value;
+            const tripDate = document.getElementById('tripDate').value;
 
             if (!tripTitle || !tripCity || !tripDate) {
                 alert('请填写所有信息！');
                 return;
             }
 
+            // 获取当前登录用户ID
+            const userId = sessionStorage.getItem('userId');
+            if (!userId) {
+                alert('未检测到登录用户，请先登录！');
+                return;
+            }
+
             // 获取当前日期（格式为 YYYY-MM-DD）
-            var currentDate = new Date().toISOString().split('T')[0];
+            const currentDate = new Date().toISOString().split('T')[0];
 
             // 检查用户填写的日期是否早于当前日期
             if (tripDate < currentDate) {
@@ -162,21 +169,32 @@
                 return;
             }
 
-            var newTrip = {
-                id: Date.now(), // 添加唯一 ID
-                name: tripTitle, // 统一使用 `name`，确保 travel.html 也能正确解析
-                city: tripCity,
-                date: tripDate,
-                todos: [] // 待办事项数组，初始值为空
-            };
+            try {
+                const response = await fetch('http://localhost:5199/api/Travel', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        TravelTitle: tripTitle,
+                        TravelCity: tripCity,
+                        TravelTime: tripDate,
+                        TodoItems: [],
+                        UserId: Number(userId) // 这里用登录用户的ID
+                    })
+                });
 
-            // 读取 `travels`，如果没有则初始化为空数组
-            var travels = JSON.parse(localStorage.getItem('travels')) || [];
-            travels.push(newTrip);
-            localStorage.setItem('travels', JSON.stringify(travels));
+                if (!response.ok) {
+                    const error = await response.text();
+                    throw new Error(error);
+                }
 
-            alert('新行程 "' + tripTitle + '" 已创建！');
-            window.location.href = '../travel.html'; // 创建完成后跳转到行程列表页面
+                const result = await response.json();
+                alert('新行程 "' + tripTitle + '" 已创建！');
+                window.location.href = '../travel.html';
+            } catch (error) {
+                alert('创建行程失败：' + error.message);
+            }
         }
 
     </script>

@@ -195,80 +195,106 @@
         const urlParams = new URLSearchParams(window.location.search);
         const travelId = urlParams.get('travelId');
 
-        function loadTripInfo() {
-            const travels = JSON.parse(localStorage.getItem("travels")) || [];
-            const travel = travels.find(t => t.id == travelId);
-
-            if (travel) {
-                // 显示行程信息
-                document.getElementById("tripName").textContent = travel.name;
-                document.getElementById("tripCity").textContent = `城市: ${travel.city}`;
-                document.getElementById("tripDate").textContent = `时间: ${travel.date}`;
+        async function loadTripInfo() {
+            try {
+                const response = await fetch(`http://localhost:5199/api/Travel/${travelId}`);
+                if (!response.ok) {
+                    throw new Error('获取行程信息失败');
+                }
+                const travel = await response.json();
+                
+                document.getElementById("tripName").textContent = travel.travelTitle;
+                document.getElementById("tripCity").textContent = `城市: ${travel.travelCity}`;
+                document.getElementById("tripDate").textContent = `时间: ${travel.travelTime}`;
+            } catch (error) {
+                alert('加载行程信息失败：' + error.message);
             }
         }
 
-        function loadTodos() {
+        async function loadTodos() {
             const todoList = document.getElementById("todoList");
             todoList.innerHTML = ""; // 清空列表
 
-            const travels = JSON.parse(localStorage.getItem("travels")) || [];
-            const travel = travels.find(t => t.id == travelId);
-
-            if (travel && travel.todos.length > 0) {
-                travel.todos.forEach((todo, index) => {
-                    const todoItem = document.createElement("div");
-                    todoItem.classList.add("todo-item");
-                    if (todo.completed) todoItem.classList.add("completed");
-                    todoItem.innerHTML = `
-                        <span>${todo.time} | ${todo.location} - ${todo.content}</span>
-                        <div>
-                            <button onclick="removeTodo(${index})">删除</button>
-                            <button class="${todo.completed ? 'completed-btn' : ''}" onclick="toggleComplete(${index})">
-                                ${todo.completed ? ' 已完成' : '打卡'}
-                            </button>
-                        </div>
-                    `;
-                    todoList.appendChild(todoItem);
-                });
-            } else {
-                todoList.innerHTML = "<p>暂无待办事项。</p>";
-            }
-        }
-
-        function addTodo() {
-            const newTodo = document.getElementById('newTodo').value.trim();
-            if (newTodo) {
-                const travels = JSON.parse(localStorage.getItem("travels")) || [];
-                const travel = travels.find(t => t.id == travelId);
-
-                if (travel) {
-                    travel.todos.push({ content: newTodo, time: '', location: '', completed: false });
-                    localStorage.setItem('travels', JSON.stringify(travels));
-                    loadTodos(); // 重新加载待办事项
+            try {
+                const response = await fetch(`http://localhost:5199/api/TodoItem/get?travelId=${travelId}`);
+                if (!response.ok) {
+                    throw new Error('获取待办事项失败');
                 }
-                document.getElementById('newTodo').value = ""; // 清空输入框
+                const todos = await response.json();
+
+                if (todos && todos.length > 0) {
+                    todos.forEach((todo) => {
+                        const todoItem = document.createElement("div");
+                        todoItem.classList.add("todo-item");
+                        if (todo.isCompleted) todoItem.classList.add("completed");
+                        todoItem.innerHTML = `
+                            <span>${todo.time} | ${todo.place} - ${todo.description}</span>
+                            <div>
+                                <button onclick="removeTodo(${todo.itemId})">删除</button>
+                                <button class="${todo.isCompleted ? 'completed-btn' : ''}" onclick="toggleComplete(${todo.itemId}, ${!todo.isCompleted})">
+                                    ${todo.isCompleted ? '已完成' : '打卡'}
+                                </button>
+                            </div>
+                        `;
+                        todoList.appendChild(todoItem);
+                    });
+                } else {
+                    todoList.innerHTML = "<p>暂无待办事项。</p>";
+                }
+            } catch (error) {
+                alert('加载待办事项失败：' + error.message);
             }
         }
 
-        function removeTodo(index) {
-            const travels = JSON.parse(localStorage.getItem("travels")) || [];
-            const travel = travels.find(t => t.id == travelId);
+        async function removeTodo(itemId) {
+            try {
+                const response = await fetch(`http://localhost:5199/api/TodoItem/delete?itemId=${itemId}`, {
+                    method: 'DELETE'
+                });
 
-            if (travel) {
-                travel.todos.splice(index, 1); // 删除对应的待办事项
-                localStorage.setItem('travels', JSON.stringify(travels));
+                if (!response.ok) {
+                    throw new Error('删除待办事项失败');
+                }
+
                 loadTodos(); // 重新加载待办事项
+            } catch (error) {
+                alert('删除待办事项失败：' + error.message);
             }
         }
 
-        function toggleComplete(index) {
-            const travels = JSON.parse(localStorage.getItem("travels")) || [];
-            const travel = travels.find(t => t.id == travelId);
+        async function toggleComplete(itemId, newStatus) {
+            try {
+                // 首先获取当前的待办事项信息
+                const response = await fetch(`http://localhost:5199/api/TodoItem/get?travelId=${travelId}`);
+                if (!response.ok) {
+                    throw new Error('获取待办事项信息失败');
+                }
+                const todos = await response.json();
+                const todo = todos.find(t => t.itemId === itemId);
 
-            if (travel) {
-                travel.todos[index].completed = !travel.todos[index].completed; // 切换完成状态
-                localStorage.setItem('travels', JSON.stringify(travels));
+                if (!todo) {
+                    throw new Error('未找到待办事项');
+                }
+
+                // 更新待办事项状态
+                const updateResponse = await fetch(`http://localhost:5199/api/TodoItem/update?itemid=${itemId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        ...todo,
+                        IsCompleted: newStatus
+                    })
+                });
+
+                if (!updateResponse.ok) {
+                    throw new Error('更新待办事项状态失败');
+                }
+
                 loadTodos(); // 重新加载待办事项
+            } catch (error) {
+                alert('更新待办事项状态失败：' + error.message);
             }
         }
 

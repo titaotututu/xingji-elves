@@ -3,20 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp\\TravelApp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|c:\\users\\asus\\desktop\\xingji-elves\\c-sharp\\travelapp\\travelapp\\controller\\journaldetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|solutionrelative:travelapp\\controller\\journaldetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|c:\\users\\asus\\desktop\\xingji-elves\\c-sharp\\travelapp\\travelapp\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|solutionrelative:travelapp\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|c:\\users\\asus\\desktop\\xingji-elves\\c-sharp\\travelapp\\travelapp\\controller\\journalcell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|solutionrelative:travelapp\\controller\\journalcell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|c:\\users\\asus\\desktop\\xingji-elves\\c-sharp\\travelapp\\travelapp\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|solutionrelative:travelapp\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|c:\\users\\asus\\desktop\\xingji-elves\\c-sharp\\travelapp\\travelapp\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|solutionrelative:travelapp\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|c:\\users\\asus\\desktop\\xingji-elves\\c-sharp\\travelapp\\travelapp\\controller\\personalinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|solutionrelative:travelapp\\controller\\personalinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|c:\\users\\asus\\desktop\\xingji-elves\\c-sharp\\travelapp\\travelapp\\controller\\journaldetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|solutionrelative:travelapp\\controller\\journaldetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|c:\\users\\asus\\desktop\\xingji-elves\\c-sharp\\travelapp\\travelapp\\register.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|solutionrelative:travelapp\\register.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|c:\\users\\asus\\desktop\\xingji-elves\\c-sharp\\travelapp\\travelapp\\controller\\chatpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|solutionrelative:travelapp\\controller\\chatpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|c:\\users\\asus\\desktop\\xingji-elves\\c-sharp\\travelapp\\travelapp\\mainformfinal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|solutionrelative:travelapp\\mainformfinal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp\\TravelApp\\travelapp\\mainformfinal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|solutionrelative:travelapp\\mainformfinal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -25,7 +37,7 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 97,
+          "DockedWidth": 200,
           "SelectedChildIndex": 5,
           "Children": [
             {
@@ -42,54 +54,92 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "JournalCell.cs",
-              "DocumentMoniker": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp\\TravelApp\\TravelApp\\controller\\JournalCell.cs",
-              "RelativeDocumentMoniker": "TravelApp\\controller\\JournalCell.cs",
-              "ToolTip": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp\\TravelApp\\TravelApp\\controller\\JournalCell.cs",
-              "RelativeToolTip": "TravelApp\\controller\\JournalCell.cs",
-              "ViewState": "AQIAAC0AAAAAAAAAAAAnwDMAAAAIAAAA",
+              "DocumentIndex": 2,
+              "Title": "Personalinfo.cs",
+              "DocumentMoniker": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp\\TravelApp\\TravelApp\\controller\\Personalinfo.cs",
+              "RelativeDocumentMoniker": "TravelApp\\controller\\Personalinfo.cs",
+              "ToolTip": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp\\TravelApp\\TravelApp\\controller\\Personalinfo.cs",
+              "RelativeToolTip": "TravelApp\\controller\\Personalinfo.cs",
+              "ViewState": "AQIAAH4AAAAAAAAAAAAewIoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T09:48:38.714Z",
+              "WhenOpened": "2025-05-24T16:31:16.463Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Client.cs",
-              "DocumentMoniker": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp\\TravelApp\\TravelApp\\Client.cs",
-              "RelativeDocumentMoniker": "TravelApp\\Client.cs",
-              "ToolTip": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp\\TravelApp\\TravelApp\\Client.cs",
-              "RelativeToolTip": "TravelApp\\Client.cs",
-              "ViewState": "AQIAACgAAAAAAAAAAAAnwEkAAAAIAAAA",
+              "DocumentIndex": 1,
+              "Title": "Login.cs",
+              "DocumentMoniker": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp\\TravelApp\\TravelApp\\Login.cs",
+              "RelativeDocumentMoniker": "TravelApp\\Login.cs",
+              "ToolTip": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp\\TravelApp\\TravelApp\\Login.cs",
+              "RelativeToolTip": "TravelApp\\Login.cs",
+              "ViewState": "AQIAAFQAAAAAAAAAAAAQwGEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T03:42:59.647Z",
+              "WhenOpened": "2025-05-24T16:30:11.017Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "JournalDetail.cs",
-              "DocumentMoniker": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp\\TravelApp\\TravelApp\\controller\\JournalDetail.cs",
-              "RelativeDocumentMoniker": "TravelApp\\controller\\JournalDetail.cs",
-              "ToolTip": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp\\TravelApp\\TravelApp\\controller\\JournalDetail.cs",
-              "RelativeToolTip": "TravelApp\\controller\\JournalDetail.cs",
-              "ViewState": "AQIAAE4BAAAAAAAAAAApwFUBAAAUAAAA",
+              "Title": "Login.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp\\TravelApp\\TravelApp\\Login.cs",
+              "RelativeDocumentMoniker": "TravelApp\\Login.cs",
+              "ToolTip": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp\\TravelApp\\TravelApp\\Login.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "TravelApp\\Login.cs [\u8BBE\u8BA1]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T03:18:05.848Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-24T16:30:08.594Z",
+              "EditorCaption": " [\u8BBE\u8BA1]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "JournalDetail.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp\\TravelApp\\TravelApp\\controller\\JournalDetail.cs",
-              "RelativeDocumentMoniker": "TravelApp\\controller\\JournalDetail.cs",
-              "ToolTip": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp\\TravelApp\\TravelApp\\controller\\JournalDetail.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "TravelApp\\controller\\JournalDetail.cs [\u8BBE\u8BA1]",
+              "Title": "Register.cs",
+              "DocumentMoniker": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp\\TravelApp\\TravelApp\\Register.cs",
+              "RelativeDocumentMoniker": "TravelApp\\Register.cs",
+              "ToolTip": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp\\TravelApp\\TravelApp\\Register.cs",
+              "RelativeToolTip": "TravelApp\\Register.cs",
+              "ViewState": "AQIAAHAAAAAAAAAAAAASwDEAAAA9AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-21T15:39:59.536Z",
+              "WhenOpened": "2025-05-24T16:22:49.678Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ChatPage.cs",
+              "DocumentMoniker": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp\\TravelApp\\TravelApp\\controller\\ChatPage.cs",
+              "RelativeDocumentMoniker": "TravelApp\\controller\\ChatPage.cs",
+              "ToolTip": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp\\TravelApp\\TravelApp\\controller\\ChatPage.cs",
+              "RelativeToolTip": "TravelApp\\controller\\ChatPage.cs",
+              "ViewState": "AQIAAHUAAAAAAAAAAAAnwHsAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-24T14:06:32.289Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MainFormFinal.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp\\TravelApp\\TravelApp\\MainFormFinal.cs",
+              "RelativeDocumentMoniker": "TravelApp\\MainFormFinal.cs",
+              "ToolTip": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp\\TravelApp\\TravelApp\\MainFormFinal.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "TravelApp\\MainFormFinal.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-24T13:49:24.919Z",
               "EditorCaption": " [\u8BBE\u8BA1]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MainFormFinal.cs",
+              "DocumentMoniker": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp\\TravelApp\\TravelApp\\MainFormFinal.cs",
+              "RelativeDocumentMoniker": "TravelApp\\MainFormFinal.cs",
+              "ToolTip": "C:\\Users\\asus\\Desktop\\xingji-elves\\C-Sharp\\TravelApp\\TravelApp\\MainFormFinal.cs",
+              "RelativeToolTip": "TravelApp\\MainFormFinal.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-08T05:33:23.508Z",
+              "EditorCaption": ""
             }
           ]
         }

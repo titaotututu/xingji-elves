@@ -30,7 +30,7 @@ namespace TravelApp
             string userID = textBox1.Text;
             string password = textBox2.Text;
             
-            long passwordEncrypt = SimpleEncryptionHelper.EncryptLong(long.Parse(password));
+            long passwordEncrypt = long.Parse(password);
 
             if (userID.Length == 0 || userID == "单行输入")
             {

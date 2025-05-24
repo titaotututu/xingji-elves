@@ -17,5 +17,17 @@ namespace TravelApp.models
         public string Description { get; set; }
         public string Picture { get; set; }
         public long UserId { get; set; }
+
+
+    }
+    public class ImageApiResponse
+    {
+        public List<ImageData> Images { get; set; }
+    }
+
+    public class ImageData
+    {
+        public string Filename { get; set; }
+        public string Data { get; set; }
     }
 }

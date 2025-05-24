@@ -147,7 +147,7 @@
         const urlParams = new URLSearchParams(window.location.search);
         const travelId = urlParams.get('travelId');
 
-        function saveTodo() {
+        async function saveTodo() {
             const time = document.getElementById('todoTime').value;
             const location = document.getElementById('todoLocation').value.trim();
             const content = document.getElementById('todoContent').value.trim();
@@ -157,27 +157,31 @@
                 return;
             }
 
-            // 从 localStorage 中获取所有行程数据
-            const travels = JSON.parse(localStorage.getItem("travels")) || [];
+            try {
+                const response = await fetch('http://localhost:5199/api/TodoItem', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        TravelId: Number(travelId),
+                        Time: time,
+                        Place: location,
+                        Description: content,
+                        IsCompleted: false
+                    })
+                });
 
-            // 查找与当前 travelId 对应的行程
-            const travel = travels.find(t => t.id == travelId);
+                if (!response.ok) {
+                    const error = await response.text();
+                    throw new Error(error);
+                }
 
-            if (!travel) {
-                // 如果没有找到行程，显示错误信息
-                alert("未找到对应的行程！");
-                console.error(`未找到ID为${travelId}的行程`);
-                return;
+                alert("待办事项已保存！");
+                window.location.href = `todo.html?travelId=${travelId}`;
+            } catch (error) {
+                alert('保存待办事项失败：' + error.message);
             }
-
-            // 如果找到了对应行程，添加新的待办事项
-            travel.todos.push({ content: content, time: time, location: location, completed: false });
-
-            // 更新 localStorage 中的行程数据
-            localStorage.setItem('travels', JSON.stringify(travels));
-
-            alert("待办事项已保存！");
-            window.location.href = `todo.html?travelId=${travelId}`; // 保存后跳转回 todo.html 页面
         }
 
     </script>

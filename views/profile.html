@@ -244,56 +244,139 @@
         </div>
 
     <script>
-        // 编辑昵称功能
-        const nicknameInput = document.getElementById('nickname');
-        const editNicknameBtn = document.getElementById('edit-nickname-btn');
-        const saveNicknameBtn = document.getElementById('save-nickname-btn');
+        document.addEventListener("DOMContentLoaded", async () => {
+            const userId = sessionStorage.getItem("userId"); // 假设用户 ID 存储在 sessionStorage 中
+            const localApiUrl = `http://localhost:5199/api/User/${userId}`;
+            const pythonApiUrl = `http://localhost:5199/api/python/user/${userId}`;
 
-        editNicknameBtn.addEventListener('click', () => {
-            nicknameInput.disabled = false;
-            nicknameInput.focus();
-            editNicknameBtn.style.display = 'none';
-            saveNicknameBtn.style.display = 'inline-block';
-        });
+            // 初始化用户信息
+            async function initUserInfo() {
+                try {
+                    const response = await fetch(localApiUrl);
+                    if (!response.ok) throw new Error(await response.text());
 
-        saveNicknameBtn.addEventListener('click', () => {
-            nicknameInput.disabled = true;
-            saveNicknameBtn.style.display = 'none';
-            editNicknameBtn.style.display = 'inline-block';
-            alert('昵称已更新！');
-        });
-
-        // 修改密码功能
-        const changePasswordBtn = document.getElementById('change-password-btn');
-        const passwordForm = document.getElementById('password-form');
-        const savePasswordBtn = document.getElementById('save-password-btn');
-
-        changePasswordBtn.addEventListener('click', () => {
-            passwordForm.style.display = 'flex';
-        });
-
-        savePasswordBtn.addEventListener('click', () => {
-            const oldPassword = document.getElementById('old-password').value;
-            const newPassword = document.getElementById('new-password').value;
-            const confirmPassword = document.getElementById('confirm-password').value;
-
-            if (!oldPassword || !newPassword || !confirmPassword) {
-                alert('请填写所有字段！');
-                return;
-            }
-            if (newPassword !== confirmPassword) {
-                alert('两次输入的新密码不一致！');
-                return;
+                    const user = await response.json();
+                    document.getElementById("user-id").textContent = user.userId;
+                    document.getElementById("nickname").value = user.userName;
+                    document.getElementById("password-display").textContent = "******";
+                } catch (error) {
+                    console.error("初始化用户信息失败：", error);
+                    alert("无法加载用户信息，请稍后重试。");
+                }
             }
 
-            // 模拟保存密码逻辑
-            alert('密码已更新！');
-            passwordForm.style.display = 'none';
+            // 更新用户信息
+            async function updateUserInfo(newNickname, newPassword) {
+                try {
+                    // 获取当前用户信息
+                    const response = await fetch(localApiUrl);
+                    if (!response.ok) throw new Error(await response.text());
 
-            // 清空表单
-            document.getElementById('old-password').value = '';
-            document.getElementById('new-password').value = '';
-            document.getElementById('confirm-password').value = '';
+                    const user = await response.json();
+                    newPassword=parseInt(newPassword);
+                    // 更新昵称或密码
+                    const updatedUser = {
+                        userId: user.userId,
+                        userName: newNickname || user.userName, // 如果未提供新昵称，则使用当前昵称
+                        password: newPassword || user.password // 如果未提供新密码，则使用当前密码
+                    };
+
+                    const jsonData = JSON.stringify(updatedUser);
+
+                    // 更新本地数据库
+                    const localResponse = await fetch(localApiUrl, {
+                        method: "PUT",
+                        headers: { "Content-Type": "application/json" },
+                        body: jsonData
+                    });
+                    if (!localResponse.ok) throw new Error(await localResponse.text());
+
+                    // 更新 Python 数据库
+                    const pythonResponse = await fetch(pythonApiUrl, {
+                        method: "PUT",
+                        headers: { "Content-Type": "application/json" },
+                        body: jsonData
+                    });
+                    console.log("发送的数据：", jsonData);
+                    if (!pythonResponse.ok) throw new Error(await pythonResponse.text());
+
+                    alert("用户信息更新成功！");
+                } catch (error) {
+                    console.error("更新用户信息失败：", error);
+                    alert("更新用户信息失败，请稍后重试。");
+                }
+            }
+
+            // 编辑昵称功能
+            const nicknameInput = document.getElementById("nickname");
+            const editNicknameBtn = document.getElementById("edit-nickname-btn");
+            const saveNicknameBtn = document.getElementById("save-nickname-btn");
+
+            editNicknameBtn.addEventListener("click", () => {
+                nicknameInput.disabled = false;
+                nicknameInput.focus();
+                editNicknameBtn.style.display = "none";
+                saveNicknameBtn.style.display = "inline-block";
+            });
+
+            saveNicknameBtn.addEventListener("click", async () => {
+                const newNickname = nicknameInput.value.trim();
+                if (!newNickname) {
+                    alert("昵称不能为空！");
+                    return;
+                }
+
+                nicknameInput.disabled = true;
+                saveNicknameBtn.style.display = "none";
+                editNicknameBtn.style.display = "inline-block";
+
+                await updateUserInfo(newNickname, null); // 仅更新昵称
+            });
+
+            // 修改密码功能
+            const changePasswordBtn = document.getElementById("change-password-btn");
+            const passwordForm = document.getElementById("password-form");
+            const savePasswordBtn = document.getElementById("save-password-btn");
+
+            changePasswordBtn.addEventListener("click", () => {
+                passwordForm.style.display = "flex";
+            });
+
+            savePasswordBtn.addEventListener("click", async () => {
+                const oldPassword = document.getElementById("old-password").value.trim();
+                const newPassword = document.getElementById("new-password").value.trim();
+                const confirmPassword = document.getElementById("confirm-password").value.trim();
+
+                if (!oldPassword || !newPassword || !confirmPassword) {
+                    alert("请填写所有字段！");
+                    return;
+                }
+                if (newPassword !== confirmPassword) {
+                    alert("两次输入的新密码不一致！");
+                    return;
+                }
+
+                // 模拟验证旧密码（可根据实际需求调用后端验证）
+                const response = await fetch(localApiUrl);
+                const user = await response.json();
+                console.log("输入：", oldPassword);
+                console.log("老密码：", user.password);
+                if (user.password != oldPassword) {
+                    alert("当前密码错误！");
+                    return;
+                }
+                
+                
+                await updateUserInfo(null, newPassword); // 仅更新密码
+
+                passwordForm.style.display = "none";
+                document.getElementById("old-password").value = "";
+                document.getElementById("new-password").value = "";
+                document.getElementById("confirm-password").value = "";
+            });
+
+            // 初始化页面
+            await initUserInfo();
         });
     </script>
 </body>

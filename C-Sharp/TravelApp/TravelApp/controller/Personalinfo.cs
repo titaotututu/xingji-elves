@@ -59,7 +59,7 @@ namespace TravelApp.controller
                     new_name.Text = user.UserName;
                     //cbGender.Text = user.Sex;
                     //密码显示与不显示
-                    long pwd = SimpleEncryptionHelper.DecryptLong(user.password);
+                    long pwd = user.password;
                     //if (checkBox1.Checked)
                     //{
                     //    new_pwd.Text = Convert.ToString(pwd);
@@ -92,7 +92,7 @@ namespace TravelApp.controller
             string newUsername = new_name.Text;
             string Userpwd = new_pwd.Text;
             long newUserpwd = long.Parse(Userpwd);
-            newUserpwd = SimpleEncryptionHelper.EncryptLong(newUserpwd);
+            newUserpwd = newUserpwd;
 
             User newuser = new User();
             newuser.UserName = newUsername;
