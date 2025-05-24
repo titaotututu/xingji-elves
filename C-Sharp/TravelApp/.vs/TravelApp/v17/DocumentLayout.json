@@ -3,11 +3,11 @@
   "WorkspaceRootPath": "C:\\Users\\32188\\Desktop\\SE\\final2.0\\C-Sharp\\TravelApp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|C:\\Users\\32188\\Desktop\\SE\\final2.0\\C-Sharp\\TravelApp\\travelapp\\controller\\chatpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|c:\\users\\32188\\desktop\\se\\final2.0\\c-sharp\\travelapp\\travelapp\\controller\\chatpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|solutionrelative:travelapp\\controller\\chatpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|c:\\users\\32188\\desktop\\se\\final2.0\\c-sharp\\travelapp\\travelapp\\controller\\chatpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|C:\\Users\\32188\\Desktop\\SE\\final2.0\\C-Sharp\\TravelApp\\travelapp\\controller\\chatpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|solutionrelative:travelapp\\controller\\chatpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -30,11 +30,11 @@
       "RelativeMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|solutionrelative:travelapp\\controller\\journaldetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|c:\\users\\32188\\desktop\\se\\final2.0\\c-sharp\\travelapp\\travelapp\\controller\\journallist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|C:\\Users\\32188\\Desktop\\SE\\final2.0\\C-Sharp\\TravelApp\\travelapp\\controller\\journallist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|solutionrelative:travelapp\\controller\\journallist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|c:\\users\\32188\\desktop\\se\\final2.0\\c-sharp\\travelapp\\travelapp\\controller\\chatpage.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|C:\\Users\\32188\\Desktop\\SE\\final2.0\\C-Sharp\\TravelApp\\travelapp\\controller\\chatpage.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{455A8ACC-D685-4677-8F81-018BD921DD70}|TravelApp\\TravelApp.csproj|solutionrelative:travelapp\\controller\\chatpage.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -109,7 +109,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
@@ -122,8 +122,7 @@
               "ViewState": "AQIAAHcAAAAAAAAAAAAswJEAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-26T04:02:32.41Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -138,12 +137,37 @@
               "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ChatPage.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "C:\\Users\\32188\\Desktop\\SE\\final2.0\\C-Sharp\\TravelApp\\TravelApp\\controller\\ChatPage.cs",
+              "RelativeDocumentMoniker": "TravelApp\\controller\\ChatPage.cs",
+              "ToolTip": "C:\\Users\\32188\\Desktop\\SE\\final2.0\\C-Sharp\\TravelApp\\TravelApp\\controller\\ChatPage.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "TravelApp\\controller\\ChatPage.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T14:05:10.033Z",
+              "EditorCaption": " [\u8BBE\u8BA1]"
             },
             {
               "$type": "Bookmark",
               "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ChatPage.cs",
+              "DocumentMoniker": "C:\\Users\\32188\\Desktop\\SE\\final2.0\\C-Sharp\\TravelApp\\TravelApp\\controller\\ChatPage.cs",
+              "RelativeDocumentMoniker": "TravelApp\\controller\\ChatPage.cs",
+              "ToolTip": "C:\\Users\\32188\\Desktop\\SE\\final2.0\\C-Sharp\\TravelApp\\TravelApp\\controller\\ChatPage.cs",
+              "RelativeToolTip": "TravelApp\\controller\\ChatPage.cs",
+              "ViewState": "AQIAANMAAAAAAAAAAAAgwN8AAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T03:33:57.243Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
@@ -164,19 +188,6 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ChatPage.cs",
-              "DocumentMoniker": "C:\\Users\\32188\\Desktop\\SE\\final2.0\\C-Sharp\\TravelApp\\TravelApp\\controller\\ChatPage.cs",
-              "RelativeDocumentMoniker": "TravelApp\\controller\\ChatPage.cs",
-              "ToolTip": "C:\\Users\\32188\\Desktop\\SE\\final2.0\\C-Sharp\\TravelApp\\TravelApp\\controller\\ChatPage.cs",
-              "RelativeToolTip": "TravelApp\\controller\\ChatPage.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAADgAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-22T03:33:57.243Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 7,
               "Title": "JournalList.cs",
               "DocumentMoniker": "C:\\Users\\32188\\Desktop\\SE\\final2.0\\C-Sharp\\TravelApp\\TravelApp\\controller\\JournalList.cs",
@@ -185,20 +196,7 @@
               "RelativeToolTip": "TravelApp\\controller\\JournalList.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-22T03:15:06.368Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ChatPage.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "C:\\Users\\32188\\Desktop\\SE\\final2.0\\C-Sharp\\TravelApp\\TravelApp\\controller\\ChatPage.cs",
-              "RelativeDocumentMoniker": "TravelApp\\controller\\ChatPage.cs",
-              "ToolTip": "C:\\Users\\32188\\Desktop\\SE\\final2.0\\C-Sharp\\TravelApp\\TravelApp\\controller\\ChatPage.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "TravelApp\\controller\\ChatPage.cs [\u8BBE\u8BA1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T14:05:10.033Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
+              "WhenOpened": "2025-05-22T03:15:06.368Z"
             },
             {
               "$type": "Document",
@@ -209,8 +207,7 @@
               "ToolTip": "C:\\Users\\32188\\Desktop\\SE\\final2.0\\C-Sharp\\TravelApp\\TravelApp\\MainFormFinal.cs [\u8BBE\u8BA1]",
               "RelativeToolTip": "TravelApp\\MainFormFinal.cs [\u8BBE\u8BA1]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-26T03:57:19.694Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
+              "WhenOpened": "2025-04-26T03:57:19.694Z"
             },
             {
               "$type": "Document",
@@ -232,8 +229,7 @@
               "ToolTip": "C:\\Users\\32188\\Desktop\\SE\\final2.0\\C-Sharp\\TravelApp\\TravelApp\\controller\\JournalList.cs [\u8BBE\u8BA1]",
               "RelativeToolTip": "TravelApp\\controller\\JournalList.cs [\u8BBE\u8BA1]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-30T02:19:26.072Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
+              "WhenOpened": "2025-04-30T02:19:26.072Z"
             },
             {
               "$type": "Document",

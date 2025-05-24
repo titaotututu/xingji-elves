@@ -31,13 +31,14 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.buttonSend = new System.Windows.Forms.Button();
             this.flpHead = new System.Windows.Forms.FlowLayoutPanel();
+            this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
             this.labelIcon = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.buttonNewSession = new System.Windows.Forms.PictureBox();
             this.textBoxInput = new System.Windows.Forms.TextBox();
             this.listBoxChat = new System.Windows.Forms.ListBox();
             this.listBoxSessions = new System.Windows.Forms.ListBox();
-            this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
-            this.buttonNewSession = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.flpHead.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
@@ -49,6 +50,7 @@
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.buttonSend);
             this.panel1.Controls.Add(this.flpHead);
+            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.buttonNewSession);
             this.panel1.Controls.Add(this.textBoxInput);
@@ -83,6 +85,17 @@
             this.flpHead.Size = new System.Drawing.Size(819, 88);
             this.flpHead.TabIndex = 15;
             // 
+            // pictureBoxIcon
+            // 
+            this.pictureBoxIcon.Image = global::TravelApp.Properties.Resources.智能助手__1_;
+            this.pictureBoxIcon.Location = new System.Drawing.Point(30, 20);
+            this.pictureBoxIcon.Margin = new System.Windows.Forms.Padding(30, 20, 3, 3);
+            this.pictureBoxIcon.Name = "pictureBoxIcon";
+            this.pictureBoxIcon.Size = new System.Drawing.Size(58, 57);
+            this.pictureBoxIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxIcon.TabIndex = 0;
+            this.pictureBoxIcon.TabStop = false;
+            // 
             // labelIcon
             // 
             this.labelIcon.AutoSize = true;
@@ -104,14 +117,28 @@
             this.label3.TabIndex = 16;
             this.label3.Text = "label3";
             // 
+            // buttonNewSession
+            // 
+            this.buttonNewSession.BackColor = System.Drawing.Color.Transparent;
+            this.buttonNewSession.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonNewSession.Image = global::TravelApp.Properties.Resources.add;
+            this.buttonNewSession.Location = new System.Drawing.Point(863, 20);
+            this.buttonNewSession.Margin = new System.Windows.Forms.Padding(30, 20, 3, 3);
+            this.buttonNewSession.Name = "buttonNewSession";
+            this.buttonNewSession.Size = new System.Drawing.Size(58, 60);
+            this.buttonNewSession.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.buttonNewSession.TabIndex = 17;
+            this.buttonNewSession.TabStop = false;
+            this.buttonNewSession.Click += new System.EventHandler(this.buttonNewSession_Click);
+            // 
             // textBoxInput
             // 
             this.textBoxInput.BackColor = System.Drawing.Color.WhiteSmoke;
             this.textBoxInput.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxInput.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxInput.Location = new System.Drawing.Point(221, 553);
+            this.textBoxInput.Location = new System.Drawing.Point(330, 553);
             this.textBoxInput.Name = "textBoxInput";
-            this.textBoxInput.Size = new System.Drawing.Size(713, 27);
+            this.textBoxInput.Size = new System.Drawing.Size(604, 27);
             this.textBoxInput.TabIndex = 2;
             // 
             // listBoxChat
@@ -142,30 +169,17 @@
             this.listBoxSessions.TabIndex = 0;
             this.listBoxSessions.SelectedIndexChanged += new System.EventHandler(this.listBoxSessions_SelectedIndexChanged);
             // 
-            // pictureBoxIcon
+            // label1
             // 
-            this.pictureBoxIcon.Image = global::TravelApp.Properties.Resources.智能助手__1_;
-            this.pictureBoxIcon.Location = new System.Drawing.Point(30, 20);
-            this.pictureBoxIcon.Margin = new System.Windows.Forms.Padding(30, 20, 3, 3);
-            this.pictureBoxIcon.Name = "pictureBoxIcon";
-            this.pictureBoxIcon.Size = new System.Drawing.Size(58, 57);
-            this.pictureBoxIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxIcon.TabIndex = 0;
-            this.pictureBoxIcon.TabStop = false;
-            // 
-            // buttonNewSession
-            // 
-            this.buttonNewSession.BackColor = System.Drawing.Color.Transparent;
-            this.buttonNewSession.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonNewSession.Image = global::TravelApp.Properties.Resources.add;
-            this.buttonNewSession.Location = new System.Drawing.Point(863, 20);
-            this.buttonNewSession.Margin = new System.Windows.Forms.Padding(30, 20, 3, 3);
-            this.buttonNewSession.Name = "buttonNewSession";
-            this.buttonNewSession.Size = new System.Drawing.Size(58, 60);
-            this.buttonNewSession.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.buttonNewSession.TabIndex = 17;
-            this.buttonNewSession.TabStop = false;
-            this.buttonNewSession.Click += new System.EventHandler(this.buttonNewSession_Click);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("幼圆", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.ForeColor = System.Drawing.Color.DarkGreen;
+            this.label1.Location = new System.Drawing.Point(218, 550);
+            this.label1.Margin = new System.Windows.Forms.Padding(10, 35, 3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(106, 30);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "输入：";
             // 
             // ChatPage
             // 
@@ -196,5 +210,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox buttonNewSession;
         private System.Windows.Forms.Button buttonSend;
+        private System.Windows.Forms.Label label1;
     }
 }
